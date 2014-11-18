@@ -1,0 +1,16 @@
+A configuração de diversas opções e principalmente dos elementos pré-textuais é realizada com comandos específicos inseridos antes do comando \comando{begin\{document\}}. As informações do documento são configuradas através dos comandos:
+\begin{description}
+ \item[\comando{titulo\{T\}}] Título do trabalho (substitua T pelo título do trabalho);
+ \item[\comando{autor\{N\}}] Nome do autor do trabalho (onde N é o nome do autor);
+ \item[\comando{orientador\{O\}}] Nome do professor orientador do trabalho. Caso seja uma orientadora pode ser usado o comando \comando{orientador[Orientadora:$\backslash\backslash$]\{O\}} (sendo que O é o nome do orientador ou orientadora);
+ \item[\comando{coorientador\{C\}}] Nome do professor coorientador do trabalho. Caso seja uma coorientadora pode ser usado um comando análogo a definição de orientadora  empregando o comando \comando{coorientador[Coorientadora:$\backslash\backslash$]\{C\}}(sendo que C é o nome do orientador ou orientadora);
+ \item[\comando{departamento\{D\}}] Nome do departamento sob o qual está o curso do aluno (substituindo D pelo nome do departamento);
+ 
+ \item[\comando{curso\{MC\}\{NC\}\{GC\}}] Dados do curso, modalidade do curso(MC), nome do curso(NC) e grau obtido com o curso(GC). Exemplo: \comando{curso\{Bacharelado\}\{Ciência da Computação\}\{Bacharel\}};
+ 
+ \item[Membros da banca avaliadora] Os membros da banca avaliadora constarão na folha de aprovação e são definidos através dos comandos \comando{orientador\{\}}, \comando{coorientador\{\}} (caso exista) e \comando{membrobanca\{\}}. O orientador será o primeiro membro da folha de aprovação, o coorientador será o segundo (se existir), seguidos pelos membros definidos pelos comandos\comando{membrobanca\{\}} quantas vezes forem necessárias para se completar a banca examinadora, que deve possui pelo menos dois membros, além do orientador e coorientador. A definição destes últimos seguem o mesmo formato:
+ 
+\comando{membrobanca\{NM\}\{IM\}} (onde NM é o nome do membro e IM é a instituição do membro);
+ \item[\comando{data\{dia\}\{mês (por extenso)\}\{ano\}}] Configuração da data do documento que aparecerá na folha de aprovação;
+ \item[\comando{textoresumo\{TR\}\{PC\}}] Texto do resumo (TR) e palavras chaves (PC) do documento. Cada palavra chave deve ser inserida com o comando \comando{palavrachave\{P\}}, onde P é a palavra chave.
+\end{description}

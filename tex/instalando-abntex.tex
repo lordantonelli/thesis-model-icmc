@@ -1,0 +1,63 @@
+
+A instalação do \emph{abnTeX2} varia de acordo com o sistema operacional empregado pelo usuário. Aqui serão apresentadas as formas de instalação nos sistemas mais utilizados atualmente no curso de ciência da computação do Câmpus Catalão, a saber: Linux (Ubuntu 12.04), Mac OS X e Windows 7
+
+\section{Linux (Ubuntu 12.04)}
+
+Se você já instalou o Tex Live via apt-get, basta seguir os seguintes comandos:
+
+\begin{enumerate}
+
+\item Baixe os arquivos de instalação do abnTeX2 (\url{http://code.google.com/p/abntex2/downloads/list}). Nesse link você também encontra a documentação e exemplos de uso.
+\item Extraia o conteúdo do arquivo baixado na pasta texmf local, geralmente /usr/local/share/texmf. 
+\item Em um Terminal: extraia o ZIP: \emph{unzip abntex2.tds.zip} em qualquer local;
+\item copie o conteúdo extraído para o destino: \emph{cp abntex2/* /usr/local/share/texmf};
+\item Em um Terminal digite: \emph{sudo texhash}
+\item Pronto!
+\end{enumerate}
+
+\section{Mac OS}
+
+Primeiramente, deve-se abrir o terminal do Mac que pode ser encontrado em Aplicativos/Utilitários - buscando pelo Finder.  E seguir os comandos abaixo:
+\begin{enumerate}
+\item Baixe os arquivos de instalação do abnTeX2 (\url{http://code.google.com/p/abntex2/downloads/list}). Nesse link você também encontra a documentação e exemplos de uso.
+\item Extraia o conteúdo do arquivo baixado na pasta \emph{texmf} local, geralmente \emph{/usr/local/texlive/texmf-local}
+\item Em um Terminal digite: \emph{sudo texhash}
+\item Pronto!
+\end{enumerate}
+ 
+ \section{Windows 7}
+
+\subsection{Instalar/atualizar pelo Package Manager (recomendado)}
+
+Geralmente o abnTeX2 é baixado e instalado automaticamente pelo MiKTeX quando o usuário compila pela primeira vez um dos modelos do abnTeX2. Porém, caso isso não ocorra, siga os passos seguintes:
+
+\begin{enumerate}
+\item Clique em Iniciar/Start -> Todos os Programas/All Programs -> MiKTeX -> Package Manager;
+\item Clique em Repository / Synchronize;
+\item Clique com o botão direito sobre \emph{abntex2} na lista e selecione Install (ou Update, caso já esteja instalado);
+\item Pronto!
+\end{enumerate}
+
+\subsection{Instalar/atualizar manualmente}
+
+Você apenas precisará utilizar a instalação manual no caso de:
+
+\begin{enumerate}
+\item o abnTeX2 não estar na lista de pacotes do MiKTeX por alguma razão;
+\item você não poder utilizar uma conexão com a Internet no momento da instalação;
+\item a versão do abnTeX2 no MiKTeX estar desatualizada em relação à versão disponível no CTAN.
+\end{enumerate}
+Em qualquer caso, lembre-se de remover uma eventual instalação anterior do abnTeX2 . Se houver instalado pelo Package Manager, remova o abnTeX2 também por ele.
+
+Passos para instalação manual do abnTeX2 no MiKTeX:
+
+\begin{enumerate}
+\item Baixe os arquivos de instalação do abnTeX2 (abntex2.tds-vX.X.zip). Nesse link você também encontra a documentação e exemplos de uso.
+\item Extraia o conteúdo do arquivo baixado em uma pasta qualquer;
+\item Você pode criar uma pasta abntex2, por exemplo, em $C:\backslash abntex2\backslash$;
+\item Consulte http://www.tex.ac.uk/cgi-bin/texfaq2html?label=install-where para outras informações;
+\item Clique em Iniciar/Start -> Todos os Programas/All Programs -> MiKTeX -> Settings;
+\item Na aba Roots, adicione o diretório recém criado;
+\item Na aba General, clique em Refresh FNDB, OU, se preferir, em um Terminal digite initexmf --update-fndb;
+\item Pronto!
+\end{enumerate}

@@ -1,0 +1,181 @@
+
+Corpos flutuantes são elementos não textuais como figuras e tabelas que complementam as informações do texto. Neste capítulo são expostos breves exemplos dos corpos flutuantes disponíveis na classe \textit{icmc}.
+
+Na Seção \ref{secao:figuras} é mostrado como inserir figuras, a Seção \ref{secao:tabelas_e_quadros} explica como incluir tabelas e quadros e a Seção \ref{secao:algoritmos_e_codigos} demostra como trabalhar com algoritmos e códigos fontes.
+
+\section{Figuras}
+\label{secao:figuras}
+
+A inserção de figuras é realizada normalmente através do comando \comando{begin\{figure\}}. Na Figura \ref{figura:exemplo_grafo} é mostrado um exemplo de grafo com o pacote \textit{xy}. Já a Figura \ref{figura:logomarca_usp} exibe a logomarca da USP com o pacote \textit{graphicx}. De acordo com as normas ABNT a lista de figuras é um elemento opcional do documento, para incluí-la é preciso inserir o comando \comando{incluidelistafiguras} antes do início do documento.
+
+Desde 2012, deve ser incorporado ao corpo flutuante do tipo figura, além da legenda, a fonte de onde esta foi extraída. Se a figura foi confeccionada pelo próprio autor, deve se colocar " o autor".
+
+\begin{figure}[htb]
+\caption{Exemplo de grafo}
+\label{figura:exemplo_grafo}
+\centering
+\begin{scriptsize}
+$$
+\xymatrix@R20pt@C10pt{
+ & & & & vr \ar[dlll] \ar[dl] \ar[d] \ar[dr] \ar[drr] \ar[drrr] & & & \\
+ & (a_3, b_2, c_1) \ar[d]^{\varphi_2} \ar[dl]_{\varphi_1} & & (a_3, b_2, c_2) \ar[d]^{\varphi_2} \ar[dl]_{\varphi_1} & (a_1, b_1, c_1) & (a_1, b_1, c_2) & (a_1, b_2, c_1) & (a_1, b_2, c_2) \\
+ (a_2, b_2, c_1) \ar[dr]_{\varphi_3} & (a_3, b_1, c_1) \ar[d]^{\varphi_1} & (a_2, b_2, c_2) \ar[dr]_{\varphi_3} & (a_3, b_1, c_2) \ar[d]^{\varphi_1} & & & & \\
+& (a_2, b_1, c_1)  & & (a_2, b_1, c_2) & & & & \\
+}
+$$
+\end{scriptsize}
+\legend{Fonte: o  autor.}
+\end{figure}
+
+\begin{figure}[htb]
+ \caption{Logomarca da USP}
+ \label{figura:logomarca_usp}
+ \centering
+ \includegraphics[scale=0.3]{images/usp-logo}
+ \legend{Fonte: Universidade de São Paulo \cite{usp:logo}}
+\end{figure}
+
+
+\section{Tabelas e Quadros}
+\label{secao:tabelas_e_quadros}
+
+A inserção de tabelas e quadros é feita de forma semelhante a inserção de figuras, porém são utilizados os ambientes \textit{table} e \textit{quadro}. A principal diferença entre tabelas e quadros, de acordo com \citeonline{silveira:2006:manual_tcc}, é que as tabelas são destinadas para informações numéricas e os quadros são mais adequados para informações textuais.
+
+ Como exemplos foram inseridas a Tabela \ref{tabela:lista_produtos} que exibe uma de lista de produtos e a Tabela \ref{tabela:populacao_america_sul} que mostra a população dos países da América do Sul. Foi inserido também o Quadro \ref{quadro:editores_texto_livres} com alguns editores que podem ser usados para se trebalhar com Latex para demonstrar a inserção de quadros.
+
+ A lista de tabelas também é um elemento opcional que pode ser incluída com o comando \comando{incluidelistatabelas} antes do início do documento. O mesmo acontece com a lista de quadros que pode ser incluída com o comando \comando{incluidelistaquadros}.
+
+\begin{table}[htb]
+\centering
+\caption{Lista de produtos}
+\label{tabela:lista_produtos}
+\begin{tabularx}{\textwidth}{X|l|r|r|r} \hline
+Produto      & Unidade & Preço (R\$) & Quantidade & Total (R\$) \\ \hline
+Arroz        & Kg      & 2,00        & 550        & 1.100,00    \\
+Óleo de Soja & L       & 2,50        & 500        & 750,00      \\
+Açucar       & Kg      & 3,00        & 100        & 300,00      \\ \hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[htb]
+\centering
+\caption{População dos países da América do Sul} \label{tabela:populacao_america_sul}
+\begin{tabular}{r|l|r}        \hline
+Código  & País            & População   \\ \hline
+1       & Brasil          & 191.480.630 \\
+2       & Argentina       &  39.934.100 \\
+3       & Colômbia        &  46.741.100 \\
+4       & Paraguai        &   9.694.200 \\
+5       & Uruguai         &   3.350.500 \\
+6       & Peru            &  28.221.500 \\
+7       & Equador         &  13.481.200 \\
+8       & Bolívia         &   9.694.200 \\
+9       & Venezuela       &  28.121.700 \\
+10      & Chile           &  16.803.000 \\ \hline
+\end{tabular}
+
+\legend{Fonte: \citeonline{wikipedia:2011:america_sul}.}
+\end{table}
+
+\begin{quadro}[htb]
+\caption{Editores de Texto Livres}
+\label{quadro:editores_texto_livres}
+\centering
+\begin{tabular}{|l|l|r|}        \hline
+Editor     & Multiplataforma & Específico para Latex \\ \hline
+Kwriter    & Sim             & Não                   \\
+Texmaker   & Sim             & Sim                   \\
+Kile       & Sim             & Sim                   \\
+Geany      & Sim             & Não                   \\ \hline
+\end{tabular}
+\end{quadro}
+
+\section{Algoritmos e Códigos}
+\label{secao:algoritmos_e_codigos}
+
+Além dos corpos flutuantes convencionais para inserir figuras (\comando{begin\{figure\}}) e tabelas (\comando{begin\{figure\}}), a classe \textit{icmc} possui mais dois tipos de corpos flutuantes um para algoritmos (\comando{begin\{algoritmo\}}) e outro para códigos (\comando{begin\{codigo\}}). A utilização de um ou de outro fica a critério do usuário. Como exemplo temos o Algoritmo \ref{algoritmo:mdc} que calcula o máximo divisor comum entre dois números e os Códigos \ref{codigo:notas_alunos} e \ref{codigo:metodo_leitura} que são uma consulta na \textit{Structured Query Language (SQL)}\sigla{SQL}{Structured Query Language} e uma sobrotina em \textit{Java}.
+
+\begin{algoritmo}[htb]
+\caption{Algoritmo para cálculo de máximo divisor comum MDC($n_1$,$n_2$)}
+\label{algoritmo:mdc}
+\hrule
+\begin{algorithmic}[1]
+ \Require Dois números inteiros ($n_1, n_2$)
+ \If{$n_2 > n_1$} \Comment{Garante que o maior número seja $n_1$}
+   \State troca valores de $n_1$ e $n_2$
+ \EndIf
+ \Repeat
+   \State $r \leftarrow$ resto da divisão de $n_1$ por $n_2$
+   \State $n_1 \leftarrow n_2$
+   \State $n_2 \leftarrow r$
+ \Until{$r > 0$}
+ \Return $n_1$
+\end{algorithmic}
+\end{algoritmo}
+
+%\begin{codigo}[htb]
+%\caption{Consulta SQL}
+%\label{codigo:notas_alunos}
+%\hrule
+\begin{codigo}[caption = {Consulta SQL}, label={codigo:notas_alunos},language=SQL, breaklines=true]
+SELECT a.nome_aluno AS aluno,
+       d.nome_disciplina AS disciplina,
+       m.nota AS nota
+FROM aluno AS a,
+     disciplina AS d,
+     matriculado AS m
+WHERE a.id_aluno = m.id_aluno
+  AND d.id_disciplina = m.id_disciplina
+ORDER BY a.nome_aluno, d.nome_disciplina;
+\end{codigo}
+%\end{codigo}
+
+%\begin{codigo}[htb]
+%\caption{Subrotina para obter uma entrada do usuário}
+%\label{codigo:metodo_leitura}
+%\hrule
+\begin{codigo}[caption={Subrotina para obter uma entrada do usuário}, label={codigo:metodo_leitura}, language=Java, breaklines=true]
+public static String Leitura(){
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    try {
+        return reader.readLine(); // Lê uma linha pelo teclado
+    } catch (IOException e) {
+        e.printStackTrace();
+        return "";
+    }
+}
+\end{codigo}
+%\end{codigo}
+
+Existem diversos outros pacotes disponíveis para escrever algoritmos e códigos. Nos exemplos anteriormente foram utilizados o pacote \textit{algpseudocode} e \textit{listings}. O pacote \textit{algpseudocode} é usado para escrever algoritmos em alto nível \cite{janos:2005:algpseudocode}. Já o pacote \textit{listings} serve para escrever os códigos em diversas linguagens de programação \cite{moses:2006:listings}.
+
+Caso sejam utilizados os ambientes de algoritmos e código podem ser incluídos os comandos \comando{incluidelistaalgoritmos} e \comando{incluidelistacodigos} antes do \comando{begin\{document\}} para que a lista de algoritmos e a lista de código sejam criadas.
+
+
+\section{Ambientes Matemáticos}
+
+A classe \textit{ufgcac} provê os seguintes ambientes matemáticos:
+\begin{itemize}
+ \item Teoremas (\comando{begin\{teorema\}[\ ]} ... \comando{begin\{teorema\}});
+ \item Proposição (\comando{begin\{proposicao\}[\ ]} ... \comando{begin\{proposicao\}});
+ \item Lema (\comando{begin\{lema\}[\ ]} ... \comando{begin\{lema\}});
+ \item Corolário (\comando{begin\{corolario\}[\ ]} ... \comando{begin\{corolario\}});
+ \item Exemplo (\comando{begin\{exemplo\}[\ ]} ... \comando{begin\{exemplo\}});
+ \item Observação (\comando{begin\{observacao\}[\ ]} ... \comando{begin\{observacao\}});
+ \item Definição (\comando{begin\{definicao\}[\ ]} ... \comando{begin\{definicao\}});
+ \item demonstracao (\comando{begin\{demonstracao\}[\ ]} ... \comando{begin\{demonstracao\}}).
+\end{itemize}
+
+Abaixo temos um exemplo de proposição com sua demonstração:
+\begin{proposicao}
+ Sejam $a$ e $b$ reais, tais que $0<a<b$. Então $a^2<b^2$.
+\end{proposicao}
+\begin{demonstracao}
+ Pela hipótese concluímos que $(b+a)>0$ e $(b-a)>0$.
+
+Como $b^2-a^2=(b+a)(b-a)$ concluímos que $b^2-a^2>0$, ou seja, $a^2<b^2$.
+\end{demonstracao}
+
+Neste documento tratamos brevemente apenas dos ambientes mencionados anteriormente. Contudo, para escrever expressões matemáticas complexas é preciso estudar uma documentação mais específica como em \citeonline{cassagojr:1997:amslatex}.
+
+Alguns dos ambientes matemáticos da classe \textit{icmc} podem ser usados também para outras finalidades como exemplos e definições.

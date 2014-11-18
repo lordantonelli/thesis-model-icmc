@@ -1,0 +1,81 @@
+Em documentos acadêmicos podem existir citações diretas e citações indiretas. As citações indiretas são feitas quando se reescreve uma referência consultada. Nas citações indiretas há duas formatações possíveis dependendo de como ocorre a citação no texto. Quando o autor é mencionado explicitamente  deve ser usado o comando \comando{citeonline\{\}}, nas demais situações é usado o comando \comando{cite\{\}}. No quadro \ref{figura:citacao_indireta_explicita} encontrasse um  exemplo de uso do comando \comando{citeonline\{\}}.
+
+\begin{quadro}[htb]
+\caption{Exemplo de citação indireta explícita} \label{figura:citacao_indireta_explicita}
+\hrulefill
+
+\lstset{language=Tex, breaklines=true}
+\begin{lstlisting}
+Segundo \citeonline{silveira:2006}, o trabalho de conclusão de curso deve seguir as normas da ABNT.
+\end{lstlisting}
+
+\hrulefill
+
+Segundo \citeonline{silveira:2006:manual_tcc}, o trabalho de conclusão de curso deve seguir as normas da ABNT.
+
+\hrulefill
+
+%\legend{Fonte: o autor.}
+\end{quadro}
+
+Para especificar a página consultada na referência é preciso acrescentá-la entre colchetes com os comandos \comando{cite[página]\{\}} ou \comando{citeonline[página]\{\}}. No quadro \ref{figura:citacao_indireta_pagina} é mostrado um exemplo de citação com página específica.
+
+\begin{quadro}[htb]
+\caption{Exemplo de citação indireta não explícita} \label{figura:citacao_indireta_pagina}
+\hrulefill
+
+\lstset{language=Tex, breaklines=true}
+\begin{lstlisting}
+A folha de aprovação é um elemento obrigatório na monografia de projeto final de curso trabalho de conclusão de curso.  \cite[p.~10]{silveira:2006}.
+\end{lstlisting}
+
+\hrulefill
+
+A folha de aprovação é um elemento obrigatório no trabalho de conclusão de curso.  \cite[p.~10]{silveira:2006:manual_tcc}.
+
+\hrulefill
+
+\end{quadro}
+
+As citações diretas acontecem quando o texto de uma referência é transcrito literalmente. As citações diretas são curtas (até três linhas) são inseridas no texto entre aspas duplas. Conforme exemplo no quadro \ref{figura:citacao_direta_curta}.
+
+\begin{quadro}[htb]
+\caption{Exemplo de citação direta curta}
+\label{figura:citacao_direta_curta}
+\hrulefill
+
+\lstset{language=Tex, breaklines=true}
+\begin{lstlisting}
+``Os quadros, ao contrário das tabelas, apresentam dados textuais e devem localizar-se o mais próximo do texto a que se referem'' \cite[p.~25]{silveira:2006}.
+\end{lstlisting}
+
+\hrulefill
+
+``Os quadros, ao contrário das tabelas, apresentam dados textuais e devem localizar-se o mais próximo do texto a que se referem'' \cite[p.~25]{silveira:2006:manual_tcc}.
+
+\hrulefill
+\end{quadro}
+
+As citações longas (com mais de 3 linhas) podem ser inseridas via \comando{begin\{citacao\}} conforme quadro \ref{figura:citacao_direta_longa}.
+
+\begin{quadro}[htb]
+\caption{Exemplo de citação direta longa}
+\label{figura:citacao_direta_longa}
+\hrulefill
+
+\lstset{language=Tex, breaklines=true}
+\begin{lstlisting}
+\begin{citacao}
+Síntese final do trabalho, a conclusão constitui-se de uma resposta à hipótese enunciada na introdução. O autor manifestará seu ponto de vista sobre os resultados obtidos e sobre o alcance dos mesmos. Não se permite a inclusão de dados novos nesse capítulo nem citações ou interpretações de outros autores \cite[p.~25]{silveira:2006}.
+\end{citacao}
+\end{lstlisting}
+
+\hrulefill
+
+\begin{citacao}
+Síntese final do trabalho, a conclusão constitui-se de uma resposta à hipótese enunciada na introdução. O autor manifestará seu ponto de vista sobre os resultados obtidos e sobre o alcance dos mesmos. Não se permite a inclusão de dados novos nesse capítulo nem citações ou interpretações de outros autores \cite[p.~25]{silveira:2006:manual_tcc}.
+\end{citacao}
+
+\hrulefill
+
+\end{quadro}

@@ -1,0 +1,234 @@
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% ICMC: Modelo de Trabalho Acadêmico (tese de doutorado, dissertação de
+% mestrado e trabalhos monográficos em geral) em conformidade com 
+% ABNT NBR 14724:2011: Informação e documentação - Trabalhos acadêmicos -
+% Apresentação
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+
+% Opções: 
+%   Qualificação         = qualificacao 
+%   Curso                = doutorado/mestrado
+%   Situação do trabalho = pre-defesa/pos-defesa (exceto para qualificação)
+% -- opções do pacote babel --
+% Idioma padrão = brazil
+	%french,	    	% idioma adicional para hifenização
+	%spanish,			% idioma adicional para hifenização
+	%english,			% idioma adicional para hifenização
+	%brazil				% o último idioma é o principal do documento
+\documentclass[mestrado, spanish, english, brazil]{packages/icmc}
+
+% ---
+% Pacotes Opcionais
+% ---
+\usepackage{mathptmx}           % Usando times para equações, opcional
+\usepackage{rotating}           % Usado para rotacionar o texto
+\usepackage{algpseudocode}      % Pacote para escrever algoritmos em pseudo-código
+\usepackage[all,knot,arc,import,poly]{xy}   % Pacote para desenhos gráficos
+% Este pacote pode conflitar com outros pacotes gráficos como o ``pictex''
+% Então é necessário usar apenas um dos pacotes conflitantes
+
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\titulo{Modelo de Teses e Dissertações em \LaTeX~ do ICMC}
+\autor[Antonelli, H. L.]{Humberto Lidio Antonelli}
+\local{São Carlos -- SP}
+\data{01}{12}{2014} % Data do depósito
+\orientador[Orientadora:]{Profa. Dra.}{Renata Pontin de Mattos Fortes}
+%\coorientador{Prof. Dr.}{Fulano de tal}
+\instituicao{Instituto de Ciências Matemáticas e de Computação (ICMC/USP)}
+\curso{Ciências de Computação e Matemática Computacional}
+% ---
+
+
+% ---
+% RESUMOS
+% ---
+
+% Resumo em português
+% conter no máximo 500 palavras
+\textoresumo{
+    Este trabalho é um breve modelo  para a escrita de monografias de qualificação, dissertações e teses utilizando o ambiente \LaTeX, de acordo com as normas exigidas pelo Instituto de Ciências Matemáticas e de Computação (ICMC), da Universidade de São Paulo (USP). Para a confecção deste modelo foi utilizado a última versão (1.9.2) do pacote de classes \textit{abnTeX2} que segue as normas da Associação Brasileira de Normas Técnicas. A elaboração de uma monografia, dissertação ou tese pode ser feita sobrescrevendo o conteúdo deste modelo. 
+    }{Modelo, Monografia de qualificação, Dissertação, Tese, Latex}
+
+% ---
+% resumo em inglês
+% ---
+\textoresumo[english]{
+    This paper is a brief model for writing qualification monographs, dissertations and thesis using \LaTeX environment, in accordance with the standards required by the Institute of Mathematics and Computer Sciences (ICMC), University of São Paulo (USP). For making this model, the latest version (1.9.2) \textit{abnTeX2} classes package was used. This package follow the rules of the Brazilian Association of Technical Standards. A drafting a monograph, dissertation or thesis can be done by overwriting the contents of this model.
+    }{Template, Qualification monograph, Dissertation, Thesis, Latex}
+
+% ---
+% resumo em espanhol
+% ---
+\textoresumo[spanish]{
+    Este trabajo es un breve modelo para la redacción de monografías de cualificación, disertaciones y tesis utilizando el ambiente LaTeX, de acuerdo a las normas exigidas por el Instituto de Ciencias Matemáticas y Computación (ICMC) de la Universidad de São Paulo (USP). Para la confección de este modelo fue utilizada la última versión (1.9.1) del paquete de clases abnTeX2 que sigue las normas de la Asociación Brasilera de Normas Técnicas. La elaboración de una monografía, disertación o tesis puede ser realizada reescribiendo el contenido de este modelo.
+    }{Template, Monografías de cualificación, Disertacion, Tesis, Latex}
+    
+    
+% ---
+% Configurações de aparência do PDF final
+% ---
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2/ICMC-USP},
+		pdfkeywords={\palavraschave}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      	% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+% --- 
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+
+% Inserir a ficha catalográfica
+%\incluifichacatalografica[tex/fichaCatalografica.pdf]
+%\incluifichacatalografica
+
+
+% Inserir folha de aprovação
+%\input{tex/folha-aprovacao}
+
+% DEDICATÓRIA / AGRADECIMENTO / EPÍGRAFE
+\textodedicatoria*{tex/pre-textual/dedicatoria}
+\textoagradecimentos*{tex/pre-textual/agradecimentos}
+\textoepigrafe*{tex/pre-textual/epigrafe}
+
+% Inclui a lista de figuras
+\incluilistadefiguras
+
+% Inclui a lista de tabelas
+\incluilistadetabelas
+
+% Inclui a lista de quadros
+\incluilistadequadros
+
+% Inclui a lista de algoritmos
+\incluilistadealgoritmos
+
+% Inclui a lista de códigos
+\incluilistadecodigos
+
+% Inclui a lista de siglas e abreviaturas
+\incluilistadesiglas
+
+% Inclui a lista de símbolos
+\incluilistadesimbolos
+
+% ----
+% Início do documento
+% ----
+\begin{document}
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+\chapter{Introdução}
+\label{chapter:introducao}
+\input{tex/introducao}
+
+\chapter{Instalando o abnTeX2}
+\label{chapter:instalando-abntex}
+\input{tex/instalando-abntex}
+
+\chapter{Configuração dos Elementos Pré-Textuais}
+\label{chapter:config-pre-textual}
+\input{tex/config-pre-textual}
+
+\chapter{Corpos Flutuantes}
+\label{chapter:corpos-flutuantes}
+\input{tex/corpos-flutuantes}
+
+\chapter{Listas}
+\label{chapter:listas}
+\input{tex/listas}
+
+\chapter{Ferramentas Úteis}
+\label{chapter:ferramentas-uteis}
+\input{tex/ferramentas-uteis}
+
+\chapter{Citações e Referências}
+\label{chapter:citacoes}
+\input{tex/citacoes}
+
+
+% ---
+% Finaliza a parte no bookmark do PDF, para que se inicie o bookmark na raiz
+% ---
+\bookmarksetup{startatroot}% 
+% ---
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\bibliography{references}
+
+% ---------------------------------------------------------------------
+% GLOSSÁRIO
+% ---------------------------------------------------------------------
+
+% Arquivo que contém as definições que vão aparecer no glossário
+\input{tex/glossario}
+% Comando para incluir todas as definições do arquivo glossario.tex
+\glsaddall
+% Impressão do glossário
+\printglossaries
+
+% ----------------------------------------------------------
+% Apêndices
+% ----------------------------------------------------------
+
+% ---
+% Inicia os apêndices
+% ---
+\begin{apendicesenv}
+
+    \chapter{Documento Básico Usando a Classe icmc}
+    \label{chapter:documento-basico}
+    \input{tex/appendix/documento-basico}
+
+\end{apendicesenv}
+% ---
+
+
+% ----------------------------------------------------------
+% Anexos
+% ----------------------------------------------------------
+
+% ---
+% Inicia os anexos
+% ---
+\begin{anexosenv}
+
+    \chapter{Páginas Interessantes na Internet} 
+    \label{chapter:paginas-interessantes}
+    \input{tex/annex/paginas-interessantes}
+
+\end{anexosenv}
+% ---
+
+\end{document}

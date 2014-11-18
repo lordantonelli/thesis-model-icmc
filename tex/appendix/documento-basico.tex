@@ -1,0 +1,70 @@
+\lstset{language=Tex, breaklines=true}
+\begin{lstlisting}[frame=single]
+% Documento utilizando a classe ufgcac
+\documentclass{icmc}
+
+% Título do trabalho
+\titulo{Título da Monografia}
+
+% Nome do autor
+\autor[Abreviação]{Nome sobrenome(se possuir)}{ultimo sobrenome}
+
+% Define o nome da instituição
+\instituicao{Universidade Federal de Goiás -- Câmpus Catalão}
+
+% Define o local
+\local{Catalão -- GO}
+
+% Nome do Orientador
+\orientador[Orientador:]{Nome do Orientador}{Último sobrenome do Orientador}
+
+% Nome do Coorientador (caso não exista basta remover)
+\coorientador[Coorientador:]{Nome do Coorientador}
+% Se coorientadora troque Coorientador: por Coorientadora: dentro do colchetes
+
+% Nome do departamento
+\departamento{Nome do Departamento}
+
+% Área de concentração do trabalho
+\area{Área de Concentração do Trabalho}
+
+% Modalidade do curso, nome do curso e grau obtido
+\\curso{Bacharelado}{Ciências da Computação}{Bacharel}
+
+% Membros da banca e suas instituições
+\membrobanca{Fulando de Tal}{Instituição do Fulano de Tal}
+\membrobanca{Ciclano de Tal}{Instituição do Ciclano de Tal}
+
+% Data da defesa
+\data{18}{dezembro}{2012}
+
+% Resumo
+\textoresumo{
+Texto do resumo do trabalho.
+}
+
+% Palavras chaves
+\palavrachave{Trabalho de conclusão de curso}
+\palavrachave{Latex}
+\palavrachave{Monografia}
+
+% Início do documento
+\begin{document}
+
+\chapter{Introdução}
+
+Capítulo de Introdução
+
+\chapter{Desenvolvimento}
+
+Capítulo de Desenvolvimento
+
+\chapter{Conclusão}
+
+Capítulo de conclusão
+
+% Nome do arquivo com as referências bibliográficas
+\bibliography{referencias}
+
+\end{document}
+\end{lstlisting}

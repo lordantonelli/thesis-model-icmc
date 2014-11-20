@@ -93,25 +93,26 @@ Geany      & Sim             & Não                   \\ \hline
 \section{Algoritmos e Códigos}
 \label{secao:algoritmos_e_codigos}
 
-Além dos corpos flutuantes convencionais para inserir figuras (\comando{begin\{figure\}}) e tabelas (\comando{begin\{figure\}}), a classe \textit{icmc} possui mais dois tipos de corpos flutuantes um para algoritmos (\comando{begin\{algoritmo\}}) e outro para códigos (\comando{begin\{codigo\}}). A utilização de um ou de outro fica a critério do usuário. Como exemplo temos o Algoritmo \ref{algoritmo:mdc} que calcula o máximo divisor comum entre dois números e os Códigos \ref{codigo:notas_alunos} e \ref{codigo:metodo_leitura} que são uma consulta na \textit{Structured Query Language (SQL)}\sigla{SQL}{Structured Query Language} e uma sobrotina em \textit{Java}.
+Além dos corpos flutuantes convencionais para inserir figuras (\comando{begin\{figure\}}) e tabelas (\comando{begin\{figure\}}), a classe \textit{icmc} possui mais dois tipos de corpos flutuantes um para algoritmos (\comando{begin\{algoritmo\}}) e outro para códigos (\comando{begin\{codigo\}}). A utilização de um ou de outro fica a critério do usuário. Como exemplo temos o Algoritmo \ref{algoritmo:mdc1} que calcula o máximo divisor comum entre dois números e os Códigos \ref{codigo:notas_alunos} e \ref{codigo:metodo_leitura} que são uma consulta na \textit{Structured Query Language (SQL)}\sigla{SQL}{Structured Query Language} e uma sobrotina em \textit{Java}.
 
-\begin{algoritmo}[htb]
+%\begin{algoritmo}[htb]
+\begin{algoritmo}
+%\begin{algorithmic}[1]
 \caption{Algoritmo para cálculo de máximo divisor comum MDC($n_1$,$n_2$)}
-\label{algoritmo:mdc}
-\hrule
-\begin{algorithmic}[1]
- \Require Dois números inteiros ($n_1, n_2$)
- \If{$n_2 > n_1$} \Comment{Garante que o maior número seja $n_1$}
-   \State troca valores de $n_1$ e $n_2$
- \EndIf
- \Repeat
-   \State $r \leftarrow$ resto da divisão de $n_1$ por $n_2$
-   \State $n_1 \leftarrow n_2$
-   \State $n_2 \leftarrow r$
- \Until{$r > 0$}
+\label{algoritmo:mdc1}
+
+ \KwIn{Dois números inteiros ($n_1, n_2$)}
+ \If(\tcp*[f]{Garante que o maior número seja $n_1$}){$n_2 > n_1$}
+   {troca valores de $n_1$ e $n_2$}
+ \Repeat{$r > 0$}{
+    $r \leftarrow$ resto da divisão de $n_1$ por $n_2$
+    $n_1 \leftarrow n_2$
+    $n_2 \leftarrow r$
+ }
  \Return $n_1$
-\end{algorithmic}
+%\end{algorithmic}
 \end{algoritmo}
+%\end{algoritmo}
 
 %\begin{codigo}[htb]
 %\caption{Consulta SQL}
@@ -154,7 +155,7 @@ Caso sejam utilizados os ambientes de algoritmos e código podem ser incluídos 
 
 \section{Ambientes Matemáticos}
 
-A classe \textit{ufgcac} provê os seguintes ambientes matemáticos:
+A classe \textit{icmc} provê os seguintes ambientes matemáticos:
 \begin{itemize}
  \item Teoremas (\comando{begin\{teorema\}[\ ]} ... \comando{begin\{teorema\}});
  \item Proposição (\comando{begin\{proposicao\}[\ ]} ... \comando{begin\{proposicao\}});

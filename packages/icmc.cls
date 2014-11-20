@@ -99,12 +99,11 @@
 \RequirePackage{lmodern}			% Usa a fonte Latin Modern.
 \RequirePackage{lastpage}			% Usado pela Ficha catalográfica
 \RequirePackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
-\RequirePackage{xcolor}             % Controle das cores
-\RequirePackage{color}				% Controle das cores
-\RequirePackage{colortbl}           % Controle das cores das células da tabela (utilizado no título
+\RequirePackage{color, xcolor}      % Controle das cores
+\RequirePackage{colortbl}           % Controle das cores das células da tabela (utilizado no título)
 \RequirePackage{graphicx}			% Inclusão de gráficos
-\RequirePackage{float}              % Pacote para definição de novos corpos flutuantes
-\RequirePackage[position=above]{caption}            % Pacote para definição dos captions
+%\RequirePackage{float}              % Pacote para definição de novos corpos flutuantes
+\RequirePackage{caption}            % Pacote para definição dos captions
 \RequirePackage{microtype} 		    % para melhorias de justificação
 \RequirePackage[normalem]{ulem}     % para o underline colorido
 \RequirePackage{pdfpages}           % inclusão de arquivos PDF
@@ -115,10 +114,14 @@
 \RequirePackage{xstring}
 \RequirePackage{etoolbox}           % Pacote utilizado para armazenamento de resumos
 \RequirePackage{amsthm, amsfonts, amsmath, amssymb} % Pacote para a definição dos ambientes matemáticos
+\RequirePackage{mathptmx}           % Usando times para equações, opcional
 \RequirePackage{listings}           % Pacote para formatação de diversos códigos fontes
 \RequirePackage{xparse}             % Pacote utilizado para gerar as palavras-chave da ficha catalográfica
-\RequirePackage{chngcntr}
+%\RequirePackage{chngcntr}
 
+\usepackage[linesnumbered, ruled, vlined]{algorithm2e}
+%\RequirePackage{algpseudocode}      % Pacote para escrever algoritmos em pseudo-código
+%\RequirePackage{algorithm} %algorithm
 
 %==============================================================================
 % Comando para configuração do tipo de trabalho
@@ -629,14 +632,18 @@
 
 
 %QUADRO
-\floatstyle{plaintop}
-\restylefloat{figure}
+%\floatstyle{plaintop}
+%\restylefloat{figure}
 
-\newfloat{quadro}{htbp}{qud}[chapter]
+\newfloat[chapter]{quadro}{loq}{\quadroname}
+\newlistof{listofquadros}{loq}{\listquadroname}
+\newlistentry{quadro}{loq}{0}
+
+%\newfloat{quadro}{htbp}{loq}[chapter]
 \renewcommand{\thequadro}{\thechapter.\@arabic\c@quadro}
 
-\newlistof{listofquadros}{qud}{\listquadroname}
-\newlistentry[chapter]{quadro}{qud}{0}
+%\newlistof{listofquadros}{loq}{\listquadroname}
+%\newlistentry[chapter]{quadro}{loq}{0}
 \setfloatadjustment{quadro}{\centering}
 
 \renewcommand{\cftquadroname}{\quadroname\space}
@@ -644,43 +651,65 @@
 \newcommand{\qref}[1]{\quadrorefname~\ref{#1}}
 
 
-%CODIGO
-%\floatstyle{ruled}
-%\newfloat{codigo}{htbp}{cod}[chapter]
-%\renewcommand{\thecodigo}{\thechapter.\@arabic\c@codigo}
-
-%\newlistof{listofcodigos}{cod}{\listcodigoname}
-%\newlistentry[chapter]{codigo}{cod}{0}
-%  \cftsetindents{codigo}{0em}{2.3em}
-
-%\renewcommand{\cftcodigoname}{\codigoname\space}
-%\renewcommand*{\cftcodigoaftersnum}{\hfill\textendash\hfill}
-%\newcommand{\cref}[1]{\codigorefname~\ref{#1}}
-
 
 %ALGORITMO
-\floatstyle{ruled}
-\newfloat{algoritmo}{htbp}{alg}[chapter]
-\renewcommand{\thealgoritmo}{\thechapter.\@arabic\c@algoritmo}
+%\floatstyle{ruled}
 
-\newlistof{listofalgoritmos}{alg}{\listalgoritmoname}
-\newlistentry[chapter]{algoritmo}{alg}{0}
+%\newfloat[chapter]{algoritmo}{loa}{\algoritmoname}
+%\newlistof{listofalgoritmos}{loa}{\listalgoritmoname}
+%\newlistentry{algoritmo}{loa}{0}
 
-\renewcommand{\cftalgoritmoname}{\algoritmoname\space}
-\renewcommand*{\cftalgoritmoaftersnum}{\hfill\textendash\hfill}
+
+%\newfloat{algoritmo}{htbp}{alg}[chapter]
+%\renewcommand{\thealgoritmo}{\thechapter.\@arabic\c@algoritmo}
+
+%\newlistof{listofalgoritmos}{alg}{\listalgoritmoname}
+%\newlistentry[chapter]{algoritmo}{alg}{0}
+
+%\renewcommand{\cftalgoritmoname}{\algoritmoname\space}
+%\renewcommand*{\cftalgoritmoaftersnum}{\hfill\textendash\hfill}
 \newcommand{\aref}[1]{\algoritmorefname~\ref{#1}}
 
 
-\floatname{quadro}{\quadroname}
-\floatname{algoritmo}{\algoritmoname}
-%\floatname{codigo}{\codigoname}
+%\floatname{quadro}{\quadroname}
+%\floatname{algoritmo}{\algoritmoname}
+%\floatname{algorithm}{\algoritmoname}
+
+% Alterar o espaçamento da margem no algoritmo
+%\SetAlgoCaptionSeparator{~\textendash\hfill}
+
+%\SetAlgorithmName{\algoritmoname}
+\renewcommand{\listalgorithmcfname}{\listalgoritmoname}%
+\renewcommand{\algorithmcfname}{\algoritmoname}%
+
+\begingroup
+\let\newcounter\@gobble\let\setcounter\@gobbletwo
+  \globaldefs\@ne \let\c@loldepth\@ne
+  \newlistof{algorithmt}{loa}{\listalgorithmcfname}
+  \newlistentry{algorithmt}{loa}{0}
+\endgroup
+
+   \let\oldlistofalgorithms\listofalgorithms
+\newcommand{\NEWnumberline}[1]{\hspace*{-12pt}Algoritmo #1~~\textendash~~}%
+\renewcommand{\listofalgorithms}{%
+\let\OLDnumberline\numberline%
+\let\numberline\NEWnumberline%
+\oldlistofalgorithms%
+\let\numberline\OLDnumberline%
+}%
+
+
+\newenvironment{algoritmo}[1][htb]{
+    \begin{algorithm}[#1]%
+    }{\end{algorithm}}
+   
 
 \ifthenelse{\equal{\ABNTEXisarticle}{true}}{%
   \counterwithout{quadro}{section}
-  \counterwithout{algoritmo}{section}
+  %\counterwithout{algoritmo}{section}
 }{%else
   \counterwithout{quadro}{chapter}
-  \counterwithout{algoritmo}{chapter}
+  %\counterwithout{algoritmo}{chapter}
 }
 
 
@@ -714,10 +743,7 @@
 
 %\captionsetup[lstlisting]{labelfont=bf}
 
-\renewcommand*\thelstnumber{\arabic{lstnumber}:}
-
-\DeclareCaptionFormat{mylst}{\hrule#1#2#3}
-\captionsetup[lstlisting]{format=mylst,singlelinecheck=off}
+\renewcommand*\thelstnumber{\arabic{lstnumber}}
 
 \newcounter{countcodigo}
 \setcounter{countcodigo}{1}
@@ -726,18 +752,36 @@
   {\lstset{basicstyle=\ttfamily\ABNTEXfontereduzida,
            numbers=left, 
            numbersep=5pt,
+           numberstyle=\tiny\bfseries,
             xleftmargin=20pt,
-            frame=Tb,
-            framexleftmargin=20pt,
-           %numbersep=10pt,
-           %frame=single,
-           %xleftmargin=20pt,
-           belowcaptionskip=5pt,
+            frame=tb,
+            framerule=0.8pt,
+           %framexleftmargin=20pt,
+               xleftmargin=17pt,
+              framexleftmargin=17pt,
+              framexbottommargin=5pt,
+              framextopmargin=5pt,
+           %belowcaptionskip=3pt,
            abovecaptionskip=10pt,
            #1
           }
 }
 {\setcounter{countcodigo}{\value{lstnumber}}}
+
+%==============================================================================
+% Comando para configurar os captions no documento
+%==============================================================================
+\DeclareCaptionFont{ABNTEXfontereduzida}{\ABNTEXfontereduzida}
+\captionsetup{position=above, labelfont=ABNTEXfontereduzida, font=ABNTEXfontereduzida}
+
+\DeclareCaptionFormat{listing}{\hrule height.8pt depth0pt ~~~#1#2#3}
+\captionsetup[lstlisting]{format=listing,singlelinecheck=false, margin=0pt,labelsep=colon,labelfont=bf, font=normalsize}
+
+
+
+%\DeclareCaptionFormat{mylst}{\hrule~~~#1#2#3}
+%\captionsetup[lstlisting]{format=mylst,singlelinecheck=off,labelfont=normalsize, font=normalsize, labelfont=bf, labelsep=colon}
+
 
 %==============================================================================
 % Dedicatória
@@ -959,7 +1003,7 @@
 \newcommand{\inserelistadequadros}
 {
   \@ifundefined{@incluilistadequadros}{}{
-    \pdfbookmark[0]{\listquadroname}{qud}
+    \pdfbookmark[0]{\listquadroname}{loq}
     \listofquadros*
     \cleardoublepage
   }
@@ -968,8 +1012,9 @@
 \newcommand{\inserelistadealgoritmos}
 {
   \@ifundefined{@incluilistadealgoritmos}{}{
-    \pdfbookmark[0]{\listofalgoritmos}{alg}
-    \listofalgoritmos*
+    \pdfbookmark[0]{\listalgoritmoname}{alg}
+    %\listofalgoritmos*
+    \listofalgorithms
     \cleardoublepage
   }
 }
@@ -1287,6 +1332,9 @@ USP -- São Carlos\\
         {í}{{\'{i}}}1
         {Í}{{\~{Í}}}1
         {Ú}{{\'U}}1
+        {ú}{{\'u}}1
+        {Ü}{{\"U}}1
+        {ü}{{\"u}}1
     }
     
     \ifthenelse{\equal{\ABNTEXisarticle}{true}}{%
@@ -1295,7 +1343,6 @@ USP -- São Carlos\\
       \counterwithout{lstlisting}{chapter}
     }
     
-
 
     \mainmatter
 

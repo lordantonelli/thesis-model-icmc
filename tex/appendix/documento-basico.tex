@@ -1,52 +1,49 @@
 \lstset{language=Tex, breaklines=true}
 \begin{lstlisting}[frame=single]
 % Documento utilizando a classe ufgcac
-\documentclass{icmc}
+% Opções: 
+%   Qualificação         = qualificacao 
+%   Curso                = doutorado/mestrado
+%   Situação do trabalho = pre-defesa/pos-defesa (exceto para qualificação)
+% -- opções do pacote babel --
+% Idioma padrão = brazil
+	%french,	    	% idioma adicional para hifenização
+	%spanish,			% idioma adicional para hifenização
+	%english,			% idioma adicional para hifenização
+	%brazil				% o último idioma é o principal do documento
+\documentclass[doutorado, spanish, english, brazil]{packages/icmc}
 
 % Título do trabalho
 \titulo{Título da Monografia}
 
 % Nome do autor
-\autor[Abreviação]{Nome sobrenome(se possuir)}{ultimo sobrenome}
-
-% Define o nome da instituição
-\instituicao{Universidade Federal de Goiás -- Câmpus Catalão}
+\autor[Abreviação]{Nome completo do autor}
 
 % Define o local
-\local{Catalão -- GO}
+\local{São Carlos -- SP}
+
+% Data do depósito
+\data{18}{12}{2012}
 
 % Nome do Orientador
-\orientador[Orientador:]{Nome do Orientador}{Último sobrenome do Orientador}
+\orientador[Orientador:]{Titulação do orientador}{Nome completo do Orientador}
 
 % Nome do Coorientador (caso não exista basta remover)
-\coorientador[Coorientador:]{Nome do Coorientador}
+\coorientador[Coorientador:]{Titulação do coorientador}{Nome completo do Coorientador}
 % Se coorientadora troque Coorientador: por Coorientadora: dentro do colchetes
 
-% Nome do departamento
-\departamento{Nome do Departamento}
+% Define o nome da instituição
+\instituicao{Instituto de Ciências Matemáticas e de Computação (ICMC/USP)}
 
-% Área de concentração do trabalho
-\area{Área de Concentração do Trabalho}
-
-% Modalidade do curso, nome do curso e grau obtido
-\\curso{Bacharelado}{Ciências da Computação}{Bacharel}
-
-% Membros da banca e suas instituições
-\membrobanca{Fulando de Tal}{Instituição do Fulano de Tal}
-\membrobanca{Ciclano de Tal}{Instituição do Ciclano de Tal}
-
-% Data da defesa
-\data{18}{dezembro}{2012}
+% Especiolidade e Nome do programa de Pós-graduação
+\curso[Ciências -- Ciências de Computação e Matemática Computacional]{Ciências de Computação e Matemática Computacional}
+% O valor entre colchetes é opcional
 
 % Resumo
-\textoresumo{
+\textoresumo[Idioma]{
 Texto do resumo do trabalho.
-}
+}{Lista de palavras-chave separada por virgulas}
 
-% Palavras chaves
-\palavrachave{Trabalho de conclusão de curso}
-\palavrachave{Latex}
-\palavrachave{Monografia}
 
 % Início do documento
 \begin{document}
@@ -67,4 +64,5 @@ Capítulo de conclusão
 \bibliography{referencias}
 
 \end{document}
+
 \end{lstlisting}

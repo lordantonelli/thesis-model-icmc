@@ -102,7 +102,6 @@
 \RequirePackage{color, xcolor}      % Controle das cores
 \RequirePackage{colortbl}           % Controle das cores das células da tabela (utilizado no título)
 \RequirePackage{graphicx}			% Inclusão de gráficos
-%\RequirePackage{float}              % Pacote para definição de novos corpos flutuantes
 \RequirePackage{caption}            % Pacote para definição dos captions
 \RequirePackage{microtype} 		    % para melhorias de justificação
 \RequirePackage[normalem]{ulem}     % para o underline colorido
@@ -117,11 +116,7 @@
 \RequirePackage{mathptmx}           % Usando times para equações, opcional
 \RequirePackage{listings}           % Pacote para formatação de diversos códigos fontes
 \RequirePackage{xparse}             % Pacote utilizado para gerar as palavras-chave da ficha catalográfica
-%\RequirePackage{chngcntr}
-
-\usepackage[linesnumbered, ruled, vlined]{algorithm2e}
-%\RequirePackage{algpseudocode}      % Pacote para escrever algoritmos em pseudo-código
-%\RequirePackage{algorithm} %algorithm
+\RequirePackage[linesnumbered, ruled, vlined]{algorithm2e}      % Pacote para escrever algoritmos em pseudo-código
 
 %==============================================================================
 % Comando para configuração do tipo de trabalho
@@ -305,6 +300,11 @@
 \newcommand{\simbolo}[2]{
   \addcontentsline{los}{simbolo}{\ensuremath{#1} --- #2}
 }
+
+% Comandos utilizados para referenciar corpos flutuantes no texto
+\newcommand{\qref}[1]{\quadrorefname~\ref{#1}}      % Quadro X
+\newcommand{\aref}[1]{\algoritmorefname~\ref{#1}}   % Algoritmo X
+\newcommand{\cref}[1]{\codigorefname~\ref{#1}}      % Código X
 
 
 %==============================================================================
@@ -622,66 +622,38 @@
     \renewcommand{\listquadroname}{List of frames}
     \renewcommand{\quadroname}{Frame}
     \renewcommand{\quadrorefname}{Frame}
-    \renewcommand{\listalgoritmoname}{List of algorithm}
+    \renewcommand{\listalgoritmoname}{List of algorithms}
     \renewcommand{\algoritmoname}{Algorithm}
     \renewcommand{\algoritmorefname}{Algorithm}
-    \renewcommand{\listcodigoname}{List of source code}
+    \renewcommand{\listcodigoname}{List of source codes}
     \renewcommand{\codigoname}{Source code}
     \renewcommand{\codigorefname}{Source code}
 }
 
 
-%QUADRO
-%\floatstyle{plaintop}
-%\restylefloat{figure}
+% ---
+% Formatação de ambiente Quadro
+% ---
 
 \newfloat[chapter]{quadro}{loq}{\quadroname}
 \newlistof{listofquadros}{loq}{\listquadroname}
 \newlistentry{quadro}{loq}{0}
-
-%\newfloat{quadro}{htbp}{loq}[chapter]
 \renewcommand{\thequadro}{\thechapter.\@arabic\c@quadro}
-
-%\newlistof{listofquadros}{loq}{\listquadroname}
-%\newlistentry[chapter]{quadro}{loq}{0}
 \setfloatadjustment{quadro}{\centering}
 
 \renewcommand{\cftquadroname}{\quadroname\space}
 \renewcommand*{\cftquadroaftersnum}{\hfill\textendash\hfill}
-\newcommand{\qref}[1]{\quadrorefname~\ref{#1}}
 
+% ---
+% Formatação de ambiente Algoritmo
+% ---
 
-
-%ALGORITMO
-%\floatstyle{ruled}
-
-%\newfloat[chapter]{algoritmo}{loa}{\algoritmoname}
-%\newlistof{listofalgoritmos}{loa}{\listalgoritmoname}
-%\newlistentry{algoritmo}{loa}{0}
-
-
-%\newfloat{algoritmo}{htbp}{alg}[chapter]
-%\renewcommand{\thealgoritmo}{\thechapter.\@arabic\c@algoritmo}
-
-%\newlistof{listofalgoritmos}{alg}{\listalgoritmoname}
-%\newlistentry[chapter]{algoritmo}{alg}{0}
-
-%\renewcommand{\cftalgoritmoname}{\algoritmoname\space}
-%\renewcommand*{\cftalgoritmoaftersnum}{\hfill\textendash\hfill}
-\newcommand{\aref}[1]{\algoritmorefname~\ref{#1}}
-
-
-%\floatname{quadro}{\quadroname}
-%\floatname{algoritmo}{\algoritmoname}
-%\floatname{algorithm}{\algoritmoname}
-
-% Alterar o espaçamento da margem no algoritmo
-%\SetAlgoCaptionSeparator{~\textendash\hfill}
-
-%\SetAlgorithmName{\algoritmoname}
+% Altera o rótulo a ser usando no elemento pré-textual "Lista de algoritmos"
 \renewcommand{\listalgorithmcfname}{\listalgoritmoname}%
+% Altera o nome padrão do rótulo
 \renewcommand{\algorithmcfname}{\algoritmoname}%
 
+% Configura a ``Lista de algoritmos'' conforme as regras da ABNT (para abnTeX2)
 \begingroup
 \let\newcounter\@gobble\let\setcounter\@gobbletwo
   \globaldefs\@ne \let\c@loldepth\@ne
@@ -698,31 +670,22 @@
 \let\numberline\OLDnumberline%
 }%
 
-
+% Cria um novo ambiente "algoritmo" que inclui o ambiente "algorithm"
 \newenvironment{algoritmo}[1][htb]{
     \begin{algorithm}[#1]%
     }{\end{algorithm}}
-   
-
-\ifthenelse{\equal{\ABNTEXisarticle}{true}}{%
-  \counterwithout{quadro}{section}
-  %\counterwithout{algoritmo}{section}
-}{%else
-  \counterwithout{quadro}{chapter}
-  %\counterwithout{algoritmo}{chapter}
-}
 
 
 % ---
 % Formatação de código-fonte
 % ---
 
-% Altera o nome padrão do rótulo usado no comando \autoref{}
+% Altera o nome padrão do rótulo 
 \renewcommand{\lstlistingname}{\codigoname}
-% Altera o rótulo a ser usando no elemento pré-textual "Lista de código"
+% Altera o rótulo a ser usando no elemento pré-textual "Lista de códigos"
 \renewcommand{\lstlistlistingname}{\listcodigoname}
 
-% Configura a ``Lista de Códigos'' conforme as regras da ABNT (para abnTeX2)
+% Configura a ``Lista de códigos'' conforme as regras da ABNT (para abnTeX2)
 \begingroup
 \let\newcounter\@gobble\let\setcounter\@gobbletwo
   \globaldefs\@ne \let\c@loldepth\@ne
@@ -731,7 +694,6 @@
 \endgroup
 
 \renewcommand{\cftlstlistingaftersnum}{\hfill\textendash\hfill}
-\newcommand{\cref}[1]{\codigorefname~\ref{#1}}
 
 \let\oldlstlistoflistings\lstlistoflistings
 \renewcommand{\lstlistoflistings}{%
@@ -741,13 +703,9 @@
    \oldlstlistoflistings%
    \endgroup}
 
-%\captionsetup[lstlisting]{labelfont=bf}
-
-\renewcommand*\thelstnumber{\arabic{lstnumber}}
-
+% Cria um ambiente "codigo" estilizando o ambiente "lstlisting" 
 \newcounter{countcodigo}
 \setcounter{countcodigo}{1}
-
 \lstnewenvironment{codigo}[1][]
   {\lstset{basicstyle=\ttfamily\ABNTEXfontereduzida,
            numbers=left, 
@@ -776,12 +734,6 @@
 
 \DeclareCaptionFormat{listing}{\hrule height.8pt depth0pt ~~~#1#2#3}
 \captionsetup[lstlisting]{format=listing,singlelinecheck=false, margin=0pt,labelsep=colon,labelfont=bf, font=normalsize}
-
-
-
-%\DeclareCaptionFormat{mylst}{\hrule~~~#1#2#3}
-%\captionsetup[lstlisting]{format=mylst,singlelinecheck=off,labelfont=normalsize, font=normalsize, labelfont=bf, labelsep=colon}
-
 
 %==============================================================================
 % Dedicatória
@@ -1013,7 +965,6 @@
 {
   \@ifundefined{@incluilistadealgoritmos}{}{
     \pdfbookmark[0]{\listalgoritmoname}{alg}
-    %\listofalgoritmos*
     \listofalgorithms
     \cleardoublepage
   }
@@ -1022,9 +973,6 @@
 \newcommand{\inserelistadecodigos}
 {
   \@ifundefined{@incluilistadecodigos}{}{
-    %\pdfbookmark[0]{\listofcodigos}{cod}
-    %\listofcodigos*
-    %\cleardoublepage
     \pdfbookmark[0]{\lstlistlistingname}{lol}
     \begin{KeepFromToc}
     \lstlistoflistings
@@ -1293,14 +1241,14 @@ USP -- São Carlos\\
         frame=top,
         frame=bottom,
         breakatwhitespace=false,         
-    breaklines=true,                 
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=2,
+        breaklines=true,                 
+        keepspaces=true,                 
+        numbers=left,                    
+        numbersep=5pt,                  
+        showspaces=false,                
+        showstringspaces=false,
+        showtabs=false,                  
+        tabsize=2,
         inputencoding=utf8,
         extendedchars=true,
         literate=%
@@ -1337,11 +1285,9 @@ USP -- São Carlos\\
         {ü}{{\"u}}1
     }
     
-    \ifthenelse{\equal{\ABNTEXisarticle}{true}}{%
-      \counterwithout{lstlisting}{section}
-    }{%else
-      \counterwithout{lstlisting}{chapter}
-    }
+    % Numeração contínua do elementos do presentes no documento
+    \counterwithout{quadro}{chapter}
+    \counterwithout{lstlisting}{chapter}
     
 
     \mainmatter

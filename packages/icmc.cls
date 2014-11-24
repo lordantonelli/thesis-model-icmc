@@ -124,12 +124,12 @@
 
 \ifthenelse{\boolean{opt-pre-defesa}}{
     \iflanguage{english}
-        {\newcommand{\tipoexemplar}{EXAMINATION BOARD PRESENTATION COPY.}}
-        {\newcommand{\tipoexemplar}{EXEMPLAR DE DEFESA.}}
+        {\newcommand{\tipoexemplar}{\textit{EXAMINATION BOARD PRESENTATION COPY}.}}
+        {\newcommand{\tipoexemplar}{\textit{EXEMPLAR DE DEFESA}.}}
 }{
     \iflanguage{english}
-        {\newcommand{\tipoexemplar}{FINAL VERSION.}}
-        {\newcommand{\tipoexemplar}{VERS{\~A}O REVISADA.}}
+        {\newcommand{\tipoexemplar}{\textit{FINAL VERSION}.}}
+        {\newcommand{\tipoexemplar}{\textit{VERS{\~A}O REVISADA}.}}
 }
 
 \ifthenelse{\boolean{opt-doutorado}}{
@@ -206,9 +206,9 @@
     
     \newcommand\@icmcTitulo{\@icmcFont{17}\tahoma}
     \newcommand\@icmcAutorCapa{\@icmcFont{15}\timesnewroman\bfseries\itshape}
-    \newcommand\@icmcAutorFolhaRosto{\@icmcFont{14}\timesnewroman\bfseries\itshape}
-    \newcommand\@icmcOrientadorLabel{\@icmcFont{12}\timesnewroman\bfseries}
-    \newcommand\@icmcOrientadorName{\@icmcFont{12}\timesnewroman\bfseries\itshape}
+    \newcommand\@icmcAutorFolhaRosto{\@icmcFont{14}\timesnewroman\bfseries}
+    \newcommand\@icmcOrientadorLabel{\@icmcFont{12}\timesnewroman\bfseries\itshape}
+    \newcommand\@icmcOrientadorName{\@icmcFont{12}\timesnewroman\bfseries}
     \newcommand\@icmcPreambulo{\@icmcFont{11}\timesnewroman\mdseries}
     \newcommand\@icmcLocalData{\@icmcFont{12}\timesnewroman\bfseries}
     \newcommand\@icmcCarimbo{\@icmcFont{12}\timesnewroman}
@@ -232,9 +232,9 @@
       
       \newcommand\@icmcTitulo{\@icmcFont{17}\tahoma}
       \newcommand\@icmcAutorCapa{\@icmcFont{15}\timesnewroman\bfseries\itshape}
-      \newcommand\@icmcAutorFolhaRosto{\@icmcFont{14}\timesnewroman\bfseries\itshape}
-      \newcommand\@icmcOrientadorLabel{\@icmcFont{12}\timesnewroman\bfseries}
-      \newcommand\@icmcOrientadorName{\@icmcFont{12}\timesnewroman\bfseries\itshape}
+      \newcommand\@icmcAutorFolhaRosto{\@icmcFont{14}\timesnewroman\bfseries}
+      \newcommand\@icmcOrientadorLabel{\@icmcFont{12}\timesnewroman\bfseries\itshape}
+      \newcommand\@icmcOrientadorName{\@icmcFont{12}\timesnewroman\bfseries}
       \newcommand\@icmcPreambulo{\@icmcFont{11}\timesnewroman\mdseries}
       \newcommand\@icmcLocalData{\@icmcFont{12}\timesnewroman\bfseries}
       \newcommand\@icmcCarimbo{\@icmcFont{12}\timesnewroman}
@@ -247,8 +247,8 @@
       \newcommand\@icmcTitulo{\sffamily\Large}
       \newcommand\@icmcAutorCapa{\rmfamily\large\bfseries\itshape}
       \newcommand\@icmcAutorFolhaRosto{\rmfamily\large\bfseries}
-      \newcommand\@icmcOrientadorLabel{\rmfamily\normalsize\bfseries}
-      \newcommand\@icmcOrientadorName{\rmfamily\normalsize\bfseries\itshape}
+      \newcommand\@icmcOrientadorLabel{\rmfamily\normalsize\bfseries\itshape}
+      \newcommand\@icmcOrientadorName{\rmfamily\normalsize\bfseries}
       \newcommand\@icmcPreambulo{\SingleSpacing\rmfamily\small\mdseries}
       \newcommand\@icmcLocalData{\rmfamily\normalsize\bfseries}
       \newcommand\@icmcCarimbo{\rmfamily\normalsize}
@@ -619,9 +619,9 @@
 
 \addto\captionsenglish{% ingles
     %% adjusts names from abnTeX2
-    \renewcommand{\listquadroname}{List of frames}
-    \renewcommand{\quadroname}{Frame}
-    \renewcommand{\quadrorefname}{Frame}
+    \renewcommand{\listquadroname}{List of chart}
+    \renewcommand{\quadroname}{Chart}
+    \renewcommand{\quadrorefname}{Chart}
     \renewcommand{\listalgoritmoname}{List of algorithms}
     \renewcommand{\algoritmoname}{Algorithm}
     \renewcommand{\algoritmorefname}{Algorithm}

@@ -6,7 +6,7 @@
 %% of this license or (at your option) any later version.
 %% The latest version of this license is in
 %%   http://www.latex-project.org/lppl.txt
-%% and version 1.3 or later is part of all distributions of LaTeX
+%% and version 1.1.3 or later is part of all distributions of LaTeX
 %% version 2005/12/01 or later.
 %%
 %% This work has the LPPL maintenance status `maintained'.
@@ -17,7 +17,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2014/07/24 v1.0 Classe Tese ICMC - Programa de Pós-graduação em Ciências da Computação e Matemática Computacional baseado em abnTeX2]
+\ProvidesClass{packages/icmc}[2014/07/24 v1.3 Classe Tese ICMC - Programa de Pós-graduação em Ciências da Computação e Matemática Computacional baseado em abnTeX2]
 \RequirePackage{ifthen}
 
 %==============================================================================
@@ -175,7 +175,7 @@
 
 \iflanguage {english}
     { % Preambulo em ingles
-        \renewcommand{\imprimirpreambulo}{\nohyphens{\imprimirtipotrabalho~submitted to the Instituto de Ci{\^e}ncias Matem{\'a}ticas e de Computa{\c c}{\~a}o -- ICMC-USP,\exam~in partial fulfillment of the requirements for the degree of the \nivelPos~Program in \especialidade. \tipoexemplar}}
+        \renewcommand{\imprimirpreambulo}{\nohyphens{\imprimirtipotrabalho~submitted to the \textit{Instituto de Ci{\^e}ncias Matem{\'a}ticas e de Computa{\c c}{\~a}o} -- ICMC-USP,\exam~in partial fulfillment of the requirements for the degree of the \nivelPos~Program in \especialidade. \tipoexemplar}}
     }
     { % Preambulo em português
         \renewcommand{\imprimirpreambulo}{\nohyphens{\imprimirtipotrabalho~apresentada ao Instituto de Ci{\^e}ncias Matem{\'a}ticas e de Computa{\c c}{\~a}o -- ICMC-USP,\exam~como parte dos requisitos para obten{\c c}{\~a}o do t{\'i}tulo de \nivelPos~em \especialidade. \tipoexemplar}}
@@ -323,6 +323,7 @@
     %% ajusta nomes padroes do babel
     \renewcommand{\sectionrefname}{Seção~}
     \renewcommand{\chapterrefname}{Capítulo~}
+    \renewcommand{\appendixrefname}{Apêndice~}
     \renewcommand{\figurerefname}{Figura}
     \renewcommand{\tablerefname}{Tabela}
 }
@@ -417,6 +418,11 @@
 
 % Permite comandos com @ no nome
 \makeatletter
+
+% Nome do local do instituto
+\local{São Carlos -- SP}
+% Nome do instituto
+\instituicao{Instituto de Ciências Matemáticas e de Computação (ICMC/USP)}
     
 % Comando para definição do nome e sobrenome do author
 \renewcommand\autor[2][Nome para Referência]{

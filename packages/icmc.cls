@@ -6,7 +6,7 @@
 %% of this license or (at your option) any later version.
 %% The latest version of this license is in
 %%   http://www.latex-project.org/lppl.txt
-%% and version 1.1.3 or later is part of all distributions of LaTeX
+%% and version 1.3 or later is part of all distributions of LaTeX
 %% version 2005/12/01 or later.
 %%
 %% This work has the LPPL maintenance status `maintained'.
@@ -17,7 +17,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2014/07/24 v1.3 Classe Tese ICMC - Programa de Pós-graduação em Ciências da Computação e Matemática Computacional baseado em abnTeX2]
+\ProvidesClass{packages/icmc}[2014/07/24 v1.1.4 Classe Tese ICMC - Programa de Pós-graduação em Ciências da Computação e Matemática Computacional baseado em abnTeX2]
 \RequirePackage{ifthen}
 
 %==============================================================================
@@ -115,8 +115,9 @@
 \RequirePackage{amsthm, amsfonts, amsmath, amssymb} % Pacote para a definição dos ambientes matemáticos
 \RequirePackage{mathptmx}           % Usando times para equações, opcional
 \RequirePackage{listings}           % Pacote para formatação de diversos códigos fontes
-\RequirePackage{xparse}             % Pacote utilizado para gerar as palavras-chave da ficha catalográfica
+%\RequirePackage{xparse}             % Pacote utilizado para gerar as palavras-chave da ficha catalográfica
 \RequirePackage[linesnumbered, ruled, vlined]{algorithm2e}      % Pacote para escrever algoritmos em pseudo-código
+\RequirePackage{pgffor}             % Pacote utilizado para gerar as palavras-chave da ficha catalográfica
 
 %==============================================================================
 % Comando para configuração do tipo de trabalho
@@ -161,7 +162,7 @@
 \ifthenelse{\boolean{opt-qualificacao}}{
     \iflanguage{english}
         {
-            \tipotrabalho{Monography}
+            \tipotrabalho{Monograph}
             \newcommand{\exam}{ for the Qualification Exam,}
         }
         {
@@ -266,8 +267,8 @@
 
 % Legendas utilizadas em Figuras / Tabelas / Etc.
 \newcommand{\fautor}{\legend{Fonte: Elaborada pelo autor.}}
-\newcommand{\fadaptada}[1]{\legend{Fonte: Adaptada de \citeonline{#1}.}}
-\newcommand{\fdireta}[1]{\legend{Fonte: \citeonline{#1}.}}
+\newcommand{\fadaptada}[2][]{\legend{Fonte: Adaptada de \citeonline[#1]{#2}.}}
+\newcommand{\fdireta}[2][]{\legend{Fonte: \citeonline[#1]{#2}.}}
 \newcommand{\fdadospesquisa}{\legend{Fonte: Dados da pesquisa.}}
 
 \addto\captionsenglish{% ingles
@@ -319,13 +320,24 @@
 \definecolor{white}{RGB}{255,255,255}
 \definecolor{black}{RGB}{0,0,0}
 
+
+\providecommand*{\chartautorefname}{Chart}
+\providecommand*{\algorithmautorefname}{Algorithm}
+\providecommand*{\sourcecodeautorefname}{Source code}
 \addto\captionsbrazil{% portugues-brasil
     %% ajusta nomes padroes do babel
-    \renewcommand{\sectionrefname}{Seção~}
-    \renewcommand{\chapterrefname}{Capítulo~}
-    \renewcommand{\appendixrefname}{Apêndice~}
-    \renewcommand{\figurerefname}{Figura}
-    \renewcommand{\tablerefname}{Tabela}
+    \renewcommand{\sectionrefname}{se{\c c}\~ao~}      % \Sref{ }
+    \renewcommand{\chapterrefname}{Cap{\'i}tulo~}   % \Cref{ }
+    \renewcommand{\appendixrefname}{Ap{\^e}ndice~}  % \Aref{ }
+    \renewcommand{\bookrefname}{Livro~}         % \Bref{ }
+    \renewcommand{\partrefname}{Parte~}         % \Pref{ }
+    \renewcommand{\figurerefname}{Figura}       % \fref{ }
+    \renewcommand{\tablerefname}{Tabela}        % \tref{ }
+    \renewcommand{\pagerefname}{p{\'a}gina}         % \pref{ }
+    %% ajusta nomes usados com a macro \autoref
+    \renewcommand{\chartautorefname}{Quadro}
+    \renewcommand{\algorithmautorefname}{Algoritmo}
+    \renewcommand{\sourcecodeautorefname}{Código-fonte}
 }
 
 % Níveis de subseções
@@ -379,7 +391,7 @@
 % Pacotes de citações
 %==============================================================================
 \RequirePackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
-\RequirePackage[alf,bibjustif,abnt-last-names=abnt,abnt-etal-text=it,abnt-repeated-title-omit=yes,abnt-emphasize=bf,abnt-etal-cite=3]{abntex2cite}	% Citações padrão ABNT
+\RequirePackage[alf,bibjustif,abnt-last-names=abnt,abnt-etal-text=it,abnt-repeated-title-omit=yes,abnt-emphasize=bf,abnt-etal-cite=3,abnt-etal-list=0]{abntex2cite}	% Citações padrão ABNT
 
 % ---
 % Configurações do pacote backref
@@ -548,7 +560,7 @@
   \csdef{res-language-\thenumresumo}{#1}
   \csdef{res-text-\thenumresumo}{#2}
   \csdef{res-keywords-\thenumresumo}{#3}
-  \IfStrEq{#1}{\languagename}{\renewcommand{\palavraschave}{\shortcut{#3}}}{}
+  \IfStrEq{#1}{\languagename}{\renewcommand{\palavraschave}{#3}}{}
 }
 
 % Opção para exibir a lista de figuras
@@ -619,13 +631,13 @@
 \newcommand{\algoritmoname}{Algoritmo}
 \newcommand{\algoritmorefname}{Algoritmo}
 
-\newcommand{\listcodigoname}{Lista de códigos}
-\newcommand{\codigoname}{Código}
-\newcommand{\codigorefname}{Código}
+\newcommand{\listcodigoname}{Lista de códigos-fonte}
+\newcommand{\codigoname}{Código-fonte}
+\newcommand{\codigorefname}{Código-fonte}
 
 \addto\captionsenglish{% ingles
     %% adjusts names from abnTeX2
-    \renewcommand{\listquadroname}{List of chart}
+    \renewcommand{\listquadroname}{List of charts}
     \renewcommand{\quadroname}{Chart}
     \renewcommand{\quadrorefname}{Chart}
     \renewcommand{\listalgoritmoname}{List of algorithms}
@@ -817,25 +829,10 @@
 
     % Contador das palavras-chave
     \newcounter{count}
-    
-    \ExplSyntaxOn
-    \NewDocumentCommand{\shortcut}{O{,}m}
-     {
-      \ailurus_make:nn {#1} {#2}
-     }
-    
-    \cs_new_protected:Npn \ailurus_make:nn #1 #2
-     {
-      \seq_set_split:Nnn \l_ailurus_args_seq { #1 } { #2 }
-      \seq_pop_left:NN \l_ailurus_args_seq \l_ailurus_temp_tl
-      \stepcounter{count}
-      \arabic{count}.\;\l_ailurus_temp_tl.
-      \seq_map_inline:Nn \l_ailurus_args_seq {\;\stepcounter{count}\arabic{count}.\;##1.}
-     }
-    
-    \seq_new:N \l_ailurus_args_seq
-    \tl_new:N \l_ailurus_temp_tl
-    \ExplSyntaxOff
+    % Enumera a lista de palavras-chave
+    \newcommand{\PROCESS}[1]{%
+         \foreach \i in {#1}{\stepcounter{count}\arabic{count}.\enspace\i. }%
+    }
     
     
 \newcommand{\inserefichacatalografica}
@@ -855,7 +852,7 @@
 	& & \\
 	& & \texttt{\ABNTautordatabib}\\
 	& %{\ttfamily R484r}  
-	&  {\ttfamily~~~\imprimirtitulo{} / \imprimirautor. -- \imprimirlocal, \@year.} \\
+	&  {\ttfamily~~~\imprimirtitulo{} / \imprimirautor.\;-- \imprimirlocal, \@year.} \\
 	& & {\ttfamily~~~\pageref{LastPage} p.; 29,7 cm.}\\
 	& &\\
 	& & {\ttfamily~~~\imprimirorientadorRotulo~\imprimirorientador.}\\
@@ -864,7 +861,7 @@
     }
 	& & {\ttfamily~~~\imprimirtipotrabalho~(\tipodocurso~em \especialidade) -- \imprimirinstituicao, \imprimirlocal, \@year.}\\
 	& & \\
-	& & \texttt{~~~\palavraschave\;I. \ABNTorientadordatabib.\;II. \imprimirinstituicao. III. Título.} \\
+	& & \texttt{~~~\expandafter\PROCESS\expandafter{\palavraschave}I. \ABNTorientadordatabib.\;II. \imprimirinstituicao. III. Título.} \\
 	& & \\
 	& & \\ \cline{2-3}
 	%& & ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CDU: 681.3.01:621.39 \\ \cline{2-3}

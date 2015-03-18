@@ -1,0 +1,73 @@
+
+
+\section{Codificação dos arquivos: UTF8}
+
+A codificação de todos os arquivos do pacote \abnTeX, incluindo a classe \textit{icmc}, é \texttt{UTF8}. É necessário que
+você utilize a mesma codificação nos documentos que escrever, inclusive nos
+arquivos de base bibliográficas |.bib|.
+
+
+
+\section{Inclusão de outros arquivos}\label{sec-include}
+
+É uma boa prática dividir o seu documento em diversos arquivos, e não
+apenas escrever tudo em um único. Para tanto, esse recurso foi utilizado neste
+documento, além de estarem organizados em um diretório separado do arquivo principal. Para incluir diferentes arquivos em um arquivo principal,
+de modo que cada arquivo incluído fique em uma página diferente, utilize o
+comando:
+
+\begin{verbatim}
+   \include{tex/documento-a-ser-incluido}      % sem a extensão .tex
+\end{verbatim}
+
+Para incluir documentos sem quebra de páginas, utilize:
+
+\begin{verbatim}
+   \input{tex/documento-a-ser-incluido}      % sem a extensão .tex
+\end{verbatim}
+
+
+
+\section{Remissões internas}
+
+Ao nomear a \autoref{tab:lista_produtos} e a \autoref{fig:logomarca_usp}, apresentamos um exemplo de remissão interna, que também pode ser feita quando indicamos o \autoref{chapter:corpos-flutuantes}, que tem o nome \emph{\nameref{chapter:corpos-flutuantes}}. O número do capítulo indicado é \ref{chapter:corpos-flutuantes}, que se inicia à \autopageref{chapter:corpos-flutuantes}\footnote{O número da página de uma remissão pode ser obtida também assim:
+\pageref{chapter:corpos-flutuantes}.}.
+
+O código usado para produzir o texto desta seção é:
+
+\begin{verbatim}
+Ao nomear a \autoref{tab:lista_produtos} e a \autoref{fig:logomarca_usp}, apresentamos um exemplo de remissão interna, que também pode ser feita quando indicamos o \autoref{chapter:corpos-flutuantes}, que tem o nome \emph{\nameref{chapter:corpos-flutuantes}}. O número do capítulo indicado é \ref{chapter:corpos-flutuantes}, que se inicia à \autopageref{chapter:corpos-flutuantes}\footnote{O número da página de uma remissão pode ser obtida também assim: \pageref{chapter:corpos-flutuantes}.}.
+\end{verbatim}
+
+
+
+\section{Consulte o manual da classe \textsf{abntex2}}
+
+Consulte o manual da classe \textsf{abntex2} \cite{abntex2classe} para uma
+referência completa das macros e ambientes disponíveis. 
+
+Além disso, o manual possui informações adicionais sobre as normas ABNT
+observadas pelo \abnTeX\ e considerações sobre eventuais requisitos específicos, como o caso da \citeonline[seção 5.2.2]{NBR14724:2011}, que
+especifica o espaçamento entre os capítulos e o início do texto.
+
+
+
+\section{Precisa de ajuda?}
+
+Consulte a FAQ com perguntas frequentes e comuns no portal do \abnTeX:
+\url{https://code.google.com/p/abntex2/wiki/FAQ}.
+
+Inscreva-se no grupo de usuários \LaTeX:
+\url{http://groups.google.com/group/latex-br}, tire suas dúvidas e ajude
+outros usuários.
+
+Participe também do grupo de desenvolvedores do \abnTeX:
+\url{http://groups.google.com/group/abntex2} e faça sua contribuição à
+ferramenta.
+
+
+\section{Você pode ajudar?}
+
+Sua contribuição é muito importante! Você pode ajudar na divulgação,
+desenvolvimento, aprimoramento e de várias outras formas. Veja como contribuir com a classe \textit{icmc} em
+\url{https://github.com/lordantonelli/thesis-model-icmc} e faça sua contribuição.

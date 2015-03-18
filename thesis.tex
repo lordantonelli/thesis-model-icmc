@@ -17,7 +17,7 @@
 	%spanish,			% idioma adicional para hifenização
 	%english,			% idioma adicional para hifenização
 	%brazil				% o último idioma é o principal do documento
-\documentclass[mestrado, spanish, brazil, english]{packages/icmc}
+\documentclass[mestrado, spanish, english, brazil]{packages/icmc}
 
 % ---
 % Pacotes Opcionais
@@ -33,10 +33,10 @@
 % ---
 \titulo{Modelo de Teses e Dissertações em \LaTeX~ do ICMC}
 \autor[Antonelli, H. L.]{Humberto Lidio Antonelli}
-\data{01}{12}{2014} % Data do depósito
 \orientador[Orientadora:]{Profa. Dra.}{Renata Pontin de Mattos Fortes}
 %\coorientador{Prof. Dr.}{Fulano de tal}
 \curso{Ciências de Computação e Matemática Computacional}
+\data{01}{12}{2014} % Data do depósito
 % ---
 
 
@@ -96,7 +96,7 @@
 
 % Inserir a ficha catalográfica
 %\incluifichacatalografica[tex/fichaCatalografica.pdf]
-%\incluifichacatalografica
+\incluifichacatalografica
 
 
 % Inserir folha de aprovação
@@ -145,6 +145,10 @@
 \chapter{Instalando o abnTeX2}
 \label{chapter:instalando-abntex}
 \input{tex/instalando-abntex}
+
+\chapter{Orientações Gerais}
+\label{chapter:orientacoes-gerais}
+\input{tex/orientacoes-gerais}
 
 \chapter{Configuração dos Elementos Pré-Textuais}
 \label{chapter:config-pre-textual}

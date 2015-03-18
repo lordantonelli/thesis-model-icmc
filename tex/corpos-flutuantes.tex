@@ -1,14 +1,37 @@
 
-Corpos flutuantes são elementos não textuais como figuras e tabelas que complementam as informações do texto. Neste capítulo são expostos breves exemplos dos corpos flutuantes disponíveis na classe \textit{icmc}.
+Corpos flutuantes são elementos não textuais, como figuras e tabelas, que complementam as informações do texto. Neste capítulo são expostos breves exemplos dos corpos flutuantes disponíveis na classe \textit{icmc}.
 
-Na Seção \ref{secao:figuras} é mostrado como inserir figuras, a Seção \ref{secao:tabelas_e_quadros} explica como incluir tabelas e quadros e a Seção \ref{secao:algoritmos_e_codigos} demostra como trabalhar com algoritmos e códigos fontes.
+Na \autoref{secao:figuras} é mostrado como inserir figuras, a \autoref{secao:tabelas_e_quadros} explica como incluir tabelas e quadros, a \autoref{secao:algoritmos_e_codigos} demostra como trabalhar com algoritmos e códigos-fonte e a \autoref{secao:outros-ambientes} explica como definir outros ambientes para serem utilizados, como para gráficos e diagramas.
 
 \section{Figuras}
 \label{secao:figuras}
 
-A inserção de figuras é realizada normalmente através do comando \comando{begin\{figure\}}. Na Figura \ref{figura:exemplo_grafo} é mostrado um exemplo de grafo com o pacote \textit{xy}. Já a Figura \ref{figura:logomarca_usp} exibe a logomarca da USP com o pacote \textit{graphicx}. De acordo com as normas ABNT a lista de figuras é um elemento opcional do documento, para incluí-la é preciso inserir o comando \comando{incluidelistafiguras} antes do início do documento.
+A inserção de figuras é realizada normalmente através do comando \comando{begin\{figure\}}. Na \autoref{fig:logomarca_usp} é exibida a logomarca da USP com o pacote \textit{graphicx}. Já a \autoref{figura:exemplo_grafo} mostra um exemplo de grafo com o pacote \textit{xy}. De acordo com as normas ABNT a lista de figuras é um elemento opcional do documento, para incluí-la é preciso inserir o comando \comando{incluidelistafiguras} antes do início do documento.
 
-Desde 2012, deve ser incorporado ao corpo flutuante do tipo figura, além da legenda, a fonte de onde esta foi extraída. Se a figura foi confeccionada pelo próprio autor, deve se colocar " o autor".
+Observe que, segundo a \citeonline[seções 4.2.1.10 e 5.8]{NBR14724:2011}, as
+ilustrações devem sempre ter numeração contínua e única em todo o documento. Além disso, deve ser incorporado ao corpo flutuante do tipo figura, além da legenda, a fonte de onde esta foi extraída. Se a figura foi confeccionada pelo próprio autor, deve se colocar "Elaborada pelo autor".
+
+\begin{citacao}
+Qualquer que seja o tipo de ilustração, sua identificação aparece na parte
+superior, precedida da palavra designativa (desenho, esquema, fluxograma,
+fotografia, gráfico, mapa, organograma, planta, quadro, retrato, figura,
+imagem, entre outros), seguida de seu número de ordem de ocorrência no texto,
+em algarismos arábicos, travessão e do respectivo título. Após a ilustração, na
+parte inferior, indicar a fonte consultada (elemento obrigatório, mesmo que
+seja produção do próprio autor), legenda, notas e outras informações
+necessárias à sua compreensão (se houver). A ilustração deve ser citada no
+texto e inserida o mais próximo possível do trecho a que se
+refere. \cite[seções 5.8]{NBR14724:2011}
+\end{citacao}
+
+\begin{figure}[htb]
+ \caption{Logomarca da USP}
+ \label{fig:logomarca_usp}
+ \centering
+ \includegraphics[scale=0.3]{images/usp-logo}
+ \fdireta{usp:logo}
+\end{figure}
+
 
 \begin{figure}[htb]
 \caption{Exemplo de grafo}
@@ -24,57 +47,74 @@ $$
 }
 $$
 \end{scriptsize}
-\legend{Fonte: o  autor.}
+\fautor
 \end{figure}
 
-\begin{figure}[htb]
- \caption{Logomarca da USP}
- \label{figura:logomarca_usp}
- \centering
- \includegraphics[scale=0.3]{images/usp-logo}
- \legend{Fonte: Universidade de São Paulo \cite{usp:logo}}
-\end{figure}
+A classe \textit{icmc} traz algum comando que auxiliam na inserção da legenda, para utilizá-los basta substituir o \comando{fonte\{\}} por um dos seguintes comando conforme necessário:
+
+\begin{description}
+
+ \item[\comando{fautor}] Insere o texto \aspas{Elaborada pelo autor} como fonte da figura;
+
+ \item[\comando{fadaptada[INF]\{REF\}}] Insere um texto informando que a figura foi adaptada de alguma referência bibliográfica (REF). INF refere-se ao local específico de onde a imagem foi extraída, como por exemplo o número da página. Além disso, INF é um parâmetro opcional e pode receber qualquer cadeia de texto;
+
+ \item[\comando{fdireta[INF]\{REF\}}] Insere um texto informando que a figura próvem diretamente de alguma referência bibliográfica (REF). INF refere-se ao local específico de onde a imagem foi extraída, como por exemplo o número da página. Além disso, INF é um parâmetro opcional e pode receber qualquer cadeia de texto;
+ 
+ \item[\comando{fdadospesquisa}] Insere o texto \aspas{Dados da pesquisa.} como fonte da figura;
+ 
+\end{description}
+
 
 
 \section{Tabelas e Quadros}
 \label{secao:tabelas_e_quadros}
 
-A inserção de tabelas e quadros é feita de forma semelhante a inserção de figuras, porém são utilizados os ambientes \textit{table} e \textit{quadro}. A principal diferença entre tabelas e quadros, de acordo com \citeonline{silveira:2006:manual_tcc}, é que as tabelas são destinadas para informações numéricas e os quadros são mais adequados para informações textuais.
+A inserção de tabelas e quadros é feita de forma semelhante a inserção de figuras, porém são utilizados os ambientes \textit{table} e \textit{quadro}. A principal diferença entre tabelas e quadros, de acordo com \citeonline{silveira:2006:manual_tcc}, é que as tabelas são destinadas para informações numéricas e os quadros são mais adequados para informações textuais. Em geral, as tabelas devem estar padronizadas conforme o padrão do
+\citeonline{ibge1993} requerido pelas normas da ABNT para documentos técnicos e
+acadêmicos.
 
- Como exemplos foram inseridas a \tref{tabela:lista_produtos} que exibe uma de lista de produtos e a Tabela \ref{tabela:populacao_america_sul} que mostra a população dos países da América do Sul. Foi inserido também o \qref{quadro:editores_texto_livres} com alguns editores que podem ser usados para se trebalhar com Latex para demonstrar a inserção de quadros.
+Como exemplos foram inseridas a \autoref{tab:lista_produtos} que exibe uma de lista de produtos (construída em \LaTeX) e a Tabela \autoref{tabela:populacao_america_sul} que mostra a população dos países da América do Sul (construída segundo o padrão do IBGE). Foi inserido também o \autoref{quadro:editores_texto_livres} com alguns editores que podem ser usados para se trabalhar com \LaTeX para demonstrar a inserção de quadros.
 
  A lista de tabelas também é um elemento opcional que pode ser incluída com o comando \comando{incluidelistatabelas} antes do início do documento. O mesmo acontece com a lista de quadros que pode ser incluída com o comando \comando{incluidelistaquadros}.
 
 \begin{table}[htb]
 \centering
 \caption{Lista de produtos}
-\label{tabela:lista_produtos}
+\label{tab:lista_produtos}
 \begin{tabularx}{\textwidth}{X|l|r|r|r} \hline
 Produto      & Unidade & Preço (R\$) & Quantidade & Total (R\$) \\ \hline
 Arroz        & Kg      & 2,00        & 550        & 1.100,00    \\
 Óleo de Soja & L       & 2,50        & 500        & 750,00      \\
 Açucar       & Kg      & 3,00        & 100        & 300,00      \\ \hline
 \end{tabularx}
+\fdadospesquisa
 \end{table}
 
 \begin{table}[htb]
-\centering
-\caption{População dos países da América do Sul} \label{tabela:populacao_america_sul}
-\begin{tabular}{r|l|r}        \hline
-Código  & País            & População   \\ \hline
-1       & Brasil          & 191.480.630 \\
-2       & Argentina       &  39.934.100 \\
-3       & Colômbia        &  46.741.100 \\
-4       & Paraguai        &   9.694.200 \\
-5       & Uruguai         &   3.350.500 \\
-6       & Peru            &  28.221.500 \\
-7       & Equador         &  13.481.200 \\
-8       & Bolívia         &   9.694.200 \\
-9       & Venezuela       &  28.121.700 \\
-10      & Chile           &  16.803.000 \\ \hline
+\IBGEtab{%
+  \caption{População dos países da América do Sul} \label{tabela:populacao_america_sul}
+}{%
+\begin{tabular}{r|p{3cm}|r}        
+\toprule
+Código  & País            & População   \\ \midrule \midrule
+1       & Brasil          & ~~~~~~191.480.630 \\ \midrule 
+2       & Argentina       &  39.934.100 \\ \midrule 
+3       & Colômbia        &  46.741.100 \\ \midrule 
+4       & Paraguai        &   9.694.200 \\ \midrule 
+5       & Uruguai         &   3.350.500 \\ \midrule 
+6       & Peru            &  28.221.500 \\ \midrule 
+7       & Equador         &  13.481.200 \\ \midrule 
+8       & Bolívia         &   9.694.200 \\ \midrule 
+9       & Venezuela       &  28.121.700 \\ \midrule 
+10      & Chile           &  16.803.000 \\ \bottomrule
 \end{tabular}
-
-\legend{Fonte: \citeonline{wikipedia:2011:america_sul}.}
+}{%
+  \fdireta{wikipedia:2011:america_sul}%
+  \nota{Esta é uma nota, que diz que os dados são baseados na
+  regressão linear.}%
+  \nota[Anotações]{Uma anotação adicional, que pode ser seguida de várias
+  outras, porém são opcionais.}%
+  }
 \end{table}
 
 \begin{quadro}[htb]
@@ -93,7 +133,7 @@ Geany      & Sim             & Não                   \\ \hline
 \section{Algoritmos e Códigos}
 \label{secao:algoritmos_e_codigos}
 
-Além dos corpos flutuantes convencionais para inserir figuras (\comando{begin\{figure\}}) e tabelas (\comando{begin\{figure\}}), a classe \textit{icmc} possui mais dois tipos de corpos flutuantes um para algoritmos (\comando{begin\{algoritmo\}}) e outro para códigos (\comando{begin\{codigo\}}). A utilização de um ou de outro fica a critério do usuário. Como exemplo temos o \aref{algoritmo:mdc1} que calcula o máximo divisor comum entre dois números e os Códigos \ref{codigo:notas_alunos} e \ref{codigo:metodo_leitura} que são uma consulta na \textit{Structured Query Language (SQL)}\sigla{SQL}{Structured Query Language} e uma sobrotina em \textit{Java}.
+Além dos corpos flutuantes convencionais para inserir figuras (\comando{begin\{figure\}}) e tabelas (\comando{begin\{table\}}), a classe \textit{icmc} possui mais dois tipos de corpos flutuantes um para algoritmos (\comando{begin\{algoritmo\}}) e outro para códigos-fonte (\comando{begin\{codigo\}}). A utilização de um ou de outro fica a critério do usuário. Como exemplo temos o \autoref{algoritmo:mdc1} que calcula o máximo divisor comum entre dois números e os Códigos-fonte \ref{codigo:notas_alunos} e \ref{codigo:metodo_leitura} que são uma consulta na \sigla{SQL}{\textit{Structured Query Language}} e uma sobrotina em \textit{Java}.
 
 %\begin{algoritmo}[htb]
 \begin{algoritmo}
@@ -148,7 +188,7 @@ public static String Leitura(){
 \end{codigo}
 %\end{codigo}
 
-Existem diversos outros pacotes disponíveis para escrever algoritmos e códigos. Nos exemplos anteriormente foram utilizados o pacote \textit{algpseudocode} e \textit{listings}. O pacote \textit{algpseudocode} é usado para escrever algoritmos em alto nível \cite{janos:2005:algpseudocode}. Já o pacote \textit{listings} serve para escrever os códigos em diversas linguagens de programação \cite{moses:2006:listings}.
+Existem diversos outros pacotes disponíveis para escrever algoritmos e códigos. Nos exemplos anteriormente foram utilizados o pacote \textit{algorithm} para definição do ambiente algoritmo e \textit{listings} para a definição do ambiente de código-fonte. O pacote \textit{algorithm} é usado para escrever algoritmos em alto nível \cite{janos:2005:algpseudocode}. Já o pacote \textit{listings} serve para escrever os códigos em diversas linguagens de programação \cite{moses:2006:listings}.
 
 Caso sejam utilizados os ambientes de algoritmos e código podem ser incluídos os comandos \comando{incluidelistaalgoritmos} e \comando{incluidelistacodigos} antes do \comando{begin\{document\}} para que a lista de algoritmos e a lista de código sejam criadas.
 
@@ -180,3 +220,64 @@ Como $b^2-a^2=(b+a)(b-a)$ concluímos que $b^2-a^2>0$, ou seja, $a^2<b^2$.
 Neste documento tratamos brevemente apenas dos ambientes mencionados anteriormente. Contudo, para escrever expressões matemáticas complexas é preciso estudar uma documentação mais específica como em \citeonline{cassagojr:1997:amslatex}.
 
 Alguns dos ambientes matemáticos da classe \textit{icmc} podem ser usados também para outras finalidades como exemplos e definições.
+
+
+\section{Definição de outros ambientes}
+\label{secao:outros-ambientes}
+
+O classe \textit{icmc} permite a criação de outros ambientes, além dos citados nas seções anteriores, caso seja necessário. Isso é possível graças a extensão da classe \textit{abntex}. O \autoref{codigo:novo-ambiente} deve ser inserido antes do início do documento para criação de um ambiente para gráficos. Para definição de outros ambientes, basta seguir o modelo.
+
+
+\begin{codigo}[caption={Definição do ambiente \textbf{grafico}}, label={codigo:novo-ambiente}, language=Tex, breaklines=true]
+\makeatletter
+
+% Novo list of (listings) para GRÁFICOS --------------------------
+\newcommand{\graficoname}{Gráfico}
+\newcommand{\graficorefname}{Gráfico}
+\newcommand{\listofgraficosname}{Lista de gráficos}
+
+\addto\captionsenglish{% ingles
+    %% adjusts names from abnTeX2
+    \newcommand{\graficoname}{Graph}
+    \newcommand{\graficorefname}{Graph}
+    \newcommand{\listofgraficosname}{List of graphs}
+}
+
+\newfloat[chapter]{grafico}{logr}{\graficoname}
+\newlistof{listofgraficos}{logr}{\listgraficoname}
+\newlistentry{grafico}{logr}{0}
+
+% configurações para atender às regras da ABNT
+\renewcommand{\thegrafico}{\thechapter.\@arabic\c@grafico}
+\setfloatadjustment{grafico}{\centering}
+\renewcommand{\cftgraficoname}{\graficoname\space}
+\renewcommand*{\cftgraficoaftersnum}{\hfill\textendash\hfill}
+% ----------------------------------------------------------------
+
+\makeatother
+\end{codigo}
+
+A utilização do novo ambiente no texto segue conforme o \autoref{codigo:usar-novo-ambiente}.
+
+\begin{codigo}[caption={Como usar o ambiente \textbf{grafico}}, label={codigo:usar-novo-ambiente}, language=Tex, breaklines=true]
+\begin{grafico}[htb]
+\caption{Caption do gráfico}
+\label{gra:modelo}
+Este é o conteúdo do gráfico.
+\end{grafico}
+\end{codigo}
+
+Comandos como \comando{autoref\{gra:modelo\}} funcionam normalmente.
+
+Para imprimir a "Lista de gráficos" no documento, insira o \autoref{codigo:lista-novo-ambiente} na classe \textit{icmc}, de modo que ele seja impresso após a "Lista de ilustrações". O código deve ser inserido após a linha 1244.
+
+
+\begin{codigo}[caption={Código para inserir lista de gráficos}, label={codigo:lista-novo-ambiente}, language=Tex, breaklines=true]
+% ---
+% inserir lista de gráficos
+% ---
+\pdfbookmark[0]{\listofgraficosname}{logr}
+\listofgraficos*
+\cleardoublepage
+% ---
+\end{codigo}

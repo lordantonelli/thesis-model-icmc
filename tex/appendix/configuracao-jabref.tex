@@ -1,0 +1,217 @@
+\lstdefinelanguage{XML}
+{
+  morestring=[b]",
+  moredelim=[s][\bfseries\color{maroon}]{<}{\ },
+  moredelim=[s][\bfseries\color{maroon}]{</}{>},
+  moredelim=[l][\bfseries\color{maroon}]{/>},
+  moredelim=[l][\bfseries\color{maroon}]{>},
+  morecomment=[s]{<?}{?>},
+  morecomment=[s]{<!--}{-->},
+  commentstyle=\color{darkgreen},
+  stringstyle=\color{blue},
+  identifierstyle=\color{red}
+}
+
+
+\begin{codigo}[caption={Código de configuração do programa JabRef em XML}, label={codigo:config-jabref}, language=XML, breaklines=true]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE preferences SYSTEM "http://java.sun.com/dtd/preferences.dtd">
+<preferences EXTERNAL_XML_VERSION="1.0">
+  <root type="user">
+    <map/>
+    <node name="net">
+      <map/>
+      <node name="sf">
+        <map/>
+        <node name="jabref">
+          <map>
+            <entry key="KeyPatternRegex" value=""/>
+            <entry key="KeyPatternReplacement" value=""/>
+            <entry key="abbrAuthorNames" value="true"/>
+            <entry key="allowTableEditing" value="false"/>
+            <entry key="autoComplete" value="true"/>
+            <entry key="autoCompleteFields" value="author;editor;title;journal;publisher;keywords;crossref"/>
+            <entry key="autoDoubleBraces" value="true"/>
+            <entry key="autoOpenForm" value="true"/>
+            <entry key="autoResizeMode" value="4"/>
+            <entry key="autoSave" value="true"/>
+            <entry key="autoSaveInterval" value="5"/>
+            <entry key="autolinkExactKeyOnly" value="true"/>
+            <entry key="avoidOverwritingKey" value="false"/>
+            <entry key="backup" value="false"/>
+            <entry key="caseSensitiveSearch" value="false"/>
+            <entry key="citeseerColumn" value="false"/>
+            <entry key="confirmDelete" value="true"/>
+            <entry key="ctrlClick" value="false"/>
+            <entry key="customTypeName_0" value="Article"/>
+            <entry key="customTypeName_1" value="Book"/>
+            <entry key="customTypeName_10" value="Misc"/>
+            <entry key="customTypeName_11" value="Monography"/>
+            <entry key="customTypeName_12" value="Patent"/>
+            <entry key="customTypeName_13" value="Periodical"/>
+            <entry key="customTypeName_14" value="Phdthesis"/>
+            <entry key="customTypeName_15" value="Proceedings"/>
+            <entry key="customTypeName_16" value="Standard"/>
+            <entry key="customTypeName_17" value="Techreport"/>
+            <entry key="customTypeName_2" value="Booklet"/>
+            <entry key="customTypeName_3" value="Conference"/>
+            <entry key="customTypeName_4" value="Electronic"/>
+            <entry key="customTypeName_5" value="Inbook"/>
+            <entry key="customTypeName_6" value="Incollection"/>
+            <entry key="customTypeName_7" value="Inproceedings"/>
+            <entry key="customTypeName_8" value="Manual"/>
+            <entry key="customTypeName_9" value="Mastersthesis"/>
+            <entry key="customTypeOpt_0" value="month;part;section;url;urlaccessdate;note"/>
+            <entry key="customTypeOpt_1" value="subtitle;edition;pages;number;series;isbn;volume;org-short;url;urlaccessdate;note"/>
+            <entry key="customTypeOpt_10" value="howpublished;month;year;publisher;subtitle;pages;pagename;address;series;number;editortype;url;urlaccessdate;note"/>
+            <entry key="customTypeOpt_11" value="pages;pagename;url;urlaccessdate;note"/>
+            <entry key="customTypeOpt_12" value="author;title;language;assignee;address;type;number;day;dayfiled;month;monthfiled;url;note"/>
+            <entry key="customTypeOpt_13" value="editor;language;series;volume;number;organization;month;url;org-short;note"/>
+            <entry key="customTypeOpt_14" value="pages;pagename;url;urlaccessdate;note"/>
+            <entry key="customTypeOpt_15" value="editor;volume;number;series;address;publisher;month;organization;org-short;note"/>
+            <entry key="customTypeOpt_16" value="author;language;howpublished;type;number;revision;address;month;year;url;org-short;note"/>
+            <entry key="customTypeOpt_17" value="pages;pagename;org-short;url;urlaccessdate;number;month;note"/>
+            <entry key="customTypeOpt_2" value="subtitle;edition;pages;number;volume;org-short;url;urlaccessdate;note"/>
+            <entry key="customTypeOpt_3" value="editor;volume;number;series;pages;address;month;organization;publisher;org-short;note"/>
+            <entry key="customTypeOpt_4" value="month;year;org-short;note"/>
+            <entry key="customTypeOpt_5" value="booksubtitle;edition;number;series;isbn;volume;org-short;editortype;url;urlaccessdate;note"/>
+            <entry key="customTypeOpt_6" value="booksubtitle;edition;number;series;isbn;volume;org-short;editortype;url;urlaccessdate;note"/>
+            <entry key="customTypeOpt_7" value="pages;month;publisher;booktitle;conference-location;conference-year;url;urlaccessdate;note"/>
+            <entry key="customTypeOpt_8" value="subtitle;author;organization;org-short;address;edition;month;year;pages;series;url;urlaccessdate;note"/>
+            <entry key="customTypeOpt_9" value="pages;pagename;url;urlaccessdate;note"/>
+            <entry key="customTypeReq_0" value="author;title;journal;year;volume;number;pages"/>
+            <entry key="customTypeReq_1" value="title;author/editor/organization;publisher;year;address"/>
+            <entry key="customTypeReq_10" value=";author/organization/editor/title"/>
+            <entry key="customTypeReq_11" value="author;title;type;school;year;address"/>
+            <entry key="customTypeReq_12" value="nationality;number;year;yearfiled"/>
+            <entry key="customTypeReq_13" value="title;year"/>
+            <entry key="customTypeReq_14" value="author;title;school;year;address"/>
+            <entry key="customTypeReq_15" value="title;year"/>
+            <entry key="customTypeReq_16" value="title;organization/institution"/>
+            <entry key="customTypeReq_17" value="author;title;organization/school;year;address"/>
+            <entry key="customTypeReq_2" value="title;author/editor/organization;year"/>
+            <entry key="customTypeReq_3" value="author;title;booktitle;year"/>
+            <entry key="customTypeReq_4" value="url;urlaccessdate;author/organization/title"/>
+            <entry key="customTypeReq_5" value="author;title;editor/organization;booktitle;chapter/pages;publisher;address;year"/>
+            <entry key="customTypeReq_6" value="author;title;booktitle;editor/organization;chapter/pages;publisher;address;year"/>
+            <entry key="customTypeReq_7" value="author;title;organization;conference-number;year;address"/>
+            <entry key="customTypeReq_8" value="title"/>
+            <entry key="customTypeReq_9" value="author;title;school;year;address"/>
+            <entry key="defaultEncoding" value="ISO8859_15"/>
+            <entry key="defaultLabelPattern" value="[auth]:[year]"/>
+            <entry key="defaultOwner" value=""/>
+            <entry key="defaultShowSource" value="false"/>
+            <entry key="dialogWarningForDuplicateKey" value="true"/>
+            <entry key="dialogWarningForEmptyKey" value="true"/>
+            <entry key="disableOnMultipleSelection" value="false"/>
+            <entry key="doNotResolveStringsFor" value="url"/>
+            <entry key="enableSourceEditing" value="true"/>
+            <entry key="enforceLegalBibtexKey" value="true"/>
+            <entry key="exportInOriginalOrder" value="false"/>
+            <entry key="exportInStandardOrder" value="true"/>
+            <entry key="exportWorkingDirectory" value="/home/marcos/tmp"/>
+            <entry key="fileColumn" value="true"/>
+            <entry key="fileDirectory" value=""/>
+            <entry key="filechooserDisableRename" value="true"/>
+            <entry key="floatMarkedEntries" value="true"/>
+            <entry key="floatSearch" value="true"/>
+            <entry key="fontFamily" value="SansSerif"/>
+            <entry key="fontSize" value="12"/>
+            <entry key="fontStyle" value="0"/>
+            <entry key="generateKeysAfterInspection" value="true"/>
+            <entry key="generateKeysBeforeSaving" value="false"/>
+            <entry key="gridColor" value="210:210:210"/>
+            <entry key="groupAutoHide" value="true"/>
+            <entry key="groupAutoShow" value="true"/>
+            <entry key="groupExpandTree" value="true"/>
+            <entry key="groupKeywordSeparator" value=", "/>
+            <entry key="groupShowDynamic" value="true"/>
+            <entry key="groupShowIcons" value="true"/>
+            <entry key="groupsDefaultField" value="keywords"/>
+            <entry key="incompleteEntryBackground" value="250:175:175"/>
+            <entry key="incrementS" value="false"/>
+            <entry key="lastEdited" value="/home/marcos/Documentos/IFMG/Acadêmico/Aulas/Latex/ifmgbitex/referencias.bib"/>
+            <entry key="lastUsedExport" value="html"/>
+            <entry key="lookAndFeel" value="com.jgoodies.plaf.plastic.Plastic3DLookAndFeel"/>
+            <entry key="markImportedEntries" value="true"/>
+            <entry key="markedEntryBackground" value="255:255:180"/>
+            <entry key="memoryStickMode" value="false"/>
+            <entry key="namesAsIs" value="false"/>
+            <entry key="namesFf" value="false"/>
+            <entry key="namesLastOnly" value="false"/>
+            <entry key="namesNatbib" value="true"/>
+            <entry key="openLastEdited" value="true"/>
+            <entry key="overrideDefaultFonts" value="false"/>
+            <entry key="overwriteOwner" value="false"/>
+            <entry key="overwriteTimeStamp" value="false"/>
+            <entry key="pdfColumn" value="false"/>
+            <entry key="pdfDirectory" value=""/>
+            <entry key="posX" value="0"/>
+            <entry key="posY" value="0"/>
+            <entry key="preview0" value="&lt;font face=&quot;arial&quot;&gt;&lt;b&gt;&lt;i&gt;\bibtextype&lt;/i&gt;&lt;a name=&quot;\bibtexkey&quot;&gt;\begin{bibtexkey} (\bibtexkey)&lt;/a&gt;\end{bibtexkey}&lt;/b&gt;&lt;br&gt;__NEWLINE__\begin{author} \format[HTMLChars,AuthorAbbreviator,AuthorAndsReplacer]{\author}&lt;BR&gt;\end{author}__NEWLINE__\begin{editor} \format[HTMLChars,AuthorAbbreviator,AuthorAndsReplacer]{\editor} &lt;i&gt;(\format[IfPlural(Eds.,Ed.)]{\editor})&lt;/i&gt;&lt;BR&gt;\end{editor}__NEWLINE__\begin{title} \format[HTMLChars]{\title} \end{title}&lt;BR&gt;__NEWLINE__\begin{chapter} \format[HTMLChars]{\chapter}&lt;BR&gt;\end{chapter}__NEWLINE__\begin{journal} &lt;em&gt;\format[HTMLChars]{\journal}, &lt;/em&gt;\end{journal}__NEWLINE__\begin{booktitle} &lt;em&gt;\format[HTMLChars]{\booktitle}, &lt;/em&gt;\end{booktitle}__NEWLINE__\begin{school} &lt;em&gt;\format[HTMLChars]{\school}, &lt;/em&gt;\end{school}__NEWLINE__\begin{institution} &lt;em&gt;\format[HTMLChars]{\institution}, &lt;/em&gt;\end{institution}__NEWLINE__\begin{publisher} &lt;em&gt;\format[HTMLChars]{\publisher}, &lt;/em&gt;\end{publisher}__NEWLINE__\begin{year}&lt;b&gt;\year&lt;/b&gt;\end{year}\begin{volume}&lt;i&gt;, \volume&lt;/i&gt;\end{volume}\begin{pages}, \format[FormatPagesForHTML]{\pages} \end{pages}__NEWLINE__\begin{abstract}&lt;BR&gt;&lt;BR&gt;&lt;b&gt;Abstract: &lt;/b&gt; \format[HTMLChars]{\abstract} \end{abstract}__NEWLINE__\begin{review}&lt;BR&gt;&lt;BR&gt;&lt;b&gt;Review: &lt;/b&gt; \format[HTMLChars]{\review} \end{review}&lt;/dd&gt;__NEWLINE__&lt;p&gt;&lt;/p&gt;&lt;/font&gt;"/>
+            <entry key="preview1" value="&lt;font face=&quot;arial&quot;&gt;&lt;b&gt;&lt;i&gt;\bibtextype&lt;/i&gt;&lt;a name=&quot;\bibtexkey&quot;&gt;\begin{bibtexkey} (\bibtexkey)&lt;/a&gt;\end{bibtexkey}&lt;/b&gt;&lt;br&gt;__NEWLINE__\begin{author} \format[HTMLChars,AuthorAbbreviator,AuthorAndsReplacer]{\author}&lt;BR&gt;\end{author}__NEWLINE__\begin{editor} \format[HTMLChars,AuthorAbbreviator,AuthorAndsReplacer]{\editor} &lt;i&gt;(\format[IfPlural(Eds.,Ed.)]{\editor})&lt;/i&gt;&lt;BR&gt;\end{editor}__NEWLINE__\begin{title} \format[HTMLChars]{\title} \end{title}&lt;BR&gt;__NEWLINE__\begin{chapter} \format[HTMLChars]{\chapter}&lt;BR&gt;\end{chapter}__NEWLINE__\begin{journal} &lt;em&gt;\format[HTMLChars]{\journal}, &lt;/em&gt;\end{journal}__NEWLINE__\begin{booktitle} &lt;em&gt;\format[HTMLChars]{\booktitle}, &lt;/em&gt;\end{booktitle}__NEWLINE__\begin{school} &lt;em&gt;\format[HTMLChars]{\school}, &lt;/em&gt;\end{school}__NEWLINE__\begin{institution} &lt;em&gt;\format[HTMLChars]{\institution}, &lt;/em&gt;\end{institution}__NEWLINE__\begin{publisher} &lt;em&gt;\format[HTMLChars]{\publisher}, &lt;/em&gt;\end{publisher}__NEWLINE__\begin{year}&lt;b&gt;\year&lt;/b&gt;\end{year}\begin{volume}&lt;i&gt;, \volume&lt;/i&gt;\end{volume}\begin{pages}, \format[FormatPagesForHTML]{\pages} \end{pages}&lt;/dd&gt;__NEWLINE__&lt;p&gt;&lt;/p&gt;&lt;/font&gt;"/>
+            <entry key="priDescending" value="false"/>
+            <entry key="priSort" value="entrytype"/>
+            <entry key="promptBeforeUsingAutosave" value="true"/>
+            <entry key="psDirectory" value=""/>
+            <entry key="pushToApplication" value="Insert selected citations into LyX/Kile"/>
+            <entry key="recentFiles" value="/home/marcos/Documentos/IFMG/Acadêmico/Aulas/Algoritmos/Algoritmos_exercicios_01/referencias.bib;/home/marcos/Documentos/IFMG/TCC e Projetos/ERP Comparativo/referencias.bib"/>
+            <entry key="regExpSearch" value="true"/>
+            <entry key="rememberWindowLocation" value="true"/>
+            <entry key="resolveStringsAllFields" value="false"/>
+            <entry key="runAutomaticFileSearch" value="false"/>
+            <entry key="saveInOriginalOrder" value="false"/>
+            <entry key="saveInStandardOrder" value="true"/>
+            <entry key="searchAll" value="false"/>
+            <entry key="searchAllBases" value="false"/>
+            <entry key="searchGen" value="true"/>
+            <entry key="searchOpt" value="true"/>
+            <entry key="searchPanelVisible" value="false"/>
+            <entry key="searchReq" value="true"/>
+            <entry key="secDescending" value="false"/>
+            <entry key="secSort" value=""/>
+            <entry key="selectS" value="false"/>
+            <entry key="showSearchInDialog" value="false"/>
+            <entry key="showSource" value="true"/>
+            <entry key="sizeX" value="1280"/>
+            <entry key="sizeY" value="800"/>
+            <entry key="stringsPosX" value="340"/>
+            <entry key="stringsPosY" value="200"/>
+            <entry key="stringsSizeX" value="600"/>
+            <entry key="stringsSizeY" value="400"/>
+            <entry key="tableBackground" value="255:255:255"/>
+            <entry key="tableColorCodesOn" value="true"/>
+            <entry key="tableOptFieldBackground" value="230:255:230"/>
+            <entry key="tableReqFieldBackground" value="230:235:255"/>
+            <entry key="tableText" value="0:0:0"/>
+            <entry key="terDescending" value="false"/>
+            <entry key="terSort" value=""/>
+            <entry key="timeStampField" value="timestamp"/>
+            <entry key="timeStampFormat" value="dd/MM/yyyy"/>
+            <entry key="unmarkAllEntriesBeforeImporting" value="true"/>
+            <entry key="urlColumn" value="true"/>
+            <entry key="useDefaultLookAndFeel" value="true"/>
+            <entry key="useIEEEAbrv" value="true"/>
+            <entry key="useImportInspectionDialog" value="true"/>
+            <entry key="useImportInspectionDialogForSingle" value="true"/>
+            <entry key="useNativeFileDialogOnMac" value="false"/>
+            <entry key="useOwner" value="false"/>
+            <entry key="useRegExpSearch" value="false"/>
+            <entry key="useRemoteServer" value="false"/>
+            <entry key="useTimeStamp" value="true"/>
+            <entry key="useXmpPrivacyFilter" value="false"/>
+            <entry key="warnAboutDuplicatesInInspection" value="true"/>
+            <entry key="warnBeforeOverwritingKey" value="true"/>
+            <entry key="windowMaximised" value="false"/>
+            <entry key="workingDirectory" value="/home/marcos/Documentos/IFMG/Acadêmico/Aulas/Algoritmos/Algoritmos_exercicios_01"/>
+          </map>
+          <node name="labelPattern">
+            <map/>
+          </node>
+        </node>
+      </node>
+    </node>
+  </root>
+</preferences>
+
+\end{codigo}

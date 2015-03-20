@@ -1,5 +1,7 @@
 %%
-%% Customizações do abnTeX2 (http://abnTeX2.googlecode.com) para o Instituto de Ciências Matemáticas e de Computação, Universidade de São Paulo
+%% Customizações do abnTeX2 (http://abnTeX2.googlecode.com) para o 
+%% Instituto de Ciências Matemáticas e de Computação, Universidade 
+%% de São Paulo
 %%
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
@@ -11,18 +13,22 @@
 %%
 %% This work has the LPPL maintenance status `maintained'.
 %% 
-%% The Current Maintainer of this work is Humberto Lidio Antonelli, humbertoantonelli@usp.br
+%% The Current Maintainer of this work is Humberto Lidio Antonelli, 
+%% Contact: humbertoantonelli@usp.br
 %%
-%% Further information about abnTeX2 are available on http://abntex2.googlecode.com/
+%% Further information about abnTeX2 are available on 
+%% http://abntex2.googlecode.com/
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2014/07/24 v1.1.4 Classe Tese ICMC - Programa de Pós-graduação em Ciências da Computação e Matemática Computacional baseado em abnTeX2]
+\ProvidesClass{packages/icmc}[2015/03/20 v1.1.5 Classe Tese ICMC - 
+Programa de Pós-graduação em Ciências da Computação e Matemática 
+Computacional baseado em abnTeX2]
 \RequirePackage{ifthen}
 
-%==============================================================================
+%================================================================================
 % Declaração de opções
-%==============================================================================
+%================================================================================
 % Opções:
 % 	qualificacao:   Formata documento para qualificação
 %   completa:       Formata documento para dissertação/tese
@@ -32,7 +38,7 @@
 %                   apenas para versão completa)
 %   pro-defesa:     Formata documento para versão final (utilizado apenas
 %                   para versão completa)
-% -----------------------------------------------------------------------------
+% -------------------------------------------------------------------------------
 
 \DeclareOption*{%
     \PackageWarning{icmc}{Unknown option ‘\CurrentOption’}%
@@ -74,55 +80,64 @@
 \ProcessOptions\relax
 
 
-%==============================================================================
+%================================================================================
 % Herança da classe `abntex2' e inclusão de pacotes e arquivos necessários
-%==============================================================================
+%================================================================================
 \LoadClass[% -- opções da classe memoir --
 	12pt,				% tamanho da fonte
-	openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+	openright,			% capítulos começam em pág ímpar 
+	                    % (insere página vazia caso preciso)
 	twoside,			% para impressão em verso e anverso. Oposto a oneside
 	a4paper,			% tamanho do papel. 
-	% -- opções da classe abntex2 --
 	chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
-	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
-	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
-	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
-	brazil,
+	brazil              % Define o idioma pt-br para as opções da classe
 	]{abntex2}
 	
 
-%==============================================================================
+%================================================================================
 % Pacotes fundamentais 
-%==============================================================================
+%================================================================================
 \RequirePackage{morewrites}         % Resolve o erro “No room for a new \write”
 \RequirePackage{cmap}				% Mapear caracteres especiais no PDF
 \RequirePackage{lmodern}			% Usa a fonte Latin Modern.
 \RequirePackage{lastpage}			% Usado pela Ficha catalográfica
 \RequirePackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
 \RequirePackage{color, xcolor}      % Controle das cores
-\RequirePackage{colortbl}           % Controle das cores das células da tabela (utilizado no título)
+\RequirePackage{colortbl}           % Controle das cores das células da tabela
+                                    % (utilizado no título)
 \RequirePackage{graphicx}			% Inclusão de gráficos
 \RequirePackage{caption}            % Pacote para definição dos captions
 \RequirePackage{microtype} 		    % para melhorias de justificação
-\RequirePackage[normalem]{ulem}     % para o underline colorido
 \RequirePackage{pdfpages}           % inclusão de arquivos PDF
-\RequirePackage{xifthen}            % fornece o uso \isempty (pacote utilizado nesse estilo para configurações diversas)
+\RequirePackage{xifthen}            % fornece o uso \isempty (pacote utilizado
+                                    % nesse estilo para configurações diversas)
 \RequirePackage{ifxetex}            % verifica se a compilação ocorre por xetex
 \RequirePackage{ifluatex}           % verifica se a compilação ocorre por luatex
-\RequirePackage{hyphenat}           % Pacote para retirar a hifenização do Preâmbulo
-\RequirePackage{xstring}
-\RequirePackage{etoolbox}           % Pacote utilizado para armazenamento de resumos
+\RequirePackage{hyphenat}           % Pacote para retirar a hifenização do
+                                    % Preâmbulo
+\RequirePackage{xstring}            % Pacate para manipulação de Strings
+\RequirePackage{etoolbox}           % Pacote utilizado para armazenamento de
+                                    % resumos
 \RequirePackage{amsthm, amsfonts, amsmath, amssymb} % Pacote para a definição dos ambientes matemáticos
 \RequirePackage{mathptmx}           % Usando times para equações, opcional
-\RequirePackage{listings}           % Pacote para formatação de diversos códigos fontes
-%\RequirePackage{xparse}             % Pacote utilizado para gerar as palavras-chave da ficha catalográfica
-\RequirePackage[linesnumbered, ruled, vlined]{algorithm2e}      % Pacote para escrever algoritmos em pseudo-código
-\RequirePackage{pgffor}             % Pacote utilizado para gerar as palavras-chave da ficha catalográfica
+\RequirePackage{listings}           % Pacote para formatação de diversos 
+                                    % códigos fontes
+\RequirePackage[linesnumbered, ruled, vlined]{algorithm2e}      % Pacote para
+                                    % escrever algoritmos em pseudo-código
+\RequirePackage{pgffor}             % Pacote utilizado para gerar as
+                                    % palavras-chave da ficha catalográfica
+\RequirePackage{nomencl}            % Pacote para criação da Lista de Siglas
+\RequirePackage[translate=babel,nonumberlist,style=altlist,toc]{glossaries}	 % Pacote para gerar o glossário
+\RequirePackage[brazilian,hyperpageref]{backref} % Paginas com as citações na bibl
+\RequirePackage[alf,bibjustif,abnt-last-names=abnt,abnt-etal-text=it,abnt-repeated-title-omit=yes,abnt-emphasize=bf,abnt-etal-cite=3,abnt-etal-list=0]{abntex2cite}   % Citações padrão ABNT
 
-%==============================================================================
+
+
+%================================================================================
 % Comando para configuração do tipo de trabalho
-%==============================================================================
+%================================================================================
 
+% Configuração da situação do trabalho entregue
 \ifthenelse{\boolean{opt-pre-defesa}}{
     \iflanguage{english}
         {\newcommand{\tipoexemplar}{\textit{EXAMINATION BOARD PRESENTATION COPY}.}}
@@ -133,6 +148,7 @@
         {\newcommand{\tipoexemplar}{\textit{VERS{\~A}O REVISADA}.}}
 }
 
+% Configuração do tipo de trabalho para DOUTORADO ou MESTRADO
 \ifthenelse{\boolean{opt-doutorado}}{
     \iflanguage {english}
         {
@@ -157,8 +173,9 @@
             \newcommand{\nivelPos}{Mestre}
             \newcommand{\tipodocurso}{Mestrado}
         }
-    
 }
+
+% Configuração do tipo de trabalho como QUALIFICAÇAO de DOUTORADO ou MESTRADO
 \ifthenelse{\boolean{opt-qualificacao}}{
     \iflanguage{english}
         {
@@ -174,6 +191,7 @@
     \newcommand{\exam}{}
 }
 
+% Configuração do texto impresso no Preambulo
 \iflanguage {english}
     { % Preambulo em ingles
         \renewcommand{\imprimirpreambulo}{\nohyphens{\imprimirtipotrabalho~submitted to the \textit{Instituto de Ci{\^e}ncias Matem{\'a}ticas e de Computa{\c c}{\~a}o} -- ICMC-USP,\exam~in partial fulfillment of the requirements for the degree of the \nivelPos~Program in \especialidade. \tipoexemplar}}
@@ -183,9 +201,9 @@
     }
     
 
-%==============================================================================
+%================================================================================
 % Configuração da fonte utilizada na capa exigida pelo ICMC
-%==============================================================================
+%================================================================================
 
 \newcommand{\@icmcFont}[2][]{\fontsize{#2}{#2}\ifthenelse{\isempty{#1}}{}{\fontspec[Mapping = tex-text, Path = packages/fonts/]{#1}}}
 
@@ -241,7 +259,6 @@
       \newcommand\@icmcCarimbo{\@icmcFont{12}\timesnewroman}
       \newcommand\@icmcSVPG{\@icmcFont{9}\timesnewroman}
     
-    
     \else % Configuração da fonte para a compilação por PDFLATEX
       \RequirePackage[T1]{fontenc}	    	% Selecao de codigos de fonte.
       \RequirePackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
@@ -258,9 +275,9 @@
 \fi
 
 
-%==============================================================================
+%================================================================================
 % Comando auxiliares
-%==============================================================================
+%================================================================================
 
 % Comando para marcar texto para revisão
 \newcommand{\rev}[1]{\textcolor{red}{[#1]}}
@@ -282,35 +299,15 @@
 % Automatiza o processo de aspas
 \newcommand{\aspas}[1]{``{#1}''}
 
-% Comando para criação de abreviaturas e siglas
-\def\sigla{\@ifstar\@sigla\@@sigla}
-% Apenas faz o registro na tabela de siglas
-\def\@sigla#1#2{\nomenclature{#1}{#2}}          % \sigla*{}{} 
-% Faz o registro na tabela de siglas e insere os dados no corpo do documento
-\def\@@sigla#1#2{#2 (#1)\nomenclature{#1}{#2}}  % \sigla{}{}
-
-% Comando para simplificar a definição de palavras no Glossário
-\newcommand*{\newword}[3]{%
-    \newglossaryentry{#1}{%
-        name={#2:},%
-        description={#3},%
-    }%
-}
-
-% Comando para inserir simbolos na lista de símbolos
-\newcommand{\simbolo}[2]{
-  \addcontentsline{los}{simbolo}{\ensuremath{#1} --- #2}
-}
-
 % Comandos utilizados para referenciar corpos flutuantes no texto
 \newcommand{\qref}[1]{\quadrorefname~\ref{#1}}      % Quadro X
 \newcommand{\aref}[1]{\algoritmorefname~\ref{#1}}   % Algoritmo X
 \newcommand{\cref}[1]{\codigorefname~\ref{#1}}      % Código X
 
 
-%==============================================================================
+%================================================================================
 % Configurações diversas
-%==============================================================================
+%================================================================================
 
 % Codificação dos caracteres especiais no Bookmark
 \hypersetup{unicode=true}
@@ -326,13 +323,13 @@
 \providecommand*{\sourcecodeautorefname}{Source code}
 \addto\captionsbrazil{% portugues-brasil
     %% ajusta nomes padroes do babel
-    \renewcommand{\sectionrefname}{se{\c c}\~ao~}      % \Sref{ }
+    \renewcommand{\sectionrefname}{se{\c c}\~ao~}   % \Sref{ }
     \renewcommand{\chapterrefname}{Cap{\'i}tulo~}   % \Cref{ }
     \renewcommand{\appendixrefname}{Ap{\^e}ndice~}  % \Aref{ }
-    \renewcommand{\bookrefname}{Livro~}         % \Bref{ }
-    \renewcommand{\partrefname}{Parte~}         % \Pref{ }
-    \renewcommand{\figurerefname}{Figura}       % \fref{ }
-    \renewcommand{\tablerefname}{Tabela}        % \tref{ }
+    \renewcommand{\bookrefname}{Livro~}             % \Bref{ }
+    \renewcommand{\partrefname}{Parte~}             % \Pref{ }
+    \renewcommand{\figurerefname}{Figura}           % \fref{ }
+    \renewcommand{\tablerefname}{Tabela}            % \tref{ }
     \renewcommand{\pagerefname}{p{\'a}gina}         % \pref{ }
     %% ajusta nomes usados com a macro \autoref
     \renewcommand{\chartautorefname}{Quadro}
@@ -356,11 +353,15 @@
 % Pasta padrão para as imagens
 \graphicspath{{images/}}
 
+% Nome do local do instituto
+\local{São Carlos -- SP}
+% Nome do instituto
+\instituicao{Instituto de Ciências Matemáticas e de Computação (ICMC/USP)}
 
-%==============================================================================
+
+%================================================================================
 % Pacote para criação da lista de siglas e abreviaturas
-%==============================================================================
-\RequirePackage{nomencl}
+%================================================================================
 
 % Configuração do pacote nomencl
 % Tamanho da Label da sigla
@@ -370,14 +371,19 @@
 \setlength{\nomitemsep}{-.05in} 
 % Comando necessário para a criação da lista de abreviaturas
 \makenomenclature
-
 % Traduz o título da lista de abreviaturas
 \renewcommand{\nomname}{\listadesiglasname}
 
-%==============================================================================
+% Comando para criação de abreviaturas e siglas
+\def\sigla{\@ifstar\@sigla\@@sigla}
+% Apenas faz o registro na tabela de siglas
+\def\@sigla#1#2{\nomenclature{#1}{#2}}          % \sigla*{}{} 
+% Faz o registro na tabela de siglas e insere os dados no corpo do documento
+\def\@@sigla#1#2{#2 (#1)\nomenclature{#1}{#2}}  % \sigla{}{}
+
+%================================================================================
 % Pacote para criação do GLOSSÁRIO
-%==============================================================================
-\RequirePackage[translate=babel,nonumberlist,style=altlist,toc]{glossaries}	
+%================================================================================
 % Gera o indíce do Glossário
 \makeglossaries
 % Traduz o nome do glossário
@@ -387,13 +393,21 @@
 % Estilo de apresentação do glossário
 \glossarystyle{list}
 
-%==============================================================================
-% Pacotes de citações
-%==============================================================================
-\RequirePackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
-\RequirePackage[alf,bibjustif,abnt-last-names=abnt,abnt-etal-text=it,abnt-repeated-title-omit=yes,abnt-emphasize=bf,abnt-etal-cite=3,abnt-etal-list=0]{abntex2cite}	% Citações padrão ABNT
+% Contador de definições do Glossário
+\newcounter{count_glossario}
+% Comando para simplificar a definição de palavras no glossário
+\newcommand{\newword}[2]{%
+    \stepcounter{count_glossario}% Incrementa o contador do glossário
+    \newglossaryentry{Def.\arabic{count_glossario}}{%
+        name={#1:},%
+        description={#2},%
+    }%
+}
 
-% ---
+%================================================================================
+% Pacotes de citações
+%================================================================================
+
 % Configurações do pacote backref
 % Texto padrão antes do número das páginas
 \renewcommand{\backref}{}
@@ -424,18 +438,13 @@
 }
 % ---
 
-%==============================================================================
+%================================================================================
 % Definição/Alteração de comandos uitlizados
-%==============================================================================
+%================================================================================
 
 % Permite comandos com @ no nome
 \makeatletter
 
-% Nome do local do instituto
-\local{São Carlos -- SP}
-% Nome do instituto
-\instituicao{Instituto de Ciências Matemáticas e de Computação (ICMC/USP)}
-    
 % Comando para definição do nome e sobrenome do author
 \renewcommand\autor[2][Nome para Referência]{
     
@@ -449,6 +458,15 @@
     \def\ABNTautorreferencia{#1}
     \def\ABNTautordatabib{\@authsurn, \@authname}
     \global\def\@author{\@authname~\@authsurn}
+}
+
+% Retira os dois pontos (:) que vem por padrão da classe Abntex2
+\renewcommand{\orientadorname}{Orientador}
+\renewcommand{\coorientadorname}{Coorientador}
+\addto\captionsenglish{% ingles
+    %% adjusts names from abnTeX2
+    \renewcommand{\orientadorname}{Supervisor}
+    \renewcommand{\coorientadorname}{Co-supervisor}
 }
 
 % Redefinição do comando de orientador
@@ -465,9 +483,14 @@
 
 % Redefinição do comando de co-orientador
 \renewcommand{\coorientador}[3][\coorientadorname]{
+
+    \StrCount{#3}{\space}[\nbmatch]%
+    \StrCut[\nbmatch]{#3}{\space}\strfirstcoorientador\strsecondcoorientador
+    
+    \renewcommand{\imprimircoorientadorRotulo}{#1}
     \newcommand{\titulacaocoorientador}{#2}
-    \renewcommand{\imprimircoorientadorRotulo}{#1}%
-    \renewcommand{\imprimircoorientador}{#3}
+    \def\ABNTcoorientadordatabib{\strsecondcoorientador, \strfirstcoorientador}
+    \renewcommand{\imprimircoorientador}{\strfirstcoorientador~\strsecondcoorientador}
 }
 
 % Camando para definição do programa e sua modalidade
@@ -530,28 +553,6 @@
 }
 
 
-% Comando para definição da dedicatória
-\def\textodedicatoria{\@ifstar\@textodedicatoria\@@textodedicatoria}
-% Inclui texto de um arquivo como dedicatória
-\def\@textodedicatoria#1{\gdef\@dedicatoria{\input{#1}}}          % \textodedicatoria*{}{} 
-% Inclui o texto como dedicatória
-\def\@@textodedicatoria#1{\gdef\@dedicatoria{#1}}  % \textodedicatoria{}{}
-
-% Comando para definição dos agradecimentos
-\def\textoagradecimentos{\@ifstar\@textoagradecimentos\@@textoagradecimentos}
-% Inclui texto de um arquivo como agradecimentos
-\def\@textoagradecimentos#1{\gdef\@agradecimentos{\input{#1}}}          % \textoagradecimentos*{}{} 
-% Inclui o texto como agradecimentos
-\def\@@textoagradecimentos#1{\gdef\@agradecimentos{#1}}  % \textoagradecimentos{}{}
-
-% Comando para definição da epígafe
-\def\textoepigrafe{\@ifstar\@textoepigrafe\@@textoepigrafe}
-% Inclui texto de um arquivo como epígafe
-\def\@textoepigrafe#1{\gdef\@epigrafe{\input{#1}}}          % \textoepigrafe*{}{} 
-% Inclui o texto como epígafe
-\def\@@textoepigrafe#1{\gdef\@epigrafe{#1}}  % \textoepigrafe{}{}
-
-
 % Comando para definição dos resumos e palavras-chave
 \newcounter{numresumo}
 \newcommand{\palavraschave}{}
@@ -598,16 +599,17 @@
   \gdef\@incluilistadecodigos{true}
 }
 
-\newcommand{\incluifichacatalografica}[1][]{
-    \gdef\@incluifichacatalografica{true}
-    \ifthenelse{\isempty{#1}}{}{
-        \gdef\@arquivofichacatalografica{#1}
-    }
-}
+% Comando para inclusão da ficha catalográfica
+\def\incluifichacatalografica{\@ifstar\@incluifichacatalografica\@@incluifichacatalografica}
+% Incluir um arquivo externo como ficha catalográfica
+\def\@incluifichacatalografica#1{\gdef\@incluifichacatalografica{true}\gdef\@arquivofichacatalografica{#1}}          % \incluifichacatalografica*{}{} 
+% Gera a ficha catalográfica automaticamente de acordo com o número da Tabela de Cutter http://www.davignon.qc.ca/cutter1.html
+\def\@@incluifichacatalografica#1{\gdef\@incluifichacatalografica{true}\gdef\@codigocutter{#1}}  % \incluifichacatalografica{}{}
 
-%==============================================================================
+
+%================================================================================
 % Definição dos ambientes matemáticos
-%==============================================================================
+%================================================================================
 
 \theoremstyle{definition}
 \newtheorem{teorema}{Teorema}
@@ -619,9 +621,9 @@
 \newtheorem{definicao}{Definição}
 \newenvironment{demonstracao}{\begin{proof}[Demonstração]}{\end{proof}}
 
-%==============================================================================
+%================================================================================
 % Criação dos Ambientes Flutuantes para Quadros, Algoritmos e Cógidos
-%==============================================================================
+%================================================================================
 
 \newcommand{\listquadroname}{Lista de quadros}
 \newcommand{\quadroname}{Quadro}
@@ -732,30 +734,35 @@
             xleftmargin=20pt,
             frame=tb,
             framerule=0.8pt,
-           %framexleftmargin=20pt,
-               xleftmargin=17pt,
-              framexleftmargin=17pt,
-              framexbottommargin=5pt,
-              framextopmargin=5pt,
-           %belowcaptionskip=3pt,
+            xleftmargin=17pt,
+            framexleftmargin=17pt,
+            framexbottommargin=5pt,
+            framextopmargin=5pt,
            abovecaptionskip=10pt,
            #1
           }
 }
 {\setcounter{countcodigo}{\value{lstnumber}}}
 
-%==============================================================================
+%================================================================================
 % Comando para configurar os captions no documento
-%==============================================================================
+%================================================================================
 \DeclareCaptionFont{ABNTEXfontereduzida}{\ABNTEXfontereduzida}
 \captionsetup{position=above, labelfont=ABNTEXfontereduzida, font=ABNTEXfontereduzida}
 
 \DeclareCaptionFormat{listing}{\hrule height.8pt depth0pt ~~~#1#2#3}
 \captionsetup[lstlisting]{format=listing,singlelinecheck=false, margin=0pt,labelsep=colon,labelfont=bf, font=normalsize}
 
-%==============================================================================
+%================================================================================
 % Dedicatória
-%==============================================================================
+%================================================================================
+
+% Comando para definição da dedicatória
+\def\textodedicatoria{\@ifstar\@textodedicatoria\@@textodedicatoria}
+% Inclui texto de um arquivo como dedicatória
+\def\@textodedicatoria#1{\gdef\@dedicatoria{\input{#1}}} % \textodedicatoria*{}{} 
+% Inclui o texto como dedicatória
+\def\@@textodedicatoria#1{\gdef\@dedicatoria{#1}}       % \textodedicatoria{}{}
 
 % Criação da dedicatória
 \newcommand{\inserededicatoria}
@@ -771,9 +778,16 @@
   }
 }
 
-%==============================================================================
+%================================================================================
 % Agradecimentos
-%==============================================================================
+%================================================================================
+
+% Comando para definição dos agradecimentos
+\def\textoagradecimentos{\@ifstar\@textoagradecimentos\@@textoagradecimentos}
+% Inclui texto de um arquivo como agradecimentos
+\def\@textoagradecimentos#1{\gdef\@agradecimentos{\input{#1}}} % \textoagradecimentos*{}{}
+% Inclui o texto como agradecimentos
+\def\@@textoagradecimentos#1{\gdef\@agradecimentos{#1}} % \textoagradecimentos{}{}
 
 % Criação dos agradecimentos
 \newcommand{\insereagradecimentos}
@@ -785,9 +799,16 @@
   }
 }
 
-%==============================================================================
+%================================================================================
 % Epígrafe
-%==============================================================================
+%================================================================================
+
+% Comando para definição da epígafe
+\def\textoepigrafe{\@ifstar\@textoepigrafe\@@textoepigrafe}
+% Inclui texto de um arquivo como epígafe
+\def\@textoepigrafe#1{\gdef\@epigrafe{\input{#1}}}      % \textoepigrafe*{}{} 
+% Inclui o texto como epígafe
+\def\@@textoepigrafe#1{\gdef\@epigrafe{#1}}             % \textoepigrafe{}{}
 
 % Criação da epígafe
 \newcommand{\insereepigrafe}
@@ -803,9 +824,14 @@
   }
 }
 
-%==============================================================================
+%================================================================================
 % Lista de Símbolos
-%==============================================================================
+%================================================================================
+
+% Comando para inserir simbolos na lista de símbolos
+\newcommand{\simbolo}[2]{
+  \addcontentsline{los}{simbolo}{\ensuremath{#1} --- #2}%
+}
 
 % Apresentação dos símbolos na lista de símbolos
 \newcommand\l@simbolo[2]{\par #1}
@@ -823,22 +849,29 @@
   }
 }
 
-%==============================================================================
+%================================================================================
 % Ficha Catalografica
-%==============================================================================
+%================================================================================
 
-    % Contador das palavras-chave
-    \newcounter{count}
-    % Enumera a lista de palavras-chave
-    \newcommand{\PROCESS}[1]{%
-         \foreach \i in {#1}{\stepcounter{count}\arabic{count}.\enspace\i. }%
-    }
-    
+% Contador das palavras-chave
+\newcounter{count}
+% Enumera a lista de palavras-chave
+\newcommand{\PROCESS}[1]{%
+    \foreach\i in{#1}{%
+\stepcounter{count}%
+\arabic{count}.\enspace\i.\ %
+    }%
+}
     
 \newcommand{\inserefichacatalografica}
 {
     \@ifundefined{@arquivofichacatalografica}
     {
+    
+    % Captura a primeira letra do sobrenome do autor
+    \expandafter\StrLeft\expandafter{\ABNTautordatabib}{1}[\firstletterauthor]
+    % Captura a primeira letra do título
+    \expandafter\StrLeft\expandafter{\thetitle}{1}[\firstlettertitle]
     
         \begin{fichacatalografica}
         	\vspace*{\fill}					% Posição vertical
@@ -851,17 +884,15 @@
 	\multicolumn{3}{c}{\sffamily\small com os dados fornecidos pelo(a) autor(a)} \\ \cline{2-3}
 	& & \\
 	& & \texttt{\ABNTautordatabib}\\
-	& %{\ttfamily R484r}  
-	&  {\ttfamily~~~\imprimirtitulo{} / \imprimirautor.\;-- \imprimirlocal, \@year.} \\
-	& & {\ttfamily~~~\pageref{LastPage} p.; 29,7 cm.}\\
+	& {\ttfamily \MakeUppercase{\firstletterauthor}\@codigocutter}\MakeLowercase{\firstlettertitle}
+	&  {\ttfamily~~~\imprimirtitulo{} / \imprimirautor; \MakeLowercase{\imprimirorientadorRotulo}~\imprimirorientador \abntex@ifnotempty{\imprimircoorientador}{; \MakeLowercase{\imprimircoorientadorRotulo}~\imprimircoorientador}. -- \imprimirlocal, \@year.} \\ 
+	& & {\ttfamily~~~\pageref{LastPage} p.}\\
 	& &\\
-	& & {\ttfamily~~~\imprimirorientadorRotulo~\imprimirorientador.}\\
-	\abntex@ifnotempty{\imprimircoorientador}{
-    & & {\ttfamily~~~\imprimircoorientadorRotulo~\imprimircoorientador.} \\
-    }
-	& & {\ttfamily~~~\imprimirtipotrabalho~(\tipodocurso~em \especialidade) -- \imprimirinstituicao, \imprimirlocal, \@year.}\\
+	& & {\ttfamily~~~\imprimirtipotrabalho~(\tipodocurso~-- Programa de  Pós-Graduação em \@programa) -- Instituto de Ciências Matemáticas
+e de Computação, Universidade de São Paulo, \@year.}\\
 	& & \\
-	& & \texttt{~~~\expandafter\PROCESS\expandafter{\palavraschave}I. \ABNTorientadordatabib.\;II. \imprimirinstituicao. III. Título.} \\
+	& & \texttt{~~~\expandafter\PROCESS\expandafter{\palavraschave}I. \ABNTorientadordatabib, orient.\ II.\ \abntex@ifnotempty{\imprimircoorientador}{%
+	\ABNTcoorientadordatabib, coorient.\ III.}Título.} \\
 	& & \\
 	& & \\ \cline{2-3}
 	%& & ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CDU: 681.3.01:621.39 \\ \cline{2-3}
@@ -876,9 +907,9 @@
 }
 
 
-%==============================================================================
+%================================================================================
 % Resumo
-%==============================================================================
+%================================================================================
 
 % Criação do resumo e palavras chaves no documento
 \newcommand{\insereresumo}
@@ -924,9 +955,9 @@
     }
 }
 
-%==============================================================================
+%================================================================================
 % Definição de comandos a serem inseridos diretamente no início do documento
-%==============================================================================
+%================================================================================
 
 \newcommand{\inserelistadefiguras}
 {
@@ -984,13 +1015,13 @@
   }
 }
 
-%==============================================================================
+%================================================================================
 % INDICE REMISSIVO
-%==============================================================================
+%================================================================================
 
 \makeindex
 
-%==============================================================================
+%================================================================================
 % Configuração do modelo de capa exigido pelo programa do ICMC
 %=============================================================================
 
@@ -1049,12 +1080,12 @@
 %\vspace{\fill}
 %\vspace{\fill}
 
-{\@icmcOrientadorLabel\imprimirorientadorRotulo}
+{\@icmcOrientadorLabel\imprimirorientadorRotulo:}
 {\@icmcOrientadorName\titulacaoorientador~\imprimirorientador}
 
 \abntex@ifnotempty{\imprimircoorientador}{%
     \addvspace{3pt}
-    {\@icmcOrientadorLabel\imprimircoorientadorRotulo}
+    {\@icmcOrientadorLabel\imprimircoorientadorRotulo:}
     {\@icmcOrientadorName\titulacaocoorientador~\imprimircoorientador}
 }%
 
@@ -1089,9 +1120,9 @@ USP -- São Carlos\\
 } %folha de rosto
 
 
-%==============================================================================
+%================================================================================
 % Configuração dos Estilo dos Capítulo
-%==============================================================================
+%================================================================================
 
 
 \makechapterstyle{icmc}{%
@@ -1183,9 +1214,9 @@ USP -- São Carlos\\
 }
 \chapterstyle{icmc}
 
-%==============================================================================
+%================================================================================
 % Configurações ao iniciar documento
-%==============================================================================
+%================================================================================
 \AtBeginDocument{
 
 % suporte a alguns sequências comuns do LaTeX, como -- para travessão
@@ -1213,10 +1244,6 @@ USP -- São Carlos\\
 		\inserefichacatalografica
 		\newpage
     }
-    
-
-    % Inserir a folha de aprovação
-    %\folhadeaprovacaoICMC
 
     % DEDICATÓRIA / AGRADECIMENTO / EPÍGRAFE
     \inserededicatoria
@@ -1228,10 +1255,10 @@ USP -- São Carlos\\
 
     % Insere as Listas que forem setadas no documento
     \inserelistadefiguras
-    \inserelistadetabelas
     \inserelistadequadros    
     \inserelistadealgoritmos
     \inserelistadecodigos
+    \inserelistadetabelas
     \inserelistadesiglas
     \inserelistadesimbolos
 
@@ -1292,7 +1319,6 @@ USP -- São Carlos\\
     \counterwithout{quadro}{chapter}
     \counterwithout{lstlisting}{chapter}
     
-
     \mainmatter
 
     % Retira espaço extra obsoleto entre as frases.

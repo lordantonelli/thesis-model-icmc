@@ -13,7 +13,6 @@
 %   Situação do trabalho = pre-defesa/pos-defesa (exceto para qualificação)
 % -- opções do pacote babel --
 % Idioma padrão = brazil
-	%french,	    	% idioma adicional para hifenização
 	%spanish,			% idioma adicional para hifenização
 	%english,			% idioma adicional para hifenização
 	%brazil				% o último idioma é o principal do documento
@@ -27,16 +26,19 @@
 % Este pacote pode conflitar com outros pacotes gráficos como o ``pictex''
 % Então é necessário usar apenas um dos pacotes conflitantes
 
+\newcommand{\VerbL}{0.52\textwidth}
+\newcommand{\LatL}{0.42\textwidth}
+
 
 % ---
 % Informações de dados para CAPA e FOLHA DE ROSTO
 % ---
-\titulo{Modelo de Teses e Dissertações em \LaTeX~ do ICMC}
+\titulo{Modelo de Teses e Dissertações em LaTeX do ICMC}
 \autor[Antonelli, H. L.]{Humberto Lidio Antonelli}
-\orientador[Orientadora:]{Profa. Dra.}{Renata Pontin de Mattos Fortes}
-%\coorientador{Prof. Dr.}{Fulano de tal}
+\orientador[Orientadora]{Profa. Dra.}{Renata Pontin de Mattos Fortes}
+%\coorientador{Prof. Dr.}{Fulano de Tal}
 \curso{Ciências de Computação e Matemática Computacional}
-\data{01}{12}{2014} % Data do depósito
+\data{20}{03}{2015} % Data do depósito
 % ---
 
 
@@ -95,12 +97,9 @@
 % ----------------------------------------------------------
 
 % Inserir a ficha catalográfica
-%\incluifichacatalografica[tex/fichaCatalografica.pdf]
-\incluifichacatalografica
+%\incluifichacatalografica*{tex/fichaCatalografica.pdf}
+\incluifichacatalografica{634} % Código Cutter: número atribuído ao sobrenome do autor. Para obtê-lo, consulte a tabela Cutter Sanborn (em http://www.davignon.qc.ca/cutter1.html), procure pelo sobrenome ou forma mais próxima ao sobrenome completo e coloque o número indicado como parâmetro.
 
-
-% Inserir folha de aprovação
-%\input{tex/folha-aprovacao}
 
 % DEDICATÓRIA / AGRADECIMENTO / EPÍGRAFE
 \textodedicatoria*{tex/pre-textual/dedicatoria}
@@ -132,7 +131,6 @@
 % Início do documento
 % ----
 \begin{document}
-
 % ----------------------------------------------------------
 % ELEMENTOS TEXTUAIS
 % ----------------------------------------------------------
@@ -146,15 +144,15 @@
 \label{chapter:instalando-abntex}
 \input{tex/instalando-abntex}
 
-\chapter{Orientações Gerais}
+\chapter{Orientações gerais}
 \label{chapter:orientacoes-gerais}
 \input{tex/orientacoes-gerais}
 
-\chapter{Configuração dos Elementos Pré-Textuais}
+\chapter{Configuração dos elementos pré-textuais}
 \label{chapter:config-pre-textual}
 \input{tex/config-pre-textual}
 
-\chapter{Corpos Flutuantes}
+\chapter{Corpos flutuantes}
 \label{chapter:corpos-flutuantes}
 \input{tex/corpos-flutuantes}
 
@@ -162,11 +160,11 @@
 \label{chapter:listas}
 \input{tex/listas}
 
-\chapter{Ferramentas Úteis}
+\chapter{Ferramentas úteis}
 \label{chapter:ferramentas-uteis}
 \input{tex/ferramentas-uteis}
 
-\chapter{Citações e Referências}
+\chapter{Citações e referências}
 \label{chapter:citacoes}
 \input{tex/citacoes}
 
@@ -207,9 +205,13 @@
 % ---
 \begin{apendicesenv}
 
-    \chapter{Documento Básico Usando a Classe icmc}
+    \chapter{Documento básico usando a classe \textit{icmc}}
     \label{chapter:documento-basico}
     \input{tex/appendix/documento-basico}
+    
+    \chapter{Configuração do programa JabRef}
+    \label{chapter:configuracao-jabref}
+    \input{tex/appendix/configuracao-jabref}
 
 \end{apendicesenv}
 % ---
@@ -224,7 +226,7 @@
 % ---
 \begin{anexosenv}
 
-    \chapter{Páginas Interessantes na Internet} 
+    \chapter{Páginas interessantes na Internet} 
     \label{chapter:paginas-interessantes}
     \input{tex/annex/paginas-interessantes}
 

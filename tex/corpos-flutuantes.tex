@@ -69,9 +69,7 @@ A classe \textit{icmc} traz algum comando que auxiliam na inserção da legenda,
 \section{Tabelas e Quadros}
 \label{secao:tabelas_e_quadros}
 
-A inserção de tabelas e quadros é feita de forma semelhante a inserção de figuras, porém são utilizados os ambientes \textit{table} e \textit{quadro}. A principal diferença entre tabelas e quadros, de acordo com \citeonline{silveira:2006:manual_tcc}, é que as tabelas são destinadas para informações numéricas e os quadros são mais adequados para informações textuais. Em geral, as tabelas devem estar padronizadas conforme o padrão do
-\citeonline{ibge1993} requerido pelas normas da ABNT para documentos técnicos e
-acadêmicos.
+A inserção de tabelas e quadros é feita de forma semelhante a inserção de figuras, porém são utilizados os ambientes \textit{table} e \textit{quadro}. A principal diferença entre tabelas e quadros, de acordo com \citeonline{NBR14724:2011}, é que as tabelas são destinadas para informações numéricas e os quadros são mais adequados para informações textuais. Em geral, as tabelas devem estar padronizadas conforme o padrão do \citeonline{ibge1993} requerido pelas normas da ABNT para documentos técnicos e acadêmicos.
 
 Como exemplos foram inseridas a \autoref{tab:lista_produtos} que exibe uma de lista de produtos (construída em \LaTeX) e a Tabela \autoref{tabela:populacao_america_sul} que mostra a população dos países da América do Sul (construída segundo o padrão do IBGE). Foi inserido também o \autoref{quadro:editores_texto_livres} com alguns editores que podem ser usados para se trabalhar com \LaTeX para demonstrar a inserção de quadros.
 
@@ -135,9 +133,7 @@ Geany      & Sim             & Não                   \\ \hline
 
 Além dos corpos flutuantes convencionais para inserir figuras (\comando{begin\{figure\}}) e tabelas (\comando{begin\{table\}}), a classe \textit{icmc} possui mais dois tipos de corpos flutuantes um para algoritmos (\comando{begin\{algoritmo\}}) e outro para códigos-fonte (\comando{begin\{codigo\}}). A utilização de um ou de outro fica a critério do usuário. Como exemplo temos o \autoref{algoritmo:mdc1} que calcula o máximo divisor comum entre dois números e os Códigos-fonte \ref{codigo:notas_alunos} e \ref{codigo:metodo_leitura} que são uma consulta na \sigla{SQL}{\textit{Structured Query Language}} e uma sobrotina em \textit{Java}.
 
-%\begin{algoritmo}[htb]
 \begin{algoritmo}
-%\begin{algorithmic}[1]
 \caption{Algoritmo para cálculo de máximo divisor comum MDC($n_1$,$n_2$)}
 \label{algoritmo:mdc1}
 
@@ -150,14 +146,8 @@ Além dos corpos flutuantes convencionais para inserir figuras (\comando{begin\{
     $n_2 \leftarrow r$
  }
  \Return $n_1$
-%\end{algorithmic}
 \end{algoritmo}
-%\end{algoritmo}
 
-%\begin{codigo}[htb]
-%\caption{Consulta SQL}
-%\label{codigo:notas_alunos}
-%\hrule
 \begin{codigo}[caption = {Consulta SQL}, label={codigo:notas_alunos},language=SQL, breaklines=true]
 SELECT a.nome_aluno AS aluno,
        d.nome_disciplina AS disciplina,
@@ -169,12 +159,7 @@ WHERE a.id_aluno = m.id_aluno
   AND d.id_disciplina = m.id_disciplina
 ORDER BY a.nome_aluno, d.nome_disciplina;
 \end{codigo}
-%\end{codigo}
 
-%\begin{codigo}[htb]
-%\caption{Subrotina para obter uma entrada do usuário}
-%\label{codigo:metodo_leitura}
-%\hrule
 \begin{codigo}[caption={Subrotina para obter uma entrada do usuário}, label={codigo:metodo_leitura}, language=Java, breaklines=true]
 public static String Leitura(){
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -186,7 +171,6 @@ public static String Leitura(){
     }
 }
 \end{codigo}
-%\end{codigo}
 
 Existem diversos outros pacotes disponíveis para escrever algoritmos e códigos. Nos exemplos anteriormente foram utilizados o pacote \textit{algorithm} para definição do ambiente algoritmo e \textit{listings} para a definição do ambiente de código-fonte. O pacote \textit{algorithm} é usado para escrever algoritmos em alto nível \cite{janos:2005:algpseudocode}. Já o pacote \textit{listings} serve para escrever os códigos em diversas linguagens de programação \cite{moses:2006:listings}.
 

@@ -21,10 +21,9 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2015/03/20 v1.1.5 Classe Tese ICMC - 
-Programa de Pós-graduação em Ciências da Computação e Matemática 
-Computacional baseado em abnTeX2]
-\RequirePackage{ifthen}
+\ProvidesClass{packages/icmc}[2015/05/05 v1.1.6 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
+Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Computação]
+\RequirePackage{xifthen}
 
 %================================================================================
 % Declaração de opções
@@ -109,7 +108,7 @@ Computacional baseado em abnTeX2]
 \RequirePackage{caption}            % Pacote para definição dos captions
 \RequirePackage{microtype} 		    % para melhorias de justificação
 \RequirePackage{pdfpages}           % inclusão de arquivos PDF
-\RequirePackage{xifthen}            % fornece o uso \isempty (pacote utilizado
+%\RequirePackage{xifthen}            % fornece o uso \isempty (pacote utilizado
                                     % nesse estilo para configurações diversas)
 \RequirePackage{ifxetex}            % verifica se a compilação ocorre por xetex
 \RequirePackage{ifluatex}           % verifica se a compilação ocorre por luatex
@@ -153,24 +152,24 @@ Computacional baseado em abnTeX2]
     \iflanguage {english}
         {
             \tipotrabalho{Doctoral dissertation}
-            \newcommand{\nivelPos}{Doctorate}
+            \newcommand{\degree}{Doctorate}
             \newcommand{\tipodocurso}{Doctorate Candidate}
         }
         {
             \tipotrabalho{Tese}
-            \newcommand{\nivelPos}{Doutor}
+            \newcommand{\degree}{Doutor}
             \newcommand{\tipodocurso}{Doutorado}
         }
 }{
     \iflanguage {english}
         {
             \tipotrabalho{Master dissertation}
-            \newcommand{\nivelPos}{Master}
+            \newcommand{\degree}{Master}
             \newcommand{\tipodocurso}{Master student}
         }
         {   
             \tipotrabalho{Disserta{\c c}{\~a}o}
-            \newcommand{\nivelPos}{Mestre}
+            \newcommand{\degree}{Mestre}
             \newcommand{\tipodocurso}{Mestrado}
         }
 }
@@ -192,12 +191,12 @@ Computacional baseado em abnTeX2]
 }
 
 % Configuração do texto impresso no Preambulo
-\iflanguage {english}
+\iflanguage{english}
     { % Preambulo em ingles
-        \renewcommand{\imprimirpreambulo}{\nohyphens{\imprimirtipotrabalho~submitted to the \textit{Instituto de Ci{\^e}ncias Matem{\'a}ticas e de Computa{\c c}{\~a}o} -- ICMC-USP,\exam~in partial fulfillment of the requirements for the degree of the \nivelPos~Program in \especialidade. \tipoexemplar}}
+        \renewcommand{\imprimirpreambulo}{\nohyphens{\imprimirtipotrabalho~submitted to the \imprimirinstituicao,\exam~in partial fulfillment of the requirements for the degree of the \degree~\imprimirespecialidade. \tipoexemplar}}
     }
     { % Preambulo em português
-        \renewcommand{\imprimirpreambulo}{\nohyphens{\imprimirtipotrabalho~apresentada ao Instituto de Ci{\^e}ncias Matem{\'a}ticas e de Computa{\c c}{\~a}o -- ICMC-USP,\exam~como parte dos requisitos para obten{\c c}{\~a}o do t{\'i}tulo de \nivelPos~em \especialidade. \tipoexemplar}}
+        \renewcommand{\imprimirpreambulo}{\nohyphens{\imprimirtipotrabalho~apresentada ao \imprimirinstituicao,\exam~como parte dos requisitos para obten{\c c}{\~a}o do t{\'i}tulo de \degree~\imprimirespecialidade. \tipoexemplar}}
     }
     
 
@@ -305,6 +304,11 @@ Computacional baseado em abnTeX2]
 \newcommand{\cref}[1]{\codigorefname~\ref{#1}}      % Código X
 
 
+\newcommand{\ifequals}[3]{\ifthenelse{\equal{#1}{#2}}{#3}{}}
+\newcommand{\case}[2]{#1 #2} % Dummy, so \renewcommand has something to overwrite...
+\newenvironment{switch}[1]{\renewcommand{\case}{\ifequals{#1}}}{}
+
+
 %================================================================================
 % Configurações diversas
 %================================================================================
@@ -355,8 +359,6 @@ Computacional baseado em abnTeX2]
 
 % Nome do local do instituto
 \local{São Carlos -- SP}
-% Nome do instituto
-\instituicao{Instituto de Ciências Matemáticas e de Computação (ICMC/USP)}
 
 
 %================================================================================
@@ -465,12 +467,12 @@ Computacional baseado em abnTeX2]
 \renewcommand{\coorientadorname}{Coorientador}
 \addto\captionsenglish{% ingles
     %% adjusts names from abnTeX2
-    \renewcommand{\orientadorname}{Supervisor}
-    \renewcommand{\coorientadorname}{Co-supervisor}
+    \renewcommand{\orientadorname}{Advisor}
+    \renewcommand{\coorientadorname}{Co-advisor}
 }
 
 % Redefinição do comando de orientador
-\renewcommand{\orientador}[3][\orientadorname:]{
+\renewcommand{\orientador}[3][\orientadorname]{
 
     \StrCount{#3}{\space}[\nbmatch]%
     \StrCut[\nbmatch]{#3}{\space}\strfirstorientador\strsecondorientador
@@ -493,62 +495,134 @@ Computacional baseado em abnTeX2]
     \renewcommand{\imprimircoorientador}{\strfirstcoorientador~\strsecondcoorientador}
 }
 
-% Camando para definição do programa e sua modalidade
-\newcommand{\especialidadename}{Ciências -- Ciências de Computação e Matemática Computacional}
+% Comando para definição da especialidade do Título
+\providecommand{\imprimirespecialidade}{}
+\newcommand{\especialidade}[1]{\renewcommand{\imprimirespecialidade}{#1}}
+
+% Comando para definição do nome do Programa
+\providecommand{\imprimirprograma}{}
+\newcommand{\programa}[1]{\renewcommand{\imprimirprograma}{#1}}
+
+% Comando para definição da Universidade
+\providecommand{\imprimiruniversidade}{}
+\newcommand{\universidade}[1]{\renewcommand{\imprimiruniversidade}{#1}}
+
+% Camando para definição do programa de Pós-Graduação, Especialidade do Título e Instituição
+\newcommand{\curso}[1]{
+
+\universidade{USP}
+\instituicao{Instituto de Ciências Matemáticas e de Computação -- ICMC-USP}
 \addto\captionsenglish{% ingles
-    \renewcommand{\especialidadename}{Computer Science and Computational Mathematics}
-}
-\newcommand{\curso}[2][\especialidadename]{
-  \gdef\@programa{#2}
-  \newcommand{\especialidade}{#1}
+    \instituicao{\textit{Instituto de Ciências Matemáticas e de Computação} -- ICMC-USP}
 }
 
-% Redefinição do comando de data do ABNTex
-\renewcommand{\data}[3]{
-  \date{#1}{#2}{#3}
+% CCMC ==========================================================================
+    \ifthenelse{\equal{#1}{CCMC}}{
+        \programa{Programa de Pós-Graduação em Ciências de Computação e Matemática Computacional}
+        \especialidade{em Ciências -- Ciências de Computação e Matemática Computacional}
+        \addto\captionsenglish{% ingles
+            %\programa{Programa de Pós-Graduação em Ciências de Computação e Matemática Computacional}
+            \especialidade{Program in Computer Science and Computational Mathematics}
+        }
+    }{
+% MAT ===========================================================================
+        \ifthenelse{\equal{#1}{MAT}}{
+            \programa{Programa de Pós-Graduação em Matemática}
+            \especialidade{em Ciências -- Matemática}
+            \addto\captionsenglish{% ingles
+                %\programa{Programa de Pós-Graduação em Matemática}
+                \especialidade{Program in Mathematics}
+            }
+        }{
+% PIPGES ========================================================================     
+            \ifthenelse{\equal{#1}{PIPGES}}{
+                \universidade{USP/UFSCar}
+                \instituicao{Instituto de Ciências Matemáticas e de Computação -- ICMC-USP e ao Departamento de Estatística -- DEs-UFSCar}
+                \programa{Programa Interinstitucional de Pós-Graduação em Estatística}
+                \especialidade{em Estatística -- Programa Interinstitucional de Pós-Graduação em Estatística}
+                \addto\captionsenglish{% ingles
+                    \instituicao{\textit{Instituto de Ciências Matemáticas e de Computação} -- ICMC-USP and to the \textit{Departamento de Estatística} -- DEs-UFSCar}
+                    %\programa{Programa Interinstitucional de Pós-Graduação em Estatística}
+                    \especialidade{joint Graduate Program in Statistics DEs-UFSCar/ICMC-USP}
+                }
+            }{
+% PROFMAT =======================================================================
+                \ifthenelse{\equal{#1}{PROFMAT}}{
+                    \programa{Programa de Pós-graduação em Mestrado Profissional em Matemática em Rede Nacional}
+                    \especialidade{-- Programa de Mestrado Profissional em Matemática}
+                    \addto\captionsenglish{% ingles
+                        %\programa{Programa de Pós-graduação em Mestrado Profissional em Matemática em Rede Nacional}
+                        \especialidade{-- Programa de Mestrado Profissional em Matemática}
+                    }
+                }{
+% MECAI =========================================================================
+                    \ifthenelse{\equal{#1}{MECAI}}{
+                        \programa{Programa de Pós-graduação em Mestrado Profissional em Matemática, Estatística e Computação Aplicadas à Indústria}
+                        \especialidade{-- Programa de Mestrado Profissional em Matemática, Estatística e Computação Aplicadas à Indústria}
+                        \addto\captionsenglish{% ingles
+                            %\programa{Programa de Pós-graduação em Mestrado Profissional em Matemática, Estatística e Computação Aplicadas à Indústria}
+                            \especialidade{-- Programa de Mestrado Profissional em Matemática, Estatística e Computação Aplicadas à Indústria}
+                        }
+                    }{
+% Outros ========================================================================
+                        \programa{XXX}
+                        \especialidade{XXX}
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 % Redefinição do comando \date do Latex
-\renewcommand{\date}[3]{
-  \gdef\@day{#1}
-  \gdef\@month{#2}
-  \gdef\@year{#3}
+\renewcommand{\date}[3]{%
+  \gdef\@day{#1}%
+  \gdef\@month{#2}%
+  \gdef\@year{#3}%
 }
 
 % Define a data
-\date{\number\day}{\monthname}{\number\year}
+\date{\number\day}{\number\month}{\number\year}
+
+% Redefinição do comando de data do ABNTex
+\renewcommand{\data}[3]{%
+    \date{#1}{#2}{#3}%
+}
 
 % Nome do Mês
 \newcommand\Monthname[1][EMPTY]{%
-  \ifnum1=#1Janeiro\else
-  \ifnum2=#1Fevereiro\else
-  \ifnum3=#1Março\else
-  \ifnum4=#1Abril\else
-  \ifnum5=#1Maio\else
-  \ifnum6=#1Junho\else
-  \ifnum7=#1Julho\else
-  \ifnum8=#1Agosto\else
-  \ifnum9=#1Setembro\else
-  \ifnum10=#1Outubro\else
-  \ifnum11=#1Novembro\else
-  \ifnum12=#1Dezembro\else
-  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+    \begin{switch}{#1}%
+        \case{1}{Janeiro}%
+        \case{2}{Fevereiro}%
+        \case{3}{Março}%
+        \case{4}{Abril}%
+        \case{5}{Maio}%
+        \case{6}{Junho}%
+        \case{7}{Julho}%
+        \case{8}{Agosto}%
+        \case{9}{Setembro}%
+        \case{10}{Outubro}%
+        \case{11}{Novembro}%
+        \case{12}{Dezembro}%
+    \end{switch}%
 }
 \addto\captionsenglish{% ingles
     \renewcommand\Monthname[1][EMPTY]{%
-      \ifnum1=#1January\else
-      \ifnum2=#1February\else
-      \ifnum3=#1March\else
-      \ifnum4=#1April\else
-      \ifnum5=#1May\else
-      \ifnum6=#1June\else
-      \ifnum7=#1July\else
-      \ifnum8=#1August\else
-      \ifnum9=#1September\else
-      \ifnum10=#1October\else
-      \ifnum11=#1November\else
-      \ifnum12=#1December\else
-      \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+        \begin{switch}{#1}%
+            \case{1}{January}%
+            \case{2}{February}%
+            \case{3}{March}%
+            \case{4}{April}%
+            \case{5}{May}%
+            \case{6}{June}%
+            \case{7}{July}%
+            \case{8}{August}%
+            \case{9}{September}%
+            \case{10}{October}%
+            \case{11}{November}%
+            \case{12}{December}%
+        \end{switch}%
     }
 }
 
@@ -888,7 +962,7 @@ Computacional baseado em abnTeX2]
 	&  {\ttfamily~~~\imprimirtitulo{} / \imprimirautor; \MakeLowercase{\imprimirorientadorRotulo}~\imprimirorientador \abntex@ifnotempty{\imprimircoorientador}{; \MakeLowercase{\imprimircoorientadorRotulo}~\imprimircoorientador}. -- \imprimirlocal, \@year.} \\ 
 	& & {\ttfamily~~~\pageref{LastPage} p.}\\
 	& &\\
-	& & {\ttfamily~~~\imprimirtipotrabalho~(\tipodocurso~-- Programa de  Pós-Graduação em \@programa) -- Instituto de Ciências Matemáticas
+	& & {\ttfamily~~~\imprimirtipotrabalho~(\tipodocurso~-- \imprimirprograma) -- Instituto de Ciências Matemáticas
 e de Computação, Universidade de São Paulo, \@year.}\\
 	& & \\
 	& & \texttt{~~~\expandafter\PROCESS\expandafter{\palavraschave}I. \ABNTorientadordatabib, orient.\ II.\ \abntex@ifnotempty{\imprimircoorientador}{%
@@ -937,7 +1011,7 @@ e de Computação, Universidade de São Paulo, \@year.}\\
         \begin{resumo}[\csuse{res-title-\csuse{res-language-\thecount}}]
             \begin{otherlanguage*}{\csuse{res-language-\thecount}}
                 \begin{SingleSpace}
-                    {\MakeUppercase{\ABNTautorreferencia}}. {\textbf{\imprimirtitulo}.} \@year. \pageref{LastPage} f. \imprimirtipotrabalho~(\tipodocurso~em \especialidade) -- \imprimirinstituicao, \imprimirlocal.
+                    {\MakeUppercase{\ABNTautorreferencia}}. {\textbf{\imprimirtitulo}.} \@year. \pageref{LastPage} f. \imprimirtipotrabalho~(\tipodocurso~em \imprimirespecialidade) -- Instituto de Ciências Matemáticas e de Computação (ICMC/USP), \imprimirlocal.
                 \end{SingleSpace}
                 %\end{flushleft}
                 \vskip 20pt
@@ -1060,7 +1134,7 @@ e de Computação, Universidade de São Paulo, \@year.}\\
       \hspace{3pt} Data de Depósito:
       
       \vspace{12pt}
-      \hspace{3pt} Assinatura:
+      \hspace{3pt} Assinatura: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
       \vspace{3pt}
   }
 }}}
@@ -1110,7 +1184,7 @@ e de Computação, Universidade de São Paulo, \@year.}\\
 \vspace{\fill}
 
 {\@icmcLocalData
-USP -- São Carlos\\
+\imprimiruniversidade~-- São Carlos\\
 \iflanguage{english}
     {\Monthname[\@month]~\@year\\}
     {\Monthname[\@month] de \@year\\}

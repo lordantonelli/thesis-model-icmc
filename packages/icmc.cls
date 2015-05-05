@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2015/05/05 v1.1.6 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
+\ProvidesClass{packages/icmc}[2015/05/05 v1.1.7 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
 Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Computação]
 \RequirePackage{xifthen}
 
@@ -966,7 +966,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 e de Computação, Universidade de São Paulo, \@year.}\\
 	& & \\
 	& & \texttt{~~~\expandafter\PROCESS\expandafter{\palavraschave}I. \ABNTorientadordatabib, orient.\ II.\ \abntex@ifnotempty{\imprimircoorientador}{%
-	\ABNTcoorientadordatabib, coorient.\ III.}Título.} \\
+	\ABNTcoorientadordatabib, coorient.\ III.\ }Título.} \\
 	& & \\
 	& & \\ \cline{2-3}
 	%& & ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CDU: 681.3.01:621.39 \\ \cline{2-3}
@@ -1124,8 +1124,8 @@ e de Computação, Universidade de São Paulo, \@year.}\\
 % folha de rosto
 \renewcommand{\folhaderostocontent}{
 
-\vspace*{-13mm}
-\makebox[16cm][r]{\fbox{\parbox{7.5cm}{
+\vspace*{-13.2mm}
+\makebox[16.2cm][r]{\fbox{\parbox{7.5cm}{
 \makebox[\linewidth][c]{\@icmcSVPG{SERVIÇO DE PÓS-GRADUAÇÃO DO ICMC-USP}}
   
   {
@@ -1133,7 +1133,7 @@ e de Computação, Universidade de São Paulo, \@year.}\\
       \vspace{12pt}
       \hspace{3pt} Data de Depósito:
       
-      \vspace{12pt}
+      \vspace{10pt}
       \hspace{3pt} Assinatura: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
       \vspace{3pt}
   }
@@ -1146,19 +1146,21 @@ e de Computação, Universidade de São Paulo, \@year.}\\
 {\@icmcTitulo\imprimirtitulo}
 \end{Spacing}
 
-\vspace{3cm}
+%\vspace{3cm}
+\vspace{\fill}
+\vspace{\fill}
 
 {\@icmcAutorFolhaRosto\imprimirautor}
 
-\vspace{2cm}
-%\vspace{\fill}
-%\vspace{\fill}
+%\vspace{2cm}
+\vspace{\fill}
+\vspace{\fill}
 
 {\@icmcOrientadorLabel\imprimirorientadorRotulo:}
 {\@icmcOrientadorName\titulacaoorientador~\imprimirorientador}
 
 \abntex@ifnotempty{\imprimircoorientador}{%
-    \addvspace{3pt}
+    \addvspace{1pt}
     {\@icmcOrientadorLabel\imprimircoorientadorRotulo:}
     {\@icmcOrientadorName\titulacaocoorientador~\imprimircoorientador}
 }%
@@ -1170,7 +1172,7 @@ e de Computação, Universidade de São Paulo, \@year.}\\
 \abntex@ifnotempty{\imprimirpreambulo}{%
   \hspace{.45\textwidth}
   %\begin{minipage}{.54\textwidth}
-  \begin{minipage}{8cm}
+  \begin{minipage}{8.6cm}
     \begin{SingleSpace}
     {\@icmcPreambulo
     \imprimirpreambulo}
@@ -1189,7 +1191,7 @@ e de Computação, Universidade de São Paulo, \@year.}\\
     {\Monthname[\@month]~\@year\\}
     {\Monthname[\@month] de \@year\\}
 }
-\vspace*{1.4cm}
+\vspace*{1.2cm}
 \end{center}
 } %folha de rosto
 

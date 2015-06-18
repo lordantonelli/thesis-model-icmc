@@ -16,7 +16,7 @@
 	%spanish,			% idioma adicional para hifenização
 	%english,			% idioma adicional para hifenização
 	%brazil				% o último idioma é o principal do documento
-\documentclass[mestrado, spanish, english, brazil]{packages/icmc}
+\documentclass[mestrado, pos-defesa, spanish, english, brazil]{packages/icmc}
 
 % ---
 % Pacotes Opcionais
@@ -33,8 +33,11 @@
 % ---
 % Informações de dados para CAPA e FOLHA DE ROSTO
 % ---
-\titulo{Modelo de Teses e Dissertações em LaTeX do ICMC}
+% Tanto na capa quanto nas folhas de rosto apenas a primeira letra da primeira palavra (ou nomes próprios) devem estar em letra maiúscula, todas as demais devem ser em letra minúscula.
+\tituloPT{Modelo de teses e dissertações em LaTeX do ICMC}
+\tituloEN{Model of theses and dissertations in LaTeX of the ICMC}
 \autor[Antonelli, H. L.]{Humberto Lidio Antonelli}
+\genero{M} % Gênero do autor (M = Masculino / F = Feminino)
 \orientador[Orientadora]{Profa. Dra.}{Renata Pontin de Mattos Fortes}
 %\coorientador{Prof. Dr.}{Fulano de Tal}
 \curso{CCMC}
@@ -46,26 +49,20 @@
 % RESUMOS
 % ---
 
-% Resumo em português
+% Resumo em PORTUGUÊS
 % conter no máximo 500 palavras
-\textoresumo{
+% conter no mínimo 1 e no máximo 5 palavras-chave
+\textoresumo[brazil]{
     Este trabalho é um breve modelo  para a escrita de monografias de qualificação, dissertações e teses utilizando o ambiente \LaTeX, de acordo com as normas exigidas pelo Instituto de Ciências Matemáticas e de Computação (ICMC), da Universidade de São Paulo (USP). Para a confecção deste modelo foi utilizado a última versão (1.9.2) do pacote de classes \textit{abnTeX2} que segue as normas da Associação Brasileira de Normas Técnicas. A elaboração de uma monografia, dissertação ou tese pode ser feita sobrescrevendo o conteúdo deste modelo. 
     }{Modelo, Monografia de qualificação, Dissertação, Tese, Latex}
 
-% ---
-% resumo em inglês
-% ---
+
+% resumo em INGLÊS
+% conter no máximo 500 palavras
+% conter no mínimo 1 e no máximo 5 palavras-chave
 \textoresumo[english]{
     This paper is a brief model for writing qualification monographs, dissertations and thesis using \LaTeX environment, in accordance with the standards required by the Institute of Mathematics and Computer Sciences (ICMC), University of São Paulo (USP). For making this model, the latest version (1.9.2) \textit{abnTeX2} classes package was used. This package follow the rules of the Brazilian Association of Technical Standards. A drafting a monograph, dissertation or thesis can be done by overwriting the contents of this model.
     }{Template, Qualification monograph, Dissertation, Thesis, Latex}
-
-% ---
-% resumo em espanhol
-% ---
-\textoresumo[spanish]{
-    Este trabajo es un breve modelo para la redacción de monografías de cualificación, disertaciones y tesis utilizando el ambiente LaTeX, de acuerdo a las normas exigidas por el Instituto de Ciencias Matemáticas y Computación (ICMC) de la Universidad de São Paulo (USP). Para la confección de este modelo fue utilizada la última versión (1.9.1) del paquete de clases abnTeX2 que sigue las normas de la Asociación Brasilera de Normas Técnicas. La elaboración de una monografía, disertación o tesis puede ser realizada reescribiendo el contenido de este modelo.
-    }{Template, Monografías de cualificación, Disertacion, Tesis, Latex}
-    
     
 % ---
 % Configurações de aparência do PDF final

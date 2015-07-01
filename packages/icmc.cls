@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2015/18/06 v1.1.8 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
+\ProvidesClass{packages/icmc}[2015/01/07 v1.1.9 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
 Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Computação]
 \RequirePackage{xifthen}
 
@@ -1180,20 +1180,23 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \renewcommand{\folhaderostocontent}{
 
 \vspace*{-6.2mm}
-\makebox[14.9cm][r]{\fbox{\parbox{7.2cm}{
-\vspace{0.3cm}
-\makebox[\linewidth][c]{\@icmcSVPG{SERVIÇO DE PÓS-GRADUAÇÃO DO ICMC-USP}}
-  
-  {
-      \@icmcCarimbo
-      \vspace{12pt}
-      \hspace{2pt} Data de Depósito:
-      
-      \vspace{9pt}
-      \hspace{2pt} Assinatura: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-      \vspace{9pt}
-  }
-}}}
+\iflanguage{english}{\vspace{2.95cm}}
+    {
+        \makebox[14.9cm][r]{\fbox{\parbox{7.2cm}{
+        \vspace{0.3cm}
+        \makebox[\linewidth][c]{\@icmcSVPG{SERVIÇO DE PÓS-GRADUAÇÃO DO ICMC-USP}}
+          
+          {
+              \@icmcCarimbo
+              \vspace{12pt}
+              \hspace{2pt} Data de Depósito:
+              
+              \vspace{9pt}
+              \hspace{2pt} Assinatura: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+              \vspace{9pt}
+          }
+        }}}
+    }
 \begin{center}
 
 \vspace{0.5cm}

@@ -6,7 +6,7 @@ Na \autoref{secao:figuras} é mostrado como inserir figuras, a \autoref{secao:ta
 \section{Figuras}
 \label{secao:figuras}
 
-A inserção de figuras é realizada normalmente através do comando \comando{begin\{figure\}}. Na \autoref{fig:logomarca_usp} é exibida a logomarca da USP com o pacote \textit{graphicx}. Já a \autoref{figura:exemplo_grafo} mostra um exemplo de grafo com o pacote \textit{xy}. De acordo com as normas ABNT a lista de figuras é um elemento opcional do documento, para incluí-la é preciso inserir o comando \comando{incluidelistafiguras} antes do início do documento.
+A inserção de figuras é realizada normalmente através do comando \comando{begin\{figure\}}. Na \autoref{fig:logomarca_usp} é exibida a logomarca da USP com o pacote \textit{graphicx}. Já a \autoref{figura:exemplo_grafo} mostra um exemplo de grafo com o pacote \textit{xy}. Na \autoref{fig:animals} pode ser visto um exemplo de utilização de subfiguras. De acordo com as normas ABNT a lista de figuras é um elemento opcional do documento, para incluí-la é preciso inserir o comando \comando{incluidelistafiguras} antes do início do documento.
 
 Observe que, segundo a \citeonline[seções 4.2.1.10 e 5.8]{NBR14724:2011}, as
 ilustrações devem sempre ter numeração contínua e única em todo o documento. Além disso, deve ser incorporado ao corpo flutuante do tipo figura, além da legenda, a fonte de onde esta foi extraída. Se a figura foi confeccionada pelo próprio autor, deve se colocar "Elaborada pelo autor".
@@ -50,6 +50,25 @@ $$
 \fautor
 \end{figure}
 
+\begin{figure}[htb] 
+    \centering 
+    \caption{Pictures of animals}\label{fig:animals} 
+    \begin{subfigure}[b]{0.37\textwidth} 
+        \includegraphics[width=\textwidth]{tigre.jpg} 
+        \caption{Tigre} 
+        \label{fig:tigre} 
+    \end{subfigure} ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. %(or a blank line to force the subfigure onto a new line) 
+    \begin{subfigure}[b]{0.37\textwidth} 
+        \includegraphics[width=\textwidth]{leao.jpg} 
+        \caption{Leão} \label{fig:leao} 
+    \end{subfigure} ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. %(or a blank line to force the subfigure onto a new line) 
+    \begin{subfigure}[b]{0.37\textwidth} 
+        \includegraphics[width=\textwidth]{gato.jpg} 
+        \caption{Gato} \label{fig:gato} 
+    \end{subfigure}
+    \fautor
+\end{figure}
+
 A classe \textit{icmc} traz algum comando que auxiliam na inserção da legenda, para utilizá-los basta substituir o \comando{fonte\{\}} por um dos seguintes comando conforme necessário:
 
 \begin{description}
@@ -63,6 +82,7 @@ A classe \textit{icmc} traz algum comando que auxiliam na inserção da legenda,
  \item[\comando{fdadospesquisa}] Insere o texto \aspas{Dados da pesquisa.} como fonte da figura;
  
 \end{description}
+
 
 
 

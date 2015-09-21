@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2015/01/07 v1.1.9 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
+\ProvidesClass{packages/icmc}[2015/09/21 v1.2.0 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
 Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Computação]
 \RequirePackage{xifthen}
 
@@ -106,6 +106,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
                                     % (utilizado no título)
 \RequirePackage{graphicx}			% Inclusão de gráficos
 \RequirePackage{caption}            % Pacote para definição dos captions
+\RequirePackage{subcaption}         % Pacote para definição dos subcaptions (ambientes de subfigures)
 \RequirePackage{microtype} 		    % para melhorias de justificação
 \RequirePackage{pdfpages}           % inclusão de arquivos PDF
 \RequirePackage{ifxetex}            % verifica se a compilação ocorre por xetex
@@ -142,7 +143,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 
 % Configuração do texto do preâmbulo
 \addto\captionsenglish{% ingles
-    \renewcommand{\exam}{ in partial fulfillment of the requirements for the degree of the}
+    \renewcommand{\exam}{ in partial fulfillment of the requirements for the degree}
 }
 \addto\captionsbrazil{% portugues-brasil
     \renewcommand{\exam}{ como parte dos requisitos para obten{\c c}{\~a}o do t{\'i}tulo de}
@@ -168,7 +169,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 % Configuração do tipo de trabalho para DOUTORADO ou MESTRADO
 \ifthenelse{\boolean{opt-doutorado}}{
     \addto\captionsenglish{% ingles
-        \renewcommand{\degree}{Doctorate}
+        \renewcommand{\degree}{of the Doctorate}
         \renewcommand{\tipodocurso}{Doctorate Candidate}
         \tipotrabalho{Doctoral dissertation}
     }
@@ -179,7 +180,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     }
 }{
     \addto\captionsenglish{% ingles
-        \renewcommand{\degree}{Master}
+        \renewcommand{\degree}{of the Master}
         \renewcommand{\tipodocurso}{Master student}
         \tipotrabalho{Master dissertation}
     }
@@ -597,11 +598,13 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
                 \ifthenelse{\equal{#1}{PROFMAT}}{
                     \area{Matemática}
                     \programa{Programa de Pós-graduação em Mestrado Profissional em Matemática em Rede Nacional}
-                    \especialidade{-- Programa de Mestrado Profissional em Matemática}
+                    \especialidade{em Ciências -- Programa de Mestrado Profissional em Matemática}
+                    % Configuração do texto impresso no Preambulo
                     \addto\captionsenglish{% ingles
                         \area{Mathematics}
                         %\programa{Programa de Pós-graduação em Mestrado Profissional em Matemática em Rede Nacional}
-                        \especialidade{-- Program in Mathematics Professional Master}
+                        \especialidade{of Mathematics Professional Master’s Program}
+                        \renewcommand{\imprimirpreambulo}{\nohyphens{\imprimirtipotrabalho~submitted to the \imprimirinstituicao,\exam~\imprimirespecialidade. \textit{\tipoexemplar}}}
                     }
                 }{
 % MECAI =========================================================================
@@ -725,11 +728,13 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 }
 
 % Comando para inclusão da ficha catalográfica
+\newboolean{opt-fichacatalografica}
+\setboolean{opt-fichacatalografica}{false}
 \def\incluifichacatalografica{\@ifstar\@incluifichacatalografica\@@incluifichacatalografica}
 % Incluir um arquivo externo como ficha catalográfica
-\def\@incluifichacatalografica#1{\gdef\@incluifichacatalografica{true}\gdef\@arquivofichacatalografica{#1}}          % \incluifichacatalografica*{}{} 
+\def\@incluifichacatalografica#1{\setboolean{opt-fichacatalografica}{true}\gdef\@arquivofichacatalografica{#1}}          % \incluifichacatalografica*{}
 % Gera a ficha catalográfica automaticamente de acordo com o número da Tabela de Cutter http://www.davignon.qc.ca/cutter1.html
-\def\@@incluifichacatalografica#1{\gdef\@incluifichacatalografica{true}\gdef\@codigocutter{#1}}  % \incluifichacatalografica{}{}
+\def\@@incluifichacatalografica#1{\setboolean{opt-fichacatalografica}{true}\gdef\@codigocutter{#1}}  % \incluifichacatalografica{}
 
 
 %================================================================================
@@ -1361,17 +1366,17 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     \imprimircapa
 
     % Folha de rosto e Ficha catalográfica (se houver)
-    \@ifundefined{@incluifichacatalografica}{
-        \begin{otherlanguage}{brazil}
-            \imprimirfolhaderosto{}
-        \end{otherlanguage}
-    }{
+    \ifthenelse{\boolean{opt-fichacatalografica}}{
         % (o * indica que haverá a ficha bibliográfica)
         \begin{otherlanguage}{brazil}
             \imprimirfolhaderosto*{}
         \end{otherlanguage}
 		\inserefichacatalografica
 		\newpage
+    }{
+        \begin{otherlanguage}{brazil}
+            \imprimirfolhaderosto{}
+        \end{otherlanguage}
     }
     
     \begin{otherlanguage}{english}

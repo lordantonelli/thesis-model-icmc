@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2015/09/21 v1.2.0 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
+\ProvidesClass{packages/icmc}[2016/01/26 v1.2.1 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
 Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Computação]
 \RequirePackage{xifthen}
 
@@ -125,7 +125,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \RequirePackage{pgffor}             % Pacote utilizado para gerar as
                                     % palavras-chave da ficha catalográfica
 \RequirePackage{nomencl}            % Pacote para criação da Lista de Siglas
-\RequirePackage[translate=babel,nonumberlist,style=altlist,toc]{glossaries}	 % Pacote para gerar o glossário
+\RequirePackage[noredefwarn,translate=babel,nonumberlist,style=altlist,toc]{glossaries}	 % Pacote para gerar o glossário
 \RequirePackage[brazilian,hyperpageref]{backref} % Paginas com as citações na bibl
 \RequirePackage[alf,bibjustif,abnt-last-names=abnt,abnt-etal-text=it,abnt-repeated-title-omit=yes,abnt-emphasize=bf,abnt-etal-cite=3,abnt-etal-list=0]{abntex2cite}   % Citações padrão ABNT
 
@@ -398,7 +398,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     \renewcommand{\glossaryname}{Glossário}
 }
 % Estilo de apresentação do glossário
-\glossarystyle{list}
+\setglossarystyle{list}
 
 % Contador de definições do Glossário
 \newcounter{count_glossario}
@@ -559,10 +559,11 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 
 % CCMC ==========================================================================
     \ifthenelse{\equal{#1}{CCMC}}{
-        \area{Ciências de Computação e Matemática Computacional}
-        \programa{Programa de Pós-Graduação em Ciências de Computação e Matemática Computacional}
-        \especialidade{em Ciências -- Ciências de Computação e Matemática Computacional}
-        
+        \addto\captionsbrazil{
+            \area{Ciências de Computação e Matemática Computacional}
+            \programa{Programa de Pós-Graduação em Ciências de Computação e Matemática Computacional}
+            \especialidade{em Ciências -- Ciências de Computação e Matemática Computacional}
+        }
         \addto\captionsenglish{% ingles
             \area{Computer Science and Computational Mathematics}
             %\programa{Programa de Pós-Graduação em Ciências de Computação e Matemática Computacional}
@@ -571,9 +572,11 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     }{
 % MAT ===========================================================================
         \ifthenelse{\equal{#1}{MAT}}{
-            \area{Matemática}
-            \programa{Programa de Pós-Graduação em Matemática}
-            \especialidade{em Ciências -- Matemática}
+            \addto\captionsbrazil{
+                \area{Matemática}
+                \programa{Programa de Pós-Graduação em Matemática}
+                \especialidade{em Ciências -- Matemática}
+            }
             \addto\captionsenglish{% ingles
                 \area{Mathematics}
                 %\programa{Programa de Pós-Graduação em Matemática}
@@ -582,11 +585,13 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
         }{
 % PIPGES ========================================================================     
             \ifthenelse{\equal{#1}{PIPGES}}{
-                \universidade{USP/UFSCar}
-                \instituicao{Instituto de Ciências Matemáticas e de Computação -- ICMC-USP e ao Departamento de Estatística -- DEs-UFSCar}
-                \area{Estatística}
-                \programa{Programa Interinstitucional de Pós-Graduação em Estatística}
-                \especialidade{em Estatística -- Interinstitucional de Pós-Graduação em Estatística}
+                \addto\captionsbrazil{
+                    \universidade{USP/UFSCar}
+                    \instituicao{Instituto de Ciências Matemáticas e de Computação -- ICMC-USP e ao Departamento de Estatística -- DEs-UFSCar}
+                    \area{Estatística}
+                    \programa{Programa Interinstitucional de Pós-Graduação em Estatística}
+                    \especialidade{em Estatística -- Interinstitucional de Pós-Graduação em Estatística}
+                }
                 \addto\captionsenglish{% ingles
                     \instituicao{Instituto de Ciências Matemáticas e de Computação -- ICMC-USP and to the Departamento de Estatística -- DEs-UFSCar}
                     \area{Statistics}
@@ -596,10 +601,11 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
             }{
 % PROFMAT =======================================================================
                 \ifthenelse{\equal{#1}{PROFMAT}}{
-                    \area{Matemática}
-                    \programa{Programa de Pós-graduação em Mestrado Profissional em Matemática em Rede Nacional}
-                    \especialidade{em Ciências -- Programa de Mestrado Profissional em Matemática}
-                    % Configuração do texto impresso no Preambulo
+                    \addto\captionsbrazil{
+                        \area{Matemática}
+                        \programa{Programa de Pós-graduação em Mestrado Profissional em Matemática em Rede Nacional}
+                        \especialidade{em Ciências -- Programa de Mestrado Profissional em Matemática}
+                    }
                     \addto\captionsenglish{% ingles
                         \area{Mathematics}
                         %\programa{Programa de Pós-graduação em Mestrado Profissional em Matemática em Rede Nacional}
@@ -609,9 +615,11 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
                 }{
 % MECAI =========================================================================
                     \ifthenelse{\equal{#1}{MECAI}}{
-                        \area{Matemática, Estatística e Computação Aplicadas à Indústria}
-                        \programa{Programa de Pós-graduação em Mestrado Profissional em Matemática, Estatística e Computação Aplicadas à Indústria}
-                        \especialidade{-- Programa de Mestrado Profissional em Matemática, Estatística e Computação Aplicadas à Indústria}
+                        \addto\captionsbrazil{
+                            \area{Matemática, Estatística e Computação Aplicadas à Indústria}
+                            \programa{Programa de Pós-graduação em Mestrado Profissional em Matemática, Estatística e Computação Aplicadas à Indústria}
+                            \especialidade{-- Programa de Mestrado Profissional em Matemática, Estatística e Computação Aplicadas à Indústria}
+                        }
                         \addto\captionsenglish{% ingles
                             \area{Mathematics, Statistics and Computing Applied to Industry}
                             %\programa{Programa de Pós-graduação em Mestrado Profissional em Matemática, Estatística e Computação Aplicadas à Indústria}
@@ -645,21 +653,24 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 }
 
 % Nome do Mês
-\newcommand\Monthname[1][EMPTY]{%
-    \begin{switch}{#1}%
-        \case{1}{Janeiro}%
-        \case{2}{Fevereiro}%
-        \case{3}{Março}%
-        \case{4}{Abril}%
-        \case{5}{Maio}%
-        \case{6}{Junho}%
-        \case{7}{Julho}%
-        \case{8}{Agosto}%
-        \case{9}{Setembro}%
-        \case{10}{Outubro}%
-        \case{11}{Novembro}%
-        \case{12}{Dezembro}%
-    \end{switch}%
+\providecommand*{\Monthname}{}
+\addto\captionsbrazil{
+    \renewcommand\Monthname[1][EMPTY]{%
+        \begin{switch}{#1}%
+            \case{1}{Janeiro}%
+            \case{2}{Fevereiro}%
+            \case{3}{Março}%
+            \case{4}{Abril}%
+            \case{5}{Maio}%
+            \case{6}{Junho}%
+            \case{7}{Julho}%
+            \case{8}{Agosto}%
+            \case{9}{Setembro}%
+            \case{10}{Outubro}%
+            \case{11}{Novembro}%
+            \case{12}{Dezembro}%
+        \end{switch}%
+    }
 }
 \addto\captionsenglish{% ingles
     \renewcommand\Monthname[1][EMPTY]{%

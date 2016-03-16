@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2016/03/16 v1.2.2 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
+\ProvidesClass{packages/icmc}[2016/03/16 v1.2.3 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
 Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Computação]
 \RequirePackage{xifthen}
 

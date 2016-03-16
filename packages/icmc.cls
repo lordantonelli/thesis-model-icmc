@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2016/01/26 v1.2.1 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
+\ProvidesClass{packages/icmc}[2016/03/16 v1.2.2 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
 Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Computação]
 \RequirePackage{xifthen}
 
@@ -88,14 +88,14 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 	                    % (insere página vazia caso preciso)
 	twoside,			% para impressão em verso e anverso. Oposto a oneside
 	a4paper,			% tamanho do papel. 
-	chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
-	brazil              % Define o idioma pt-br para as opções da classe
+	chapter=TITLE		% títulos de capítulos convertidos em letras maiúsculas
 	]{abntex2}
 	
 
 %================================================================================
 % Pacotes fundamentais 
 %================================================================================
+\RequirePackage{babel}
 \RequirePackage{morewrites}         % Resolve o erro “No room for a new \write”
 \RequirePackage{cmap}				% Mapear caracteres especiais no PDF
 \RequirePackage{lmodern}			% Usa a fonte Latin Modern.
@@ -125,7 +125,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \RequirePackage{pgffor}             % Pacote utilizado para gerar as
                                     % palavras-chave da ficha catalográfica
 \RequirePackage{nomencl}            % Pacote para criação da Lista de Siglas
-\RequirePackage[noredefwarn,translate=babel,nonumberlist,style=altlist,toc]{glossaries}	 % Pacote para gerar o glossário
+\RequirePackage[noredefwarn,translate=babel,nonumberlist,style=list,toc]{glossaries}	 % Pacote para gerar o glossário
 \RequirePackage[brazilian,hyperpageref]{backref} % Paginas com as citações na bibl
 \RequirePackage[alf,bibjustif,abnt-last-names=abnt,abnt-etal-text=it,abnt-repeated-title-omit=yes,abnt-emphasize=bf,abnt-etal-cite=3,abnt-etal-list=0]{abntex2cite}   % Citações padrão ABNT
 
@@ -313,13 +313,34 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \newcommand{\case}[2]{#1 #2} % Dummy, so \renewcommand has something to overwrite...
 \newenvironment{switch}[1]{\renewcommand{\case}{\ifequals{#1}}}{}
 
+% Palavras-chave do resumo
+\newcommand{\palavraschave}{}
 
 %================================================================================
 % Configurações diversas
 %================================================================================
 
-% Codificação dos caracteres especiais no Bookmark
-\hypersetup{unicode=true}
+% ---
+% Configurações de aparência do PDF final
+% ---
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\hypersetup{
+        unicode=true, % Codificação dos caracteres especiais no Bookmark
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2/ICMC-USP},
+		pdfkeywords={\palavraschave}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      	% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
 
 % alterando o aspecto da cor azul
 \definecolor{blue}{RGB}{41,5,195}
@@ -345,6 +366,19 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     \renewcommand{\algorithmautorefname}{Algoritmo}
     \renewcommand{\sourcecodeautorefname}{Código-fonte}
 }
+
+% Corrige warning gerado pelo uso do comando \uppercase
+\ifthenelse{\boolean{ABNTEXsumario-abnt-6027-2012}}{%v
+    \renewcommand{\bibsection}{%
+        \chapter*{\bibname}
+        \bibmark
+        \ifnobibintoc\else
+        \phantomsection
+        \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\bibname}}{\bibname}}
+        \fi
+        \prebibhook
+    }
+}{}
 
 % Níveis de subseções
 \setcounter{tocdepth}{4}
@@ -395,10 +429,8 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \makeglossaries
 % Traduz o nome do glossário
 \addto\captionsbrazil{% portugues-brasil
-    \renewcommand{\glossaryname}{Glossário}
+    \renewcommand{\glossaryname}{Gloss\'ario}
 }
-% Estilo de apresentação do glossário
-\setglossarystyle{list}
 
 % Contador de definições do Glossário
 \newcounter{count_glossario}
@@ -410,6 +442,17 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
         description={#2},%
     }%
 }
+
+% Alteração no formato do nome do glossário que aparece no sumário
+\ifthenelse{\boolean{ABNTEXupperchapter}}{
+    \renewcommand{\glssettoctitle}[1]{%
+        \renewcommand{\glossarytoctitle}{%
+            \texorpdfstring{\MakeTextUppercase{\csname @glotype@#1@title\endcsname}}{\csname @glotype@#1@title\endcsname}
+        }
+    }
+}{}
+
+
 
 %================================================================================
 % Pacotes de citações
@@ -452,6 +495,15 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 % Permite comandos com @ no nome
 \makeatletter
 
+% Checagem dos dialetos da língua portuguesa (portuges, portuguese, brazilian, brazil)
+\newcommand*{\IfLangPortuguese}{%
+  % A comando pode ser otimizado, colocando nomes por ordem de frequência de utilização.
+  \iflanguage{brazil}\@firstoftwo{%
+  \iflanguage{brazilian}\@firstoftwo{%
+  \iflanguage{portuguese}\@firstoftwo{%
+  \iflanguage{portuges}\@firstoftwo\@secondoftwo}}}%
+}
+
 % Comando para definir o título em português
 \providecommand{\imprimirtituloPT}{}
 \newcommand{\tituloPT}[1]{\renewcommand{\imprimirtituloPT}{#1}}%
@@ -461,7 +513,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \newcommand{\tituloEN}[1]{\renewcommand{\imprimirtituloEN}{#1}}%
 
 \providecommand{\imprimirmaintitle}{}
-\iflanguage{english}{\renewcommand{\imprimirmaintitle}{\imprimirtituloEN}}{\renewcommand{\imprimirmaintitle}{\imprimirtituloPT}}
+\IfLangPortuguese{\renewcommand{\imprimirmaintitle}{\imprimirtituloPT}}{\renewcommand{\imprimirmaintitle}{\imprimirtituloEN}}
 
 \addto\captionsenglish{% ingles
     \titulo{\imprimirtituloEN}
@@ -694,7 +746,6 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 
 % Comando para definição dos resumos e palavras-chave
 \newcounter{numresumo}
-\newcommand{\palavraschave}{}
 \newcommand{\textoresumo}[3][\languagename]{
   \stepcounter{numresumo}%
   \csdef{res-language-\thenumresumo}{#1}
@@ -1193,10 +1244,12 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 }
 
 % folha de rosto
+\newboolean{carimbo-folha-rosto}
+\setboolean{carimbo-folha-rosto}{true}
 \renewcommand{\folhaderostocontent}{
 
 \vspace*{-6.2mm}
-\iflanguage{english}{\vspace{2.95cm}}
+\ifthenelse{\boolean{carimbo-folha-rosto}}
     {
         \makebox[14.9cm][r]{\fbox{\parbox{7.2cm}{
         \vspace{0.3cm}
@@ -1213,6 +1266,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
           }
         }}}
     }
+    {\vspace{2.95cm}}
 \begin{center}
 
 \vspace{0.5cm}
@@ -1252,9 +1306,9 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 
 {\@icmcLocalData
 \imprimiruniversidade~-- São Carlos\\
-\iflanguage{english}
-    {\Monthname[\@month]~\@year\\}
+\IfLangPortuguese
     {\Monthname[\@month] de \@year\\}
+    {\Monthname[\@month]~\@year\\}
 }
 \vspace*{1.2cm}
 \end{center}
@@ -1379,20 +1433,23 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     % Folha de rosto e Ficha catalográfica (se houver)
     \ifthenelse{\boolean{opt-fichacatalografica}}{
         % (o * indica que haverá a ficha bibliográfica)
-        \begin{otherlanguage}{brazil}
-            \imprimirfolhaderosto*{}
-        \end{otherlanguage}
+        \imprimirfolhaderosto*{}
 		\inserefichacatalografica
 		\newpage
+    }{
+        \imprimirfolhaderosto{}
+    }
+    
+    \setboolean{carimbo-folha-rosto}{false}
+    \IfLangPortuguese{
+        \begin{otherlanguage}{english}
+            \imprimirfolhaderosto{}
+        \end{otherlanguage}
     }{
         \begin{otherlanguage}{brazil}
             \imprimirfolhaderosto{}
         \end{otherlanguage}
     }
-    
-    \begin{otherlanguage}{english}
-        \imprimirfolhaderosto{}
-    \end{otherlanguage}
     
     %\renewcommand{\rmdefault}{cmr}
 
@@ -1473,7 +1530,11 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     \mainmatter
 
     % Retira espaço extra obsoleto entre as frases.
-    \frenchspacing 
+    \frenchspacing
+    
+    \IfLangPortuguese{}{
+        \bibliographystyle{packages/abntexalfenglish}
+    }
 }
 
 % Finaliza comandos com @ no nome

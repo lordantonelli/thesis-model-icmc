@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2016/03/16 v1.2.3 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
+\ProvidesClass{packages/icmc}[2016/03/17 v1.2.4 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
 Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Computação]
 \RequirePackage{xifthen}
 
@@ -128,7 +128,6 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \RequirePackage[noredefwarn,translate=babel,nonumberlist,style=list,toc]{glossaries}	 % Pacote para gerar o glossário
 \RequirePackage[brazilian,hyperpageref]{backref} % Paginas com as citações na bibl
 \RequirePackage[alf,bibjustif,abnt-last-names=abnt,abnt-etal-text=it,abnt-repeated-title-omit=yes,abnt-emphasize=bf,abnt-etal-cite=3,abnt-etal-list=0]{abntex2cite}   % Citações padrão ABNT
-
 
 
 %================================================================================
@@ -705,41 +704,40 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 }
 
 % Nome do Mês
+% Nome do Mês
 \providecommand*{\Monthname}{}
 \addto\captionsbrazil{
     \renewcommand\Monthname[1][EMPTY]{%
-        \begin{switch}{#1}%
-            \case{1}{Janeiro}%
-            \case{2}{Fevereiro}%
-            \case{3}{Março}%
-            \case{4}{Abril}%
-            \case{5}{Maio}%
-            \case{6}{Junho}%
-            \case{7}{Julho}%
-            \case{8}{Agosto}%
-            \case{9}{Setembro}%
-            \case{10}{Outubro}%
-            \case{11}{Novembro}%
-            \case{12}{Dezembro}%
-        \end{switch}%
+        \ifnum1=#1Janeiro\else
+        \ifnum2=#1Fevereiro\else
+        \ifnum3=#1Março\else
+        \ifnum4=#1Abril\else
+        \ifnum5=#1Maio\else
+        \ifnum6=#1Junho\else
+        \ifnum7=#1Julho\else
+        \ifnum8=#1Agosto\else
+        \ifnum9=#1Setembro\else
+        \ifnum10=#1Outubro\else
+        \ifnum11=#1Novembro\else
+        \ifnum12=#1Dezembro\else
+        \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
     }
 }
 \addto\captionsenglish{% ingles
     \renewcommand\Monthname[1][EMPTY]{%
-        \begin{switch}{#1}%
-            \case{1}{January}%
-            \case{2}{February}%
-            \case{3}{March}%
-            \case{4}{April}%
-            \case{5}{May}%
-            \case{6}{June}%
-            \case{7}{July}%
-            \case{8}{August}%
-            \case{9}{September}%
-            \case{10}{October}%
-            \case{11}{November}%
-            \case{12}{December}%
-        \end{switch}%
+      \ifnum1=#1January\else
+      \ifnum2=#1February\else
+      \ifnum3=#1March\else
+      \ifnum4=#1April\else
+      \ifnum5=#1May\else
+      \ifnum6=#1June\else
+      \ifnum7=#1July\else
+      \ifnum8=#1August\else
+      \ifnum9=#1September\else
+      \ifnum10=#1October\else
+      \ifnum11=#1November\else
+      \ifnum12=#1December\else
+      \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
     }
 }
 
@@ -1305,7 +1303,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 %\vspace{\fill}
 
 {\@icmcLocalData
-\imprimiruniversidade~-- São Carlos\\
+\imprimiruniversidade~-- São Carlos\\ 
 \IfLangPortuguese
     {\Monthname[\@month] de \@year\\}
     {\Monthname[\@month]~\@year\\}

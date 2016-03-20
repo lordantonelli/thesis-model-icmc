@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2016/03/17 v1.2.4 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
+\ProvidesClass{packages/icmc}[2016/03/20 v1.2.5 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
 Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Computação]
 \RequirePackage{xifthen}
 
@@ -224,6 +224,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 
 \ifxetex % Configuração da fonte para a compilação por XETEX
   \RequirePackage{fontspec}
+  \RequirePackage{xltxtra}
     \newfontfamily{\arial}[
         Ligatures=TeX, % recommended
         Mapping         = tex-text,
@@ -1415,11 +1416,10 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 % suporte a alguns sequências comuns do LaTeX, como -- para travessão
 \ifxetex
     \defaultfontfeatures{Mapping=tex-text}
-    \setmainfont[Mapping=tex-text]{Latin Modern Roman}
 \else
     \ifluatex
         \defaultfontfeatures{Mapping=tex-text}
-        \setmainfont[Ligatures=TeX]{Latin Modern Roman} 
+        \setmainfont[Ligatures=TeX, SmallCapsFont={* Caps}]{Latin Modern Roman} 
     \fi
 \fi
 

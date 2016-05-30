@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2016/03/20 v1.2.5 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
+\ProvidesClass{packages/icmc}[2016/05/30 v1.2.6 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
 Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Computação]
 \RequirePackage{xifthen}
 
@@ -802,15 +802,37 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 % Definição dos ambientes matemáticos
 %================================================================================
 
+\providecommand*{\theoremaname}{Theorem}
+\providecommand*{\proposicaoname}{Proposition}
+\providecommand*{\lemaname}{Lemma}
+\providecommand*{\corolarioname}{Corollary}
+\providecommand*{\exemploname}{Example}
+\providecommand*{\observacaoname}{Note}
+\providecommand*{\definicaoname}{Definition}
+\providecommand*{\demonstracaoname}{Demonstration}
+
+\providecommand*{\sourcecodeautorefname}{Source code}
+\addto\captionsbrazil{% portugues-brasil
+    %% ajusta nomes padroes do babel
+    \renewcommand{\theoremaname}{Teorema}
+    \renewcommand{\proposicaoname}{Proposi{\c c}{\~a}o}
+    \renewcommand{\lemaname}{Lema}
+    \renewcommand{\corolarioname}{Corol{\'a}rio}
+    \renewcommand{\exemploname}{Exemplo}
+    \renewcommand{\observacaoname}{Observa{\c c}{\~a}o}
+    \renewcommand{\definicaoname}{Defini{\c c}{\~a}o}
+    \renewcommand{\demonstracaoname}{Demonstra{\c c}{\~a}o}
+}
+
 \theoremstyle{definition}
-\newtheorem{teorema}{Teorema}
-\newtheorem{proposicao}{Proposição}
-\newtheorem{lema}{Lema}
-\newtheorem{corolario}{Corolário}
-\newtheorem{exemplo}{Exemplo}
-\newtheorem{observacao}{Observação}
-\newtheorem{definicao}{Definição}
-\newenvironment{demonstracao}{\begin{proof}[Demonstração]}{\end{proof}}
+\newtheorem{teorema}{\theoremaname}
+\newtheorem{proposicao}{\proposicaoname}
+\newtheorem{lema}{\lemaname}
+\newtheorem{corolario}{\corolarioname}
+\newtheorem{exemplo}{\exemploname}
+\newtheorem{observacao}{\observacaoname}
+\newtheorem{definicao}{\definicaoname}
+\newenvironment{demonstracao}{\begin{proof}[\demonstracaoname]}{\end{proof}}
 
 %================================================================================
 % Criação dos Ambientes Flutuantes para Quadros, Algoritmos e Cógidos

@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2016/05/30 v1.2.6 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
+\ProvidesClass{packages/icmc}[2016/06/08 v1.2.7 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
 Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Computação]
 \RequirePackage{xifthen}
 
@@ -645,6 +645,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
                     \especialidade{em Estatística -- Interinstitucional de Pós-Graduação em Estatística}
                 }
                 \addto\captionsenglish{% ingles
+                    \universidade{USP/UFSCar}
                     \instituicao{Instituto de Ciências Matemáticas e de Computação -- ICMC-USP and to the Departamento de Estatística -- DEs-UFSCar}
                     \area{Statistics}
                     %\programa{Programa Interinstitucional de Pós-Graduação em Estatística}

@@ -28,7 +28,7 @@ refere. \cite[seções 5.8]{NBR14724:2011}
  \caption{Logomarca da USP}
  \label{fig:logomarca_usp}
  \centering
- \includegraphics[scale=0.3]{usp-logo.pdf}
+ \includegraphics[scale=0.23]{usp-logo.pdf}
  \fdireta{usp:logo}
 \end{figure}
 
@@ -52,17 +52,17 @@ $$
 
 \begin{figure}[htb] 
     \centering 
-    \caption{Pictures of animals}\label{fig:animals} 
-    \begin{subfigure}[b]{0.37\textwidth} 
+    \caption{Figuras de animaisPictures of animals}\label{fig:animals} 
+    \begin{subfigure}[b]{0.317\textwidth} 
         \includegraphics[width=\textwidth]{tigre.jpg} 
         \caption{Tigre} 
         \label{fig:tigre} 
     \end{subfigure} ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. %(or a blank line to force the subfigure onto a new line) 
-    \begin{subfigure}[b]{0.37\textwidth} 
+    \begin{subfigure}[b]{0.317\textwidth} 
         \includegraphics[width=\textwidth]{leao.jpg} 
         \caption{Leão} \label{fig:leao} 
     \end{subfigure} ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. %(or a blank line to force the subfigure onto a new line) 
-    \begin{subfigure}[b]{0.37\textwidth} 
+    \begin{subfigure}[b]{0.317\textwidth} 
         \includegraphics[width=\textwidth]{gato.jpg} 
         \caption{Gato} \label{fig:gato} 
     \end{subfigure}
@@ -112,7 +112,7 @@ Açucar       & Kg      & 3,00        & 100        & 300,00      \\ \hline
 \IBGEtab{%
   \caption{População dos países da América do Sul} \label{tabela:populacao_america_sul}
 }{%
-\begin{tabular}{r|p{3cm}|r}        
+\begin{tabular}{r|p{63cm}|r}        
 \toprule
 Código  & País            & População   \\ \midrule \midrule
 1       & Brasil          & ~~~~~~191.480.630 \\ \midrule 
@@ -151,22 +151,38 @@ Geany      & Sim             & Não                   \\ \hline
 \section{Algoritmos e Códigos}
 \label{secao:algoritmos_e_codigos}
 
-Além dos corpos flutuantes convencionais para inserir figuras (\comando{begin\{figure\}}) e tabelas (\comando{begin\{table\}}), a classe \textit{icmc} possui mais dois tipos de corpos flutuantes um para algoritmos (\comando{begin\{algoritmo\}}) e outro para códigos-fonte (\comando{begin\{codigo\}}). A utilização de um ou de outro fica a critério do usuário. Como exemplo temos o \autoref{algoritmo:mdc1} que calcula o máximo divisor comum entre dois números e os Códigos-fonte \ref{codigo:notas_alunos} e \ref{codigo:metodo_leitura} que são uma consulta na \sigla{SQL}{\textit{Structured Query Language}} e uma sobrotina em \textit{Java}.
+Além dos corpos flutuantes convencionais para inserir figuras (\comando{begin\{figure\}}) e tabelas (\comando{begin\{table\}}), a classe \textit{icmc} possui mais dois tipos de corpos flutuantes um para algoritmos (\comando{begin\{algoritmo\}}) e outro para códigos-fonte (\comando{begin\{codigo\}}). A utilização de um ou de outro fica a critério do usuário. Como exemplo temos o \autoref{algoritmo:euclidalgoritmo:mdc1} que calcula o máximo divisor comum entre dois números e os Códigos-fonte \ref{codigo:notas_alunos} e \ref{codigo:metodo_leitura} que são uma consulta na \sigla{SQL}{\textit{Structured Query Language}} e uma sobrotina em \textit{Java}.
+
 
 \begin{algoritmo}
-\caption{Algoritmo para cálculo de máximo divisor comum MDC($n_1$,$n_2$)}
-\label{algoritmo:mdc1}
-
- \KwIn{Dois números inteiros ($n_1, n_2$)}
- \If(\tcp*[f]{Garante que o maior número seja $n_1$}){$n_2 > n_1$}
-   {troca valores de $n_1$ e $n_2$}
- \Repeat{$r > 0$}{
-    $r \leftarrow$ resto da divisão de $n_1$ por $n_2$
-    $n_1 \leftarrow n_2$
-    $n_2 \leftarrow r$
- }
- \Return $n_1$
+\caption{Algoritmo de EuclidesEuclid’s algorithm}\label{euclid}\label{algoritmo:euclidalgoritmo:mdc1}
+\begin{algorithmic}[1]
+\Procedure{Euclid}{$a,b$}\Comment{O maior divisor comum de \textit{a} e \textit{b}The g.c.d. of a and b}
+\State $r\gets a\bmod b$
+\While{$r\not=0$}\Comment{Tem-se a resposta seWe have the answer if \textit{r}r éis 0}
+\State $a\gets b$
+\State $b\gets r$
+\State $r\gets a\bmod b$
+\EndWhile\label{euclidendwhile}
+\State \Return\textbf{return} $b$\Comment{O maior divisor comum éThe gcd is \textit{b}b}
+\EndProcedure
+\end{algorithmic}
 \end{algoritmo}
+
+%\begin{algoritmo}
+%\caption{Algoritmo para cálculo de máximo divisor comum MDC($n_1$,$n_2$)}
+%\label{algoritmo:mdc1}
+%
+% \KwIn{Dois números inteiros ($n_1, n_2$)}
+% \If(\tcp*[f]{Garante que o maior número seja $n_1$}){$n_2 > n_1$}
+%   {troca valores de $n_1$ e $n_2$}
+% \Repeat{$r > 0$}{
+%    $r \leftarrow$ resto da divisão de $n_1$ por $n_2$
+%    $n_1 \leftarrow n_2$
+%    $n_2 \leftarrow r$
+% }
+% \Return $n_1$
+%\end{algoritmo}
 
 \begin{codigo}[caption = {Consulta SQL}, label={codigo:notas_alunos},language=SQL, breaklines=true]
 SELECT a.nome_aluno AS aluno,
@@ -192,7 +208,7 @@ public static String Leitura(){
 }
 \end{codigo}
 
-Existem diversos outros pacotes disponíveis para escrever algoritmos e códigos. Nos exemplos anteriormente foram utilizados o pacote \textit{algorithm} para definição do ambiente algoritmo e \textit{listings} para a definição do ambiente de código-fonte. O pacote \textit{algorithm} é usado para escrever algoritmos em alto nível \cite{janos:2005:algpseudocode}. Já o pacote \textit{listings} serve para escrever os códigos em diversas linguagens de programação \cite{moses:2006:listings}.
+Existem diversos outros pacotes disponíveis para escrever algoritmos e códigos. Nos exemplos anteriormente foram utilizados o pacote \textit{algorithmicxalgorithm} para definição do ambiente algoritmo e \textit{listings} para a definição do ambiente de código-fonte. O pacote \textit{algorithmicxalgorithm} é usado para escrever algoritmos em alto nível \cite{janos:2005:algpseudocode}. Já o pacote \textit{listings} serve para escrever os códigos em diversas linguagens de programação \cite{moses:2006:listings}.
 
 Caso sejam utilizados os ambientes de algoritmos e código podem ser incluídos os comandos \comando{incluidelistaalgoritmos} e \comando{incluidelistacodigos} antes do \comando{begin\{document\}} para que a lista de algoritmos e a lista de código sejam criadas.
 
@@ -247,6 +263,9 @@ O classe \textit{icmc} permite a criação de outros ambientes, além dos citado
     \newcommand{\listofgraficosname}{List of graphs}
 }
 
+\newalgoritmo:euclid{grafico}{htbp}{logr}[chapter]
+\floatname{grafico}{\graficoname}
+\restylefloat{grafico}
 \newfloat[chapter]{grafico}{logr}{\graficoname}
 \newlistof{listofgraficos}{logr}{\listgraficoname}
 \newlistentry{grafico}{logr}{0}

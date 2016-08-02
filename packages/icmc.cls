@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2016/06/08 v1.2.7 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
+\ProvidesClass{packages/icmc}[2016/08/02 v1.2.8 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
 Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Computação]
 \RequirePackage{xifthen}
 
@@ -120,14 +120,14 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \RequirePackage{mathptmx}           % Usando times para equações, opcional
 \RequirePackage{listings}           % Pacote para formatação de diversos 
                                     % códigos fontes
-\RequirePackage[linesnumbered, ruled, vlined]{algorithm2e}      % Pacote para
-                                    % escrever algoritmos em pseudo-código
+\RequirePackage{algorithm, algpseudocode}  % Pacote para escrever algoritmos em pseudo-código
 \RequirePackage{pgffor}             % Pacote utilizado para gerar as
                                     % palavras-chave da ficha catalográfica
 \RequirePackage{nomencl}            % Pacote para criação da Lista de Siglas
 \RequirePackage[noredefwarn,translate=babel,nonumberlist,style=list,toc]{glossaries}	 % Pacote para gerar o glossário
 \RequirePackage[brazilian,hyperpageref]{backref} % Paginas com as citações na bibl
 \RequirePackage[alf,bibjustif,abnt-last-names=abnt,abnt-etal-text=it,abnt-repeated-title-omit=yes,abnt-emphasize=bf,abnt-etal-cite=3,abnt-etal-list=0]{abntex2cite}   % Citações padrão ABNT
+\RequirePackage{float}              % Pacote para criação de novos ambientes
 
 
 %================================================================================
@@ -847,9 +847,9 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \newcommand{\algoritmoname}{Algoritmo}
 \newcommand{\algoritmorefname}{Algoritmo}
 
-\newcommand{\listcodigoname}{Lista de códigos-fonte}
-\newcommand{\codigoname}{Código-fonte}
-\newcommand{\codigorefname}{Código-fonte}
+\newcommand{\listcodigoname}{Lista de c{\'o}digos-fonte}
+\newcommand{\codigoname}{C{\'o}digo-fonte}
+\newcommand{\codigorefname}{C{\'o}digo-fonte}
 
 \addto\captionsenglish{% ingles
     %% adjusts names from abnTeX2
@@ -868,8 +868,10 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 % ---
 % Formatação de ambiente Quadro
 % ---
-
-\newfloat[chapter]{quadro}{loq}{\quadroname}
+\newfloat{quadro}{htbp}{loq}[chapter]
+\floatname{quadro}{\quadroname}
+\floatstyle{plaintop}
+\restylefloat{quadro}
 \newlistof{listofquadros}{loq}{\listquadroname}
 \newlistentry{quadro}{loq}{0}
 \renewcommand{\thequadro}{\thechapter.\@arabic\c@quadro}
@@ -878,20 +880,23 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \renewcommand{\cftquadroname}{\quadroname\space}
 \renewcommand*{\cftquadroaftersnum}{\hfill\textendash\hfill}
 
+
+
 % ---
 % Formatação de ambiente Algoritmo
 % ---
 
 % Altera o rótulo a ser usando no elemento pré-textual "Lista de algoritmos"
-\renewcommand{\listalgorithmcfname}{\listalgoritmoname}%
+\renewcommand{\listalgorithmname}{\listalgoritmoname}%
 % Altera o nome padrão do rótulo
-\renewcommand{\algorithmcfname}{\algoritmoname}%
+%\renewcommand{\algorithmname}{\algoritmoname}%
+\floatname{algorithm}{\algoritmoname}
 
 % Configura a ``Lista de algoritmos'' conforme as regras da ABNT (para abnTeX2)
 \begingroup
 \let\newcounter\@gobble\let\setcounter\@gobbletwo
   \globaldefs\@ne \let\c@loldepth\@ne
-  \newlistof{algorithmt}{loa}{\listalgorithmcfname}
+  \newlistof{algorithmt}{loa}{\listalgorithmname}
   \newlistentry{algorithmt}{loa}{0}
 \endgroup
 
@@ -908,6 +913,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \newenvironment{algoritmo}[1][htb]{
     \begin{algorithm}[#1]%
     }{\end{algorithm}}
+
 
 
 % ---
@@ -936,27 +942,71 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
    \renewcommand{\numberline}{\lstlistingname\space\oldnumberline}%
    \oldlstlistoflistings%
    \endgroup}
+   
+\def\lst@numbersymbol{}
+\lst@Key{numbersymbol}{}{\def\lst@numbersymbol{#1}}
+\lst@Key{numbers}{none}{%
+    \let\lst@PlaceNumber\@empty
+    \lstKV@SwitchCases{#1}%
+    {none&\\%
+     left&\def\lst@PlaceNumber{\llap{\normalfont
+                \lst@numberstyle{\thelstnumber\lst@numbersymbol}\kern\lst@numbersep}}\\%
+     right&\def\lst@PlaceNumber{\rlap{\normalfont
+                \kern\linewidth \kern\lst@numbersep
+                \lst@numberstyle{\lst@numbersymbol\thelstnumber}}}%
+    }{\PackageError{Listings}{Numbers #1 unknown}\@ehc}
+}
 
 % Cria um ambiente "codigo" estilizando o ambiente "lstlisting" 
 \newcounter{countcodigo}
 \setcounter{countcodigo}{1}
 \lstnewenvironment{codigo}[1][]
   {\lstset{basicstyle=\ttfamily\ABNTEXfontereduzida,
-           numbers=left, 
-           numbersep=5pt,
-           numberstyle=\tiny\bfseries,
-            xleftmargin=20pt,
+            numbers=left, 
+            numbersep=6pt,
+            numberstyle=\ABNTEXfontereduzida,
             frame=tb,
             framerule=0.8pt,
-            xleftmargin=17pt,
-            framexleftmargin=17pt,
+            xleftmargin=20.25pt,
+            framexleftmargin=21.25pt,
             framexbottommargin=5pt,
             framextopmargin=5pt,
-           abovecaptionskip=10pt,
-           #1
+            abovecaptionskip=10pt,
+            numbersymbol=$:$,
+            #1
           }
 }
 {\setcounter{countcodigo}{\value{lstnumber}}}
+
+\addto\captionsbrazil{% portugues-brasil
+% Declaracoes em Português
+\algrenewcommand\algorithmicend{\textbf{fim}}
+\algrenewcommand\algorithmicdo{\textbf{fa{\c c}a}}
+\algrenewcommand\algorithmicwhile{\textbf{enquanto}}
+\algrenewcommand\algorithmicfor{\textbf{para}}
+\algrenewcommand\algorithmicif{\textbf{se}}
+\algrenewcommand\algorithmicthen{\textbf{ent{\~a}o}}
+\algrenewcommand\algorithmicelse{\textbf{sen{\~a}o}}
+\algrenewcommand\algorithmicreturn{\textbf{retorna}}
+\algrenewcommand\algorithmicfunction{\textbf{fun{\c c}{\~a}o}}
+\algrenewcommand\algorithmicforall{\textbf{para todo}}
+\algrenewcommand\algorithmicloop{\textbf{la{\c c}o}}
+\algrenewcommand\algorithmicrepeat{\textbf{repita}}
+\algrenewcommand\algorithmicuntil{\textbf{at{\'e}}}
+\algrenewcommand\algorithmicprocedure{\textbf{procedimento}}
+\algrenewcommand\algorithmicrequire{\textbf{Requer:}}
+\algrenewcommand\algorithmicensure{\textbf{Assegure:}}
+}
+% Rearranja os finais de cada estrutura
+\algrenewtext{EndWhile}{\algorithmicend\ \algorithmicwhile}
+\algrenewtext{EndFor}{\algorithmicend\ \algorithmicfor}
+\algrenewtext{EndIf}{\algorithmicend\ \algorithmicif}
+\algrenewtext{EndFunction}{\algorithmicend\ \algorithmicfunction}
+% O comando For, a seguir, retorna 'para #1 -- #2 até #3 faça'
+\algnewcommand\algorithmicto{\textbf{at{\'e}}}
+\algrenewtext{For}[3]%
+{\algorithmicfor\ #1 $\gets$ #2 \algorithmicto\ #3 \algorithmicdo}
+
 
 %================================================================================
 % Comando para configurar os captions no documento
@@ -964,8 +1014,9 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \DeclareCaptionFont{ABNTEXfontereduzida}{\ABNTEXfontereduzida}
 \captionsetup{position=above, labelfont=ABNTEXfontereduzida, font=ABNTEXfontereduzida}
 
-\DeclareCaptionFormat{listing}{\hrule height.8pt depth0pt ~~~#1#2#3}
-\captionsetup[lstlisting]{format=listing,singlelinecheck=false, margin=0pt,labelsep=colon,labelfont=bf, font=normalsize}
+\DeclareCaptionFormat{listing}{\hrule height.8pt depth0pt #1#2#3}
+\captionsetup[lstlisting]{format=listing,singlelinecheck=false, margin=0pt,labelsep=endash,labelfont=bf, font=normalsize}
+\captionsetup[algorithm]{singlelinecheck=false, margin=0pt,labelsep=endash,labelfont=bf, font=normalsize}
 
 %================================================================================
 % Dedicatória

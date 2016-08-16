@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2016/08/02 v1.2.8 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
+\ProvidesClass{packages/icmc}[2016/08/16 v1.2.9 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
 Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Computação]
 \RequirePackage{xifthen}
 
@@ -471,7 +471,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     	\or
     		Citado na p{\'a}gina #2.%
     	\else
-    		Citado #1 vezes nas p{\'a}ginas #2.%
+    		Citado #3 vezes nas p{\'a}ginas #2.%
     	\fi}%
 }
 \addto\captionsenglish{% ingles
@@ -481,9 +481,9 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     	\ifcase #1 %
     		No citation.%
     	\or
-    		Cited on page #2.%
+    		One citation on page #2.%
     	\else
-    		Cited #1 times on pages #2.%
+    		#3 citations on pages #2.%
     	\fi}%
 }
 % ---
@@ -1190,7 +1190,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \csdef{res-title-french}{Résumé}
 \csdef{res-title-spanish}{Resumen}
 % Labels: Palavras-chave
-\csdef{res-label-keywords-english}{Key-words}
+\csdef{res-label-keywords-english}{Keywords}
 \csdef{res-label-keywords-brazil}{Palavras-chave}
 \csdef{res-label-keywords-french}{Mots-clés}
 \csdef{res-label-keywords-spanish}{Palabras clave}

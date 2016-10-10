@@ -154,21 +154,6 @@ Geany      & Sim             & Não                   \\ \hline
 Além dos corpos flutuantes convencionais para inserir figuras (\comando{begin\{figure\}}) e tabelas (\comando{begin\{table\}}), a classe \textit{icmc} possui mais dois tipos de corpos flutuantes um para algoritmos (\comando{begin\{algoritmo\}}) e outro para códigos-fonte (\comando{begin\{codigo\}}). A utilização de um ou de outro fica a critério do usuário. Como exemplo temos o \autoref{algoritmo:euclidalgoritmo:mdc1} que calcula o máximo divisor comum entre dois números e os Códigos-fonte \ref{codigo:notas_alunos} e \ref{codigo:metodo_leitura} que são uma consulta na \sigla{SQL}{\textit{Structured Query Language}} e uma sobrotina em \textit{Java}.
 
 
-\begin{algoritmo}
-\caption{Algoritmo de EuclidesEuclid’s algorithm}\label{euclid}\label{algoritmo:euclidalgoritmo:mdc1}
-\begin{algorithmic}[1]
-\Procedure{Euclid}{$a,b$}\Comment{O maior divisor comum de \textit{a} e \textit{b}The g.c.d. of a and b}
-\State $r\gets a\bmod b$
-\While{$r\not=0$}\Comment{Tem-se a resposta seWe have the answer if \textit{r}r éis 0}
-\State $a\gets b$
-\State $b\gets r$
-\State $r\gets a\bmod b$
-\EndWhile\label{euclidendwhile}
-\State \Return\textbf{return} $b$\Comment{O maior divisor comum éThe gcd is \textit{b}b}
-\EndProcedure
-\end{algorithmic}
-\end{algoritmo}
-
 %\begin{algoritmo}
 %\caption{Algoritmo para cálculo de máximo divisor comum MDC($n_1$,$n_2$)}
 %\label{algoritmo:mdc1}
@@ -207,6 +192,21 @@ public static String Leitura(){
     }
 }
 \end{codigo}
+
+\begin{algoritmo}
+\caption{Algoritmo de Euclides}\label{algoritmo:euclidalgoritmo:mdc1}
+\begin{algorithmic}[1]
+\Procedure{Euclid}{$a,b$}\Comment{O maior divisor comum de \textit{a} e \textit{b}}
+\State $r\gets a\bmod b$
+\While{$r\not=0$}\Comment{Tem-se a resposta se \textit{r} é 0}
+\State $a\gets b$
+\State $b\gets r$
+\State $r\gets a\bmod b$
+\EndWhile\label{euclidendwhile}
+\State \Return\textbf{return} $b$\Comment{O maior divisor comum é \textit{b}}
+\EndProcedure
+\end{algorithmic}
+\end{algoritmo}
 
 Existem diversos outros pacotes disponíveis para escrever algoritmos e códigos. Nos exemplos anteriormente foram utilizados o pacote \textit{algorithmicxalgorithm} para definição do ambiente algoritmo e \textit{listings} para a definição do ambiente de código-fonte. O pacote \textit{algorithmicxalgorithm} é usado para escrever algoritmos em alto nível \cite{janos:2005:algpseudocode}. Já o pacote \textit{listings} serve para escrever os códigos em diversas linguagens de programação \cite{moses:2006:listings}.
 
@@ -275,7 +275,7 @@ O classe \textit{icmc} permite a criação de outros ambientes, além dos citado
 \setfloatadjustment{grafico}{\centering}
 \renewcommand{\cftgraficoname}{\graficoname\space}
 \renewcommand*{\cftgraficoaftersnum}{\hfill\textendash\hfill}
-% ----------------------------------------------------------------
+% -----------------------------------------------------------
 
 \makeatother
 \end{codigo}

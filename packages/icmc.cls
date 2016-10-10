@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2016/08/16 v1.2.9 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
+\ProvidesClass{packages/icmc}[2016/10/10 v1.3.0 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
 Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Computação]
 \RequirePackage{xifthen}
 
@@ -126,8 +126,9 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \RequirePackage{nomencl}            % Pacote para criação da Lista de Siglas
 \RequirePackage[noredefwarn,translate=babel,nonumberlist,style=list,toc]{glossaries}	 % Pacote para gerar o glossário
 \RequirePackage[brazilian,hyperpageref]{backref} % Paginas com as citações na bibl
-\RequirePackage[alf,bibjustif,abnt-last-names=abnt,abnt-etal-text=it,abnt-repeated-title-omit=yes,abnt-emphasize=bf,abnt-etal-cite=3,abnt-etal-list=0]{abntex2cite}   % Citações padrão ABNT
 \RequirePackage{float}              % Pacote para criação de novos ambientes
+%\usepackage[backend=biber,style=abnt,indent, bftitles,hyperref,backref]{biblatex}  % Citações padrão ABNT
+\RequirePackage[alf,bibjustif,abnt-etal-text=it,abnt-repeated-author-omit=yes,abnt-emphasize=bf,abnt-etal-cite=3,abnt-etal-list=0]{abntex2cite}   % Citações padrão ABNT
 
 
 %================================================================================
@@ -408,7 +409,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 % Tamanho da Label da sigla
 \setlength{\nomlabelwidth}{0.15\hsize} 
 % Separa as abreviaturas de suas definições com pontos (....)
-\renewcommand{\nomlabel}[1]{#1 \dotfill}
+\renewcommand{\nomlabel}[1]{#1 \hfill}
 \setlength{\nomitemsep}{-.05in} 
 % Comando necessário para a criação da lista de abreviaturas
 \makenomenclature
@@ -471,7 +472,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     	\or
     		Citado na p{\'a}gina #2.%
     	\else
-    		Citado #3 vezes nas p{\'a}ginas #2.%
+    		Citado nas p{\'a}ginas #2.%
     	\fi}%
 }
 \addto\captionsenglish{% ingles
@@ -481,9 +482,9 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     	\ifcase #1 %
     		No citation.%
     	\or
-    		One citation on page #2.%
+    		Citation on page #2.%
     	\else
-    		#3 citations on pages #2.%
+    		Citations on pages #2.%
     	\fi}%
 }
 % ---
@@ -519,7 +520,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     \titulo{\imprimirtituloEN}
 }
 \addto\captionsbrazil{% portugues-brasil
-   \titulo{\imprimirtituloPT}
+    \titulo{\imprimirtituloPT}
 }
 
 
@@ -915,7 +916,6 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     }{\end{algorithm}}
 
 
-
 % ---
 % Formatação de código-fonte
 % ---
@@ -1011,6 +1011,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 %================================================================================
 % Comando para configurar os captions no documento
 %================================================================================
+\renewcommand{\ABNTEXfontereduzida}{\small} % Fonte reduzida para 11pt, conforme recomendação da USP
 \DeclareCaptionFont{ABNTEXfontereduzida}{\ABNTEXfontereduzida}
 \captionsetup{position=above, labelfont=ABNTEXfontereduzida, font=ABNTEXfontereduzida}
 
@@ -1152,7 +1153,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 	& & \\
 	& & {\fontsize{10.3pt}{1em}\selectfont\ttfamily\ABNTautordatabib} \\ 
 	& {\fontsize{10.3pt}{1em}\selectfont\ttfamily \MakeUppercase{\firstletterauthor}\@codigocutter}\MakeLowercase{\firstlettertitle}%
-	& {\fontsize{10.3pt}{1em}\selectfont\ttfamily~~~\imprimirmaintitle\ / \imprimirautor; \MakeLowercase{\imprimirorientadorRotulo} \imprimirorientador \abntex@ifnotempty{\imprimircoorientador}{; \MakeLowercase{\imprimircoorientadorRotulo}~\imprimircoorientador}. -- \imprimirlocal, \@year.} \\ 
+	& {\fontsize{10.3pt}{1em}\selectfont\ttfamily~~~\imprimirtitulo\ / \imprimirautor; \MakeLowercase{\imprimirorientadorRotulo} \imprimirorientador \abntex@ifnotempty{\imprimircoorientador}{; \MakeLowercase{\imprimircoorientadorRotulo}~\imprimircoorientador}. -- \imprimirlocal, \@year.} \\ 
 	& & {\fontsize{10.3pt}{1em}\selectfont\ttfamily~~~\pageref{LastPage} p.}\\
 	& &\\
 	& & {\fontsize{10.3pt}{1em}\selectfont\ttfamily~~~\imprimirtipotrabalho~(\tipodocurso~- \imprimirprograma) -- Instituto de Ciências Matemáticas e de Computação, Universidade de São Paulo, \@year.}\\
@@ -1180,6 +1181,16 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 % Resumo
 %================================================================================
 
+\newcommand{\xselectlanguage}[1]{\begingroup\edef\x{\endgroup\noexpand\selectlanguage{#1}}\x}
+\newenvironment{xotherlanguage}[1]{%
+  \begingroup%
+  \edef\temp{\endgroup\noexpand\otherlanguage{#1}}%
+  \temp%
+  \ignorespaces%
+}{\endotherlanguage\ignorespacesafterend}
+
+\providecommand{\imprimirlanguage}{brazil}
+
 % Criação do resumo e palavras chaves no documento
 \newcommand{\insereresumo}
 {
@@ -1195,31 +1206,38 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \csdef{res-label-keywords-french}{Mots-clés}
 \csdef{res-label-keywords-spanish}{Palabras clave}
 
+
   \setcounter{count}{0}
   \whileboolexpr
     { test {\ifnumcomp{\value{count}}{<}{\thenumresumo}} }%
     {
         \stepcounter{count}
         
+        \renewcommand{\imprimirlanguage}{\csuse{res-language-\thecount}}
+        
         \if@openright\cleardoublepage\else\clearpage\fi
         \phantomsection
         \begin{resumo}[\csuse{res-title-\csuse{res-language-\thecount}}]
-            \begin{otherlanguage*}{\csuse{res-language-\thecount}}
                 \begin{SingleSpace}
-                    {\MakeUppercase{\ABNTautorreferencia}}. {\textbf{\imprimirtitulo}.} \@year. \pageref{LastPage} f. \imprimirtipotrabalho~(\tipodocurso~\imprimirespecialidade) -- Instituto de Ciências Matemáticas e de Computação (ICMC/USP), \imprimirlocal.
+                    \IfEndWith{\ABNTautorreferencia}{.}{\MakeUppercase{\ABNTautorreferencia}}{\MakeUppercase{\ABNTautorreferencia}.}
+                    \foreignlanguage{\imprimirlanguage}{%
+                        \textbf{\IfLangPortuguese{\imprimirtituloPT}{\imprimirtituloEN}}. %
+                    }%
+                    \@year. \pageref{LastPage} p. \imprimirtipotrabalho~(\tipodocurso~\imprimirespecialidade) -- Instituto de Ciências Matemáticas e de Computação, Universidade de S\~ao Paulo, \imprimirlocal, \@year.
                 \end{SingleSpace}
-                %\end{flushleft}
+                
                 \vskip 20pt
-                \csuse{res-text-\thecount}
-                
-                \vspace{\onelineskip}
-                
-                \noindent
-                \textbf{\csuse{res-label-keywords-\csuse{res-language-\thecount}}:}
-                \@tempswafalse
-                    \@for\next:=\csuse{res-keywords-\thecount}\do
-                    {\if@tempswa,~\else\@tempswatrue\fi\next}.
-            \end{otherlanguage*}
+                \begin{xotherlanguage}{\imprimirlanguage}
+                    \csuse{res-text-\thecount}
+                    
+                    \vspace{\onelineskip}
+                    
+                    \noindent
+                    \textbf{\csuse{res-label-keywords-\csuse{res-language-\thecount}}:}
+                    \@tempswafalse
+                        \@for\next:=\csuse{res-keywords-\thecount}\do
+                        {\if@tempswa,~\else\@tempswatrue\fi\next}.
+                \end{xotherlanguage}
         \end{resumo}
     }
 }
@@ -1486,6 +1504,9 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 % Configurações ao iniciar documento
 %================================================================================
 \AtBeginDocument{
+
+% Centraliza o caption das tabelas do IBGE, conforme recomendação da USP
+\renewcommand{\configurecaptions}{\captionstyle[singlelinecheck=on]{}}
 
 % suporte a alguns sequências comuns do LaTeX, como -- para travessão
 \ifxetex

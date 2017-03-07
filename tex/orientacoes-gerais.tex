@@ -62,15 +62,13 @@ Para usar hifenizações de diferentes idiomas, inclua nas opções do documento
     ]{icmc}
 \end{verbatim}
 
-O idioma português-brasileiro (\texttt{brazil}) é incluído automaticamente pela classe \textsf{abntex2}. Porém, mesmo assim a opção \texttt{brazil} deve ser informada para que todos os pacotes reconheçam o idioma. Vale ressaltar que \textbf{a última opção de idioma é a utilizada por padrão} no documento. Desse modo, caso deseje escrever um texto em inglês que tenha citações em português e em francês, você deveria usar o preâmbulo como abaixo:
+Os idiomas português-brasileiro (\texttt{brazil}) e inglês (\texttt{english}) são incluídos automaticamente pela classe \textsf{icmc}. Caso deseje utilizar outros idiomas no corpo do documento, como em citações em francês, você deve usar o preâmbulo como abaixo:
 
 \begin{verbatim}
     \documentclass[
         doutorado,
         pre-defesa,
-        french,
-        brazil,
-        english
+        french
     ]{icmc}
 \end{verbatim}
 

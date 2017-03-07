@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2016/10/10 v1.3.0 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
+\ProvidesClass{packages/icmc}[2017/03/07 v1.3.1 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
 Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Computação]
 \RequirePackage{xifthen}
 
@@ -77,6 +77,14 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
   \PassOptionsToClass{\CurrentOption}{abntex2}%
 }
 \ProcessOptions\relax
+
+%
+% Repassa os três idiomas principais para o pacote Babel
+%
+\PassOptionsToPackage{english}{babel}
+\PassOptionsToPackage{spanish}{babel}
+\PassOptionsToPackage{brazil}{babel}
+\PassOptionsToPackage{brazilian}{babel}
 
 
 %================================================================================
@@ -318,90 +326,6 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \newcommand{\palavraschave}{}
 
 %================================================================================
-% Configurações diversas
-%================================================================================
-
-% ---
-% Configurações de aparência do PDF final
-% ---
-% alterando o aspecto da cor azul
-\definecolor{blue}{RGB}{41,5,195}
-
-% informações do PDF
-\hypersetup{
-        unicode=true, % Codificação dos caracteres especiais no Bookmark
-		pdftitle={\@title}, 
-		pdfauthor={\@author},
-    	pdfsubject={\imprimirpreambulo},
-	    pdfcreator={LaTeX with abnTeX2/ICMC-USP},
-		pdfkeywords={\palavraschave}, 
-		colorlinks=true,       		% false: boxed links; true: colored links
-    	linkcolor=blue,          	% color of internal links
-    	citecolor=blue,        		% color of links to bibliography
-    	filecolor=magenta,      	% color of file links
-		urlcolor=blue,
-		bookmarksdepth=4
-}
-
-% alterando o aspecto da cor azul
-\definecolor{blue}{RGB}{41,5,195}
-\definecolor{white}{RGB}{255,255,255}
-\definecolor{black}{RGB}{0,0,0}
-
-
-\providecommand*{\chartautorefname}{Chart}
-\providecommand*{\algorithmautorefname}{Algorithm}
-\providecommand*{\sourcecodeautorefname}{Source code}
-\addto\captionsbrazil{% portugues-brasil
-    %% ajusta nomes padroes do babel
-    \renewcommand{\sectionrefname}{se{\c c}\~ao~}   % \Sref{ }
-    \renewcommand{\chapterrefname}{Cap{\'i}tulo~}   % \Cref{ }
-    \renewcommand{\appendixrefname}{Ap{\^e}ndice~}  % \Aref{ }
-    \renewcommand{\bookrefname}{Livro~}             % \Bref{ }
-    \renewcommand{\partrefname}{Parte~}             % \Pref{ }
-    \renewcommand{\figurerefname}{Figura}           % \fref{ }
-    \renewcommand{\tablerefname}{Tabela}            % \tref{ }
-    \renewcommand{\pagerefname}{p{\'a}gina}         % \pref{ }
-    %% ajusta nomes usados com a macro \autoref
-    \renewcommand{\chartautorefname}{Quadro}
-    \renewcommand{\algorithmautorefname}{Algoritmo}
-    \renewcommand{\sourcecodeautorefname}{Código-fonte}
-}
-
-% Corrige warning gerado pelo uso do comando \uppercase
-\ifthenelse{\boolean{ABNTEXsumario-abnt-6027-2012}}{%v
-    \renewcommand{\bibsection}{%
-        \chapter*{\bibname}
-        \bibmark
-        \ifnobibintoc\else
-        \phantomsection
-        \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\bibname}}{\bibname}}
-        \fi
-        \prebibhook
-    }
-}{}
-
-% Níveis de subseções
-\setcounter{tocdepth}{4}
-\setcounter{secnumdepth}{4}
-
-% Ajusta o espaçamento dos parágrafos do resumo
-\setlength{\absparsep}{18pt}
-
-% O tamanho do parágrafo é dado por:
-\setlength{\parindent}{1.3cm}
-
-% Controle do espaçamento entre um parágrafo e outro:
-\setlength{\parskip}{0.2cm}  % tente também \onelineskip
-
-% Pasta padrão para as imagens
-\graphicspath{{images/}}
-
-% Nome do local do instituto
-\local{São Carlos -- SP}
-
-
-%================================================================================
 % Pacote para criação da lista de siglas e abreviaturas
 %================================================================================
 
@@ -422,6 +346,8 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \def\@sigla#1#2{\nomenclature{#1}{#2}}          % \sigla*{}{} 
 % Faz o registro na tabela de siglas e insere os dados no corpo do documento
 \def\@@sigla#1#2{#2 (#1)\nomenclature{#1}{#2}}  % \sigla{}{}
+
+
 
 %================================================================================
 % Pacote para criação do GLOSSÁRIO
@@ -496,13 +422,23 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 % Permite comandos com @ no nome
 \makeatletter
 
+% Comando para selecionar o idioma principal do texto
+\providecommand{\imprimiridioma}{PT}
+\newcommand{\idioma}[1]{
+    \renewcommand{\imprimiridioma}{#1}
+    \IfEq{\imprimiridioma}{EN}{}{
+        \IfEq{\imprimiridioma}{PT}{}{
+            \PackageError{ICMC}{Ilegal parameter of idioma}{
+                Unknow language "#1"!
+                Please, use "PT" to portuguese language or "EN" to english language. The option must be in uppercase.
+            }
+            \stop
+        }
+    }
+}
 % Checagem dos dialetos da língua portuguesa (portuges, portuguese, brazilian, brazil)
 \newcommand*{\IfLangPortuguese}{%
-  % A comando pode ser otimizado, colocando nomes por ordem de frequência de utilização.
-  \iflanguage{brazil}\@firstoftwo{%
-  \iflanguage{brazilian}\@firstoftwo{%
-  \iflanguage{portuguese}\@firstoftwo{%
-  \iflanguage{portuges}\@firstoftwo\@secondoftwo}}}%
+  \iflanguage{brazil}\@firstoftwo\@secondoftwo%
 }
 
 % Comando para definir o título em português
@@ -523,10 +459,20 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     \titulo{\imprimirtituloPT}
 }
 
-
 % Comando para definir o gênero do autor (M = Masculino / F = Feminino)
 \providecommand{\imprimirgenero}{M}
-\newcommand{\genero}[1]{\renewcommand{\imprimirgenero}{#1}}
+\newcommand{\genero}[1]{
+    \renewcommand{\imprimirgenero}{#1}
+    \IfEq{\imprimirgenero}{M}{}{
+        \IfEq{\imprimirgenero}{F}{}{
+            \PackageError{ICMC}{Ilegal parameter of genero}{
+                Unknow gender "#1"!
+                Please, use "M" or "F". The option must be in uppercase.
+            }
+            \stop
+        }
+    }
+}
 
 % Comando para definição do nome e sobrenome do author
 \renewcommand\autor[2][Nome para Referência]{
@@ -639,14 +585,12 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 % PIPGES ========================================================================     
             \ifthenelse{\equal{#1}{PIPGES}}{
                 \addto\captionsbrazil{
-                    \universidade{USP/UFSCar}
                     \instituicao{Instituto de Ciências Matemáticas e de Computação -- ICMC-USP e ao Departamento de Estatística -- DEs-UFSCar}
                     \area{Estatística}
                     \programa{Programa Interinstitucional de Pós-Graduação em Estatística}
                     \especialidade{em Estatística -- Interinstitucional de Pós-Graduação em Estatística}
                 }
                 \addto\captionsenglish{% ingles
-                    \universidade{USP/UFSCar}
                     \instituicao{Instituto de Ciências Matemáticas e de Computação -- ICMC-USP and to the Departamento de Estatística -- DEs-UFSCar}
                     \area{Statistics}
                     %\programa{Programa Interinstitucional de Pós-Graduação em Estatística}
@@ -681,8 +625,11 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
                         }
                     }{
 % Outros ========================================================================
-                        \programa{XXX}
-                        \especialidade{XXX}
+                        \PackageError{ICMC}{Ilegal parameter of curso}{
+                            Unknow curso "#1"!
+                            Please, use "CCMC", "MAT", "PIPGES", "PROFMAT", or "MECAI". The option must be in upperrcase.
+                        }
+                        \stop
                     }
                 }
             }
@@ -1106,7 +1053,6 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \newcommand{\inserelistadesimbolos}
 {
   \@ifundefined{@incluilistadesimbolos}{}{
-	 \pdfbookmark[0]{\listadesimbolosname}{listadesimbolos}
      \pretextualchapter{\listadesimbolosname}
      {\setlength{\parindent}{0cm}
        \@starttoc{los}
@@ -1500,10 +1446,102 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 }
 \chapterstyle{icmc}
 
+
+
+%================================================================================
+% Configurações diversas
+%================================================================================
+
+% ---
+% Configurações de aparência do PDF final
+% ---
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\hypersetup{
+        unicode=true, % Codificação dos caracteres especiais no Bookmark
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2/ICMC-USP},
+		pdfkeywords={\palavraschave}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      	% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+\definecolor{white}{RGB}{255,255,255}
+\definecolor{black}{RGB}{0,0,0}
+
+
+\providecommand*{\chartautorefname}{Chart}
+\providecommand*{\algorithmautorefname}{Algorithm}
+\providecommand*{\sourcecodeautorefname}{Source code}
+\addto\captionsbrazil{% portugues-brasil
+    %% ajusta nomes padroes do babel
+    \renewcommand{\sectionrefname}{se{\c c}\~ao~}   % \Sref{ }
+    \renewcommand{\chapterrefname}{Cap{\'i}tulo~}   % \Cref{ }
+    \renewcommand{\appendixrefname}{Ap{\^e}ndice~}  % \Aref{ }
+    \renewcommand{\bookrefname}{Livro~}             % \Bref{ }
+    \renewcommand{\partrefname}{Parte~}             % \Pref{ }
+    \renewcommand{\figurerefname}{Figura}           % \fref{ }
+    \renewcommand{\tablerefname}{Tabela}            % \tref{ }
+    \renewcommand{\pagerefname}{p{\'a}gina}         % \pref{ }
+    %% ajusta nomes usados com a macro \autoref
+    \renewcommand{\chartautorefname}{Quadro}
+    \renewcommand{\algorithmautorefname}{Algoritmo}
+    \renewcommand{\sourcecodeautorefname}{Código-fonte}
+}
+
+% Corrige warning gerado pelo uso do comando \uppercase
+\ifthenelse{\boolean{ABNTEXsumario-abnt-6027-2012}}{%v
+    \renewcommand{\bibsection}{%
+        \chapter*{\bibname}
+        \bibmark
+        \ifnobibintoc\else
+        \phantomsection
+        \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\bibname}}{\bibname}}
+        \fi
+        \prebibhook
+    }
+}{}
+
+% Níveis de subseções
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% Ajusta o espaçamento dos parágrafos do resumo
+\setlength{\absparsep}{18pt}
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% Pasta padrão para as imagens
+\graphicspath{{images/}}
+
+% Nome do local do instituto
+\local{São Carlos -- SP}
+
+% Define o programa de Pós-Graduação padrão para o template
+\curso{CCMC}
+
+
 %================================================================================
 % Configurações ao iniciar documento
 %================================================================================
 \AtBeginDocument{
+
+% Altera o idioma principal caso o documento seja redigido em inglês
+\IfStrEq{\imprimiridioma}{ingles}{\selectlanguage{english}}{}
 
 % Centraliza o caption das tabelas do IBGE, conforme recomendação da USP
 \renewcommand{\configurecaptions}{\captionstyle[singlelinecheck=on]{}}

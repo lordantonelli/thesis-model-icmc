@@ -60,12 +60,7 @@ alsoletter={*, \{, \}, \[, \]},
 %   Qualificação         = qualificacao 
 %   Curso                = doutorado/mestrado
 %   Situação do trabalho = pre-defesa/pos-defesa (exceto para qualificação)
-% -- opções do pacote babel --
-% Idioma padrão = brazil
-	%spanish,			% idioma adicional para hifenização
-	%english,			% idioma adicional para hifenização
-	%brazil				% o último idioma é o principal do documento
-\ documentclass[doutorado, spanish, english, brazil]{packages/icmc}
+\ documentclass[doutorado, pos-defesa]{packages/icmc}
 
 % Título do trabalho em Português
 \tituloPT{Título da Monografia}
@@ -76,7 +71,7 @@ alsoletter={*, \{, \}, \[, \]},
 % Nome do autor
 \autor[Abreviação]{Nome completo do autor}
 
-% Gênero do autor
+% Gênero do autor (M ou F)
 \genero{M}
 
 % Data do depósito
@@ -92,6 +87,9 @@ alsoletter={*, \{, \}, \[, \]},
 % Sigla do programa de Pós-graduação (CCMC, MAT, PIPGES, PROFMAT, MECAI)
 \curso{CCMC}
 % O valor entre colchetes é opcional para este programa
+
+% Idioma principal do texto (EN ou PT)
+\idioma{PT}
 
 % Resumo
 \textoresumo[Idioma]{

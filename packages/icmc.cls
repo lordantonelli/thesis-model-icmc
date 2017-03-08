@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2017/03/07 v1.3.1 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
+\ProvidesClass{packages/icmc}[2017/03/07 v1.3.2 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
 Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Computação]
 \RequirePackage{xifthen}
 
@@ -1541,7 +1541,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \AtBeginDocument{
 
 % Altera o idioma principal caso o documento seja redigido em inglês
-\IfStrEq{\imprimiridioma}{ingles}{\selectlanguage{english}}{}
+\IfStrEq{\imprimiridioma}{EN}{\selectlanguage{english}}{}
 
 % Centraliza o caption das tabelas do IBGE, conforme recomendação da USP
 \renewcommand{\configurecaptions}{\captionstyle[singlelinecheck=on]{}}

@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2017/03/07 v1.3.2 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
+\ProvidesClass{packages/icmc}[2017/03/10 v1.3.3 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
 Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Computação]
 \RequirePackage{xifthen}
 
@@ -740,11 +740,11 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 % Comando para inclusão da ficha catalográfica
 \newboolean{opt-fichacatalografica}
 \setboolean{opt-fichacatalografica}{false}
-\def\incluifichacatalografica{\@ifstar\@incluifichacatalografica\@@incluifichacatalografica}
-% Incluir um arquivo externo como ficha catalográfica
-\def\@incluifichacatalografica#1{\setboolean{opt-fichacatalografica}{true}\gdef\@arquivofichacatalografica{#1}}          % \incluifichacatalografica*{}
-% Gera a ficha catalográfica automaticamente de acordo com o número da Tabela de Cutter http://www.davignon.qc.ca/cutter1.html
-\def\@@incluifichacatalografica#1{\setboolean{opt-fichacatalografica}{true}\gdef\@codigocutter{#1}}  % \incluifichacatalografica{}
+\newcommand{\incluifichacatalografica}[1]{
+    % Incluir um arquivo externo como ficha catalográfica
+    \setboolean{opt-fichacatalografica}{true}%
+    \gdef\@arquivofichacatalografica{#1}%
+}
 
 
 %================================================================================
@@ -1065,56 +1065,12 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 % Ficha Catalografica
 %================================================================================
 
-% Contador das palavras-chave
-\newcounter{count}
-% Enumera a lista de palavras-chave
-\newcommand{\PROCESS}[1]{%
-    \foreach\i in{#1}{%
-\stepcounter{count}%
-\arabic{count}.\enspace\i.\ %
-    }%
-}
-
 \newcommand{\inserefichacatalografica}
 {
-    \@ifundefined{@arquivofichacatalografica}
-    {
-    
-    % Captura a primeira letra do sobrenome do autor
-    \expandafter\StrLeft\expandafter{\ABNTautordatabib}{1}[\firstletterauthor]
-    % Captura a primeira letra do título
-    \expandafter\StrLeft\expandafter{\thetitle}{1}[\firstlettertitle]
-    
-        \begin{fichacatalografica}
-        	\vspace*{\fill}					% Posição vertical
- 
-	% Conteúdo
-	\begin{otherlanguage}{brazil}
-	\begin{tabular}{c|p{1.4cm}p{10.1cm}|}
-	
-	\multicolumn{3}{c}{\sffamily\small Ficha catalográfica elaborada pela Biblioteca Prof. Achille Bassi} \\
-	\multicolumn{3}{c}{\sffamily\small e Seção Técnica de Informática, ICMC/USP,} \\
-	\multicolumn{3}{c}{\sffamily\small com os dados fornecidos pelo(a) autor(a)} \\ \cline{2-3}
-	& & \\
-	& & \\
-	& & {\fontsize{10.3pt}{1em}\selectfont\ttfamily\ABNTautordatabib} \\ 
-	& {\fontsize{10.3pt}{1em}\selectfont\ttfamily \MakeUppercase{\firstletterauthor}\@codigocutter}\MakeLowercase{\firstlettertitle}%
-	& {\fontsize{10.3pt}{1em}\selectfont\ttfamily~~~\imprimirtitulo\ / \imprimirautor; \MakeLowercase{\imprimirorientadorRotulo} \imprimirorientador \abntex@ifnotempty{\imprimircoorientador}{; \MakeLowercase{\imprimircoorientadorRotulo}~\imprimircoorientador}. -- \imprimirlocal, \@year.} \\ 
-	& & {\fontsize{10.3pt}{1em}\selectfont\ttfamily~~~\pageref{LastPage} p.}\\
-	& &\\
-	& & {\fontsize{10.3pt}{1em}\selectfont\ttfamily~~~\imprimirtipotrabalho~(\tipodocurso~- \imprimirprograma) -- Instituto de Ciências Matemáticas e de Computação, Universidade de São Paulo, \@year.}\\
-	& & \\ 
-	& & {\fontsize{10.3pt}{1em}\selectfont\ttfamily~~~\expandafter\PROCESS\expandafter{\palavraschave}I. \ABNTorientadordatabib, orient.\ II.\ \abntex@ifnotempty{\imprimircoorientador}{%
-	\ABNTcoorientadordatabib, coorient.\ III.\ }Título.} \\
-	& & \\
-	& & \\ \cline{2-3}
-	%& & ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CDU: 681.3.01:621.39 \\ \cline{2-3}
-	
-	\end{tabular}
-	\end{otherlanguage}
-	\vspace{1.5cm}
-
-        \end{fichacatalografica}
+    \@ifundefined{@arquivofichacatalografica}{
+        \PackageError{ICMC}{Some file is missing}{
+            A ficha catalográfica não foi inserida!
+        }
     }{
         \begin{fichacatalografica}
             \includepdf{\@arquivofichacatalografica}
@@ -1152,8 +1108,10 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \csdef{res-label-keywords-french}{Mots-clés}
 \csdef{res-label-keywords-spanish}{Palabras clave}
 
-
-  \setcounter{count}{0}
+% Contador das palavras-chave
+\newcounter{count}
+\setcounter{count}{0}
+  
   \whileboolexpr
     { test {\ifnumcomp{\value{count}}{<}{\thenumresumo}} }%
     {

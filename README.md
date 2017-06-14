@@ -12,4 +12,5 @@ Os parâmetros possíveis utilizados pelo `\documentclass` são:
 - **[qualificacao]** Exclusivamente para monografias de qualificação em geral;
 - **[mestrado / doutorado]** Identifica o curso ao qual o aluno pertence, sendo utilizado apenas uma das duas opcões disponíveis. O valor padrão é **doutorado**;
 - **[pre-defesa / pos-defesa]** Identifica a situação do documento (exceto para qualificação), sedo necessário apenas uma das duas opções. O valor padrão é **pos-defesa**;
+- **[impressao]** Gera exclusivamente uma versão para impressão do documento;
 - **[french, spanish, english, brazil]** Adiciona o idioma para correta hifenização correta no documento. Os idiomas bases para o modelo (português e inglês) não precisam ser declarados.

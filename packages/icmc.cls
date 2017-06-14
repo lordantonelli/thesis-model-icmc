@@ -1,7 +1,7 @@
 %%
-%% Customizações do abnTeX2 (http://abnTeX2.googlecode.com) para o 
-%% Instituto de Ciências Matemáticas e de Computação, Universidade 
-%% de São Paulo
+%% Customizacoes do abnTeX2 (http://abnTeX2.googlecode.com) para o 
+%% Instituto de Ciencias Matematicas e de Computacao, Universidade 
+%% de Sao Paulo
 %%
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
@@ -21,22 +21,21 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2017/03/10 v1.3.3 Classe ICMC baseado em abnTeX2 - Teses e Dissertações dos  
-Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Computação]
+\ProvidesClass{packages/icmc}[2017/06/14 v1.3.4 Classe ICMC baseado em abnTeX2 - Teses e Dissertacoes dos Programas de Pos-graduacao do Instituto de Ciencias Matematicas e de Computacao]
 \RequirePackage{xifthen}
+\RequirePackage{ifxetex}        % Verifica se a compilacao ocorre por xetex
+\RequirePackage{ifluatex}       % Verifica se a compilacao ocorre por luatex
 
 %================================================================================
-% Declaração de opções
+% Declaracao de opcoes
 %================================================================================
-% Opções:
-% 	qualificacao:   Formata documento para qualificação
-%   completa:       Formata documento para dissertação/tese
+% Opcoes:
+% 	qualificacao:   Formata documento para qualificacao
 %	doutorado:      Formata documento para tese de doutorado
-% 	mestrado:       Formata documento para dissertação de mestrado
-% 	pre-defesa:     Formata documento para versão de defesa (utilizado 
-%                   apenas para versão completa)
-%   pro-defesa:     Formata documento para versão final (utilizado apenas
-%                   para versão completa)
+% 	mestrado:       Formata documento para dissertacao de mestrado
+% 	pre-defesa:     Formata documento para versao de defesa (utilizado apenas para versao completa)
+%   pro-defesa:     Formata documento para versao final (utilizado apenas para versao completa)
+%   impressao:      Formata documento para versao de impressao
 % -------------------------------------------------------------------------------
 
 \DeclareOption*{%
@@ -44,13 +43,10 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 }
 
 \newboolean{opt-qualificacao}
+\setboolean{opt-qualificacao}{false}
 \DeclareOption{qualificacao}{
     \setboolean{opt-qualificacao}{true}
 }
-\DeclareOption{completo}{
-    \setboolean{opt-qualificacao}{false}
-}
-\ExecuteOptions{completo}
 
 \newboolean{opt-doutorado}
 \DeclareOption{doutorado}{
@@ -70,77 +66,71 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 }
 \ExecuteOptions{pos-defesa}
 
-%
-% Repassa demais opções a abntex	
-%
+\newboolean{opt-impressao}
+\setboolean{opt-impressao}{false}
+\newcommand{\colorlinks}{true}
+\DeclareOption{impressao}{
+    \setboolean{opt-impressao}{true}
+    \renewcommand{\colorlinks}{false}
+}
+
+% Repassa demais opcoes a abntex	
 \DeclareOption*{%
   \PassOptionsToClass{\CurrentOption}{abntex2}%
 }
+
+% Repassa os tres idiomas principais para o pacote Babel
+\PassOptionsToPackage{spanish, english, brazil}{babel}
+
 \ProcessOptions\relax
 
-%
-% Repassa os três idiomas principais para o pacote Babel
-%
-\PassOptionsToPackage{english}{babel}
-\PassOptionsToPackage{spanish}{babel}
-\PassOptionsToPackage{brazil}{babel}
-\PassOptionsToPackage{brazilian}{babel}
-
 
 %================================================================================
-% Herança da classe `abntex2' e inclusão de pacotes e arquivos necessários
+% Heranca da classe `abntex2' e inclusao de pacotes e arquivos necessarios
 %================================================================================
-\LoadClass[% -- opções da classe memoir --
+\LoadClass[% -- opcoes da classe memoir --
 	12pt,				% tamanho da fonte
-	openright,			% capítulos começam em pág ímpar 
-	                    % (insere página vazia caso preciso)
-	twoside,			% para impressão em verso e anverso. Oposto a oneside
+	openright,			% capitulos comecam em pagina impar (insere pagina vazia caso preciso)
+	twoside,			% para impressao em verso e anverso. Oposto a oneside
 	a4paper,			% tamanho do papel. 
-	chapter=TITLE		% títulos de capítulos convertidos em letras maiúsculas
+	chapter=TITLE		% titulos de capitulos convertidos em letras maiusculas
 	]{abntex2}
 	
 
 %================================================================================
 % Pacotes fundamentais 
 %================================================================================
-\RequirePackage{babel}
-\RequirePackage{morewrites}         % Resolve o erro “No room for a new \write”
-\RequirePackage{cmap}				% Mapear caracteres especiais no PDF
-\RequirePackage{lmodern}			% Usa a fonte Latin Modern.
-\RequirePackage{lastpage}			% Usado pela Ficha catalográfica
-\RequirePackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
-\RequirePackage{color, xcolor}      % Controle das cores
-\RequirePackage{colortbl}           % Controle das cores das células da tabela
-                                    % (utilizado no título)
-\RequirePackage{graphicx}			% Inclusão de gráficos
-\RequirePackage{caption}            % Pacote para definição dos captions
-\RequirePackage{subcaption}         % Pacote para definição dos subcaptions (ambientes de subfigures)
-\RequirePackage{microtype} 		    % para melhorias de justificação
-\RequirePackage{pdfpages}           % inclusão de arquivos PDF
-\RequirePackage{ifxetex}            % verifica se a compilação ocorre por xetex
-\RequirePackage{ifluatex}           % verifica se a compilação ocorre por luatex
-\RequirePackage{hyphenat}           % Pacote para retirar a hifenização do
-                                    % Preâmbulo
-\RequirePackage{xstring}            % Pacate para manipulação de Strings
-\RequirePackage{etoolbox}           % Pacote utilizado para armazenamento de
-                                    % resumos
-\RequirePackage{amsthm, amsfonts, amsmath, amssymb} % Pacote para a definição dos ambientes matemáticos
-\RequirePackage{mathptmx}           % Usando times para equações, opcional
-\RequirePackage{listings}           % Pacote para formatação de diversos 
-                                    % códigos fontes
-\RequirePackage{algorithm, algpseudocode}  % Pacote para escrever algoritmos em pseudo-código
-\RequirePackage{pgffor}             % Pacote utilizado para gerar as
-                                    % palavras-chave da ficha catalográfica
-\RequirePackage{nomencl}            % Pacote para criação da Lista de Siglas
-\RequirePackage[noredefwarn,translate=babel,nonumberlist,style=list,toc]{glossaries}	 % Pacote para gerar o glossário
-\RequirePackage[brazilian,hyperpageref]{backref} % Paginas com as citações na bibl
-\RequirePackage{float}              % Pacote para criação de novos ambientes
-%\usepackage[backend=biber,style=abnt,indent, bftitles,hyperref,backref]{biblatex}  % Citações padrão ABNT
-\RequirePackage[alf,bibjustif,abnt-etal-text=it,abnt-repeated-author-omit=yes,abnt-emphasize=bf,abnt-etal-cite=3,abnt-etal-list=0]{abntex2cite}   % Citações padrão ABNT
+\RequirePackage{morewrites}     % Resolve o erro “No room for a new \write”
+\RequirePackage{cmap}			% Mapear caracteres especiais no PDF
+\RequirePackage{lmodern}		% Usa a fonte Latin Modern.
+\RequirePackage{lastpage}		% Usado pela Ficha catalografica
+\RequirePackage{indentfirst}	% Indenta o primeiro paragrafo de cada secao.
+\RequirePackage{color, xcolor}  % Controle das cores
+\RequirePackage{colortbl}       % Controle das cores das celulas da tabela(utilizado no titulo)
+\RequirePackage{graphicx}		% Inclusao de graficos
+\RequirePackage{caption}        % Pacote para definicao dos captions
+\RequirePackage{subcaption}     % Pacote para definicao dos subcaptions(ambientes de subfigures)
+\RequirePackage{microtype} 		% para melhorias de justificacao
+\RequirePackage{pdfpages}       % Inclusao de arquivos PDF
+\RequirePackage{hyphenat}       % Pacote para retirar a hifenizacao do preambulo
+\RequirePackage{xstring}        % Pacate para manipulacao de Strings
+\RequirePackage{etoolbox}       % Pacote utilizado para armazenamento de resumos
+\RequirePackage{amsthm, amsfonts, amsmath, amssymb} % Pacote para a definicao dos ambientes matematicos
+\RequirePackage{mathptmx}       % Usando times para equacoes, opcional
+\RequirePackage{listings}       % Pacote para formatacao de diversos codigos fontes
+\RequirePackage{algorithm, algpseudocode}  % Pacote para escrever algoritmos em pseudo-codigo
+\RequirePackage{nomencl}        % Pacote para criacao da Lista de Siglas
+\RequirePackage[noredefwarn,translate=babel,nonumberlist,style=list,toc]{glossaries}	 % Pacote para gerar o glossario
+\RequirePackage[brazilian,hyperpageref]{backref} % Paginas com as citacoes na bibl
+\RequirePackage{float}          % Pacote para criacao de novos ambientes
+\RequirePackage[alf,bibjustif,abnt-etal-text=it,abnt-repeated-author-omit=yes,abnt-emphasize=bf,abnt-etal-cite=3,abnt-etal-list=0]{abntex2cite}   % Citacoes padrao ABNT
+\RequirePackage{environ}        % Pacote para definicao de ambientes
+\RequirePackage[absolute]{textpos} % Pacote para posicionamento do texto
+\RequirePackage{eso-pic}        % Pacote para incluir imagem de fundo
 
 
 %================================================================================
-% Comando para configuração do tipo de trabalho
+% Comando para configuracao do tipo de trabalho
 %================================================================================
 
 \providecommand*{\tipoexemplar}{}
@@ -149,7 +139,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \providecommand*{\exam}{}
 \providecommand*{\arealabel}{}
 
-% Configuração do texto do preâmbulo
+% Configuracao do texto do preambulo
 \addto\captionsenglish{% ingles
     \renewcommand{\exam}{ in partial fulfillment of the requirements for the degree}
 }
@@ -157,7 +147,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     \renewcommand{\exam}{ como parte dos requisitos para obten{\c c}{\~a}o do t{\'i}tulo de}
 }
 
-% Configuração da situação do trabalho entregue
+% Configuracao da situacao do trabalho entregue
 \ifthenelse{\boolean{opt-pre-defesa}}{
     \addto\captionsenglish{% ingles
         \renewcommand{\tipoexemplar}{EXAMINATION BOARD PRESENTATION COPY}
@@ -174,7 +164,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     }
 }
 
-% Configuração do tipo de trabalho para DOUTORADO ou MESTRADO
+% Configuracao do tipo de trabalho para DOUTORADO ou MESTRADO
 \ifthenelse{\boolean{opt-doutorado}}{
     \addto\captionsenglish{% ingles
         \renewcommand{\degree}{of the Doctorate}
@@ -199,7 +189,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     }
 }
 
-% Configuração do tipo de trabalho como QUALIFICAÇAO de DOUTORADO ou MESTRADO
+% Configuracao do tipo de trabalho como QUALIFICACAO de DOUTORADO ou MESTRADO
 \ifthenelse{\boolean{opt-qualificacao}}{
     \addto\captionsenglish{% ingles
         \renewcommand{\exam}{ as part of the qualifying exam requisites of the}
@@ -213,7 +203,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     }
 }{}
 
-% Configuração do texto impresso no Preambulo
+% Configuracao do texto impresso no Preambulo
 \addto\captionsenglish{% ingles
     \renewcommand{\imprimirpreambulo}{\nohyphens{\imprimirtipotrabalho~submitted to the \imprimirinstituicao,\exam~\degree~\imprimirespecialidade. \textit{\tipoexemplar}}}
     \renewcommand{\arealabel}{Concentration Area}
@@ -224,75 +214,11 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 }
 
 
-
-%================================================================================
-% Configuração da fonte utilizada na capa exigida pelo ICMC
-%================================================================================
-
-\newcommand{\@icmcFont}[2][]{\fontsize{#2}{#2}\ifthenelse{\isempty{#1}}{}{\fontspec[Mapping = tex-text, Path = packages/fonts/]{#1}}}
-
-\ifxetex % Configuração da fonte para a compilação por XETEX
-  \RequirePackage{fontspec}
-  \RequirePackage{xltxtra}
-    \newfontfamily{\arial}[
-        Ligatures=TeX, % recommended
-        Mapping         = tex-text,
-        Path            = packages/fonts/,
-        BoldFont        = *bd,
-        ItalicFont      = *i,
-        BoldItalicFont  = *bi]{arial}
-    
-    \newcommand\@icmcTitulo{\@icmcFont{18}\arial}
-    \newcommand\@icmcAutorCapa{\@icmcFont{13}\arial\bfseries\itshape}
-    \newcommand\@icmcAutorFolhaRosto{\@icmcFont{13}\arial\bfseries}
-    \newcommand\@icmcTituloFolhaRosto{\@icmcFont{17}\arial}
-    \newcommand\@icmcOrientador{\@icmcFont{10}\arial}
-    \newcommand\@icmcPreambulo{\@icmcFont{10}\arial}
-    \newcommand\@icmcLocalData{\@icmcFont{11}\arial\bfseries}
-    \newcommand\@icmcCarimbo{\@icmcFont{11}\arial}
-    \newcommand\@icmcSVPG{\@icmcFont{8}\arial}
-\else
-    \ifluatex % Configuração da fonte para a compilação por LUATEX
-      \RequirePackage{fontspec}
-        \newfontfamily{\arial}[
-        Ligatures=TeX, % recommended
-        Mapping         = tex-text,
-        Path            = packages/fonts/,
-        BoldFont        = *bd,
-        ItalicFont      = *i,
-        BoldItalicFont  = *bi]{arial}
-      
-        \newcommand\@icmcTitulo{\@icmcFont{18}\arial}
-        \newcommand\@icmcAutorCapa{\@icmcFont{13}\arial\bfseries\itshape}
-        \newcommand\@icmcAutorFolhaRosto{\@icmcFont{13}\arial\bfseries}
-        \newcommand\@icmcTituloFolhaRosto{\@icmcFont{17}\arial}
-        \newcommand\@icmcOrientador{\@icmcFont{10}\arial}
-        \newcommand\@icmcPreambulo{\@icmcFont{10}\arial}
-        \newcommand\@icmcLocalData{\@icmcFont{11}\arial\bfseries}
-        \newcommand\@icmcCarimbo{\@icmcFont{11}\arial}
-        \newcommand\@icmcSVPG{\@icmcFont{8}\arial}
-    
-    \else % Configuração da fonte para a compilação por PDFLATEX
-      \RequirePackage[T1]{fontenc}	    	% Selecao de codigos de fonte.
-      \RequirePackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
-      \newcommand\@icmcTitulo{\fontsize{18pt}{1em}\selectfont\usefont{T1}{phv}{m}{n}}
-      \newcommand\@icmcAutorCapa{\fontsize{13pt}{1em}\selectfont\usefont{T1}{phv}{b}{it}}
-      \newcommand\@icmcAutorFolhaRosto{\fontsize{13pt}{1em}\selectfont\usefont{T1}{phv}{b}{n}}
-      \newcommand\@icmcTituloFolhaRosto{\fontsize{17pt}{1em}\selectfont\usefont{T1}{phv}{m}{n}}
-      \newcommand\@icmcOrientador{\fontsize{10pt}{1em}\selectfont\usefont{T1}{phv}{m}{n}}
-      \newcommand\@icmcPreambulo{\fontsize{10pt}{1em}\selectfont\usefont{T1}{phv}{m}{n}}
-      \newcommand\@icmcLocalData{\fontsize{11pt}{1em}\selectfont\usefont{T1}{phv}{b}{n}}
-      \newcommand\@icmcCarimbo{\fontsize{11pt}{1em}\selectfont\usefont{T1}{phv}{m}{n}}
-      \newcommand\@icmcSVPG{\fontsize{8pt}{1em}\selectfont\usefont{T1}{phv}{m}{n}}
-    \fi
-\fi
-
-
 %================================================================================
 % Comando auxiliares
 %================================================================================
 
-% Comando para marcar texto para revisão
+% Comando para marcar texto para revisao
 \newcommand{\rev}[1]{\textcolor{red}{[#1]}}
 
 % Legendas utilizadas em Figuras / Tabelas / Etc.
@@ -312,35 +238,26 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 % Automatiza o processo de aspas
 \newcommand{\aspas}[1]{``{#1}''}
 
-% Comandos utilizados para referenciar corpos flutuantes no texto
-\newcommand{\qref}[1]{\quadrorefname~\ref{#1}}      % Quadro X
-\newcommand{\aref}[1]{\algoritmorefname~\ref{#1}}   % Algoritmo X
-\newcommand{\cref}[1]{\codigorefname~\ref{#1}}      % Código X
-
-
-\newcommand{\ifequals}[3]{\ifthenelse{\equal{#1}{#2}}{#3}{}}
-\newcommand{\case}[2]{#1 #2} % Dummy, so \renewcommand has something to overwrite...
-\newenvironment{switch}[1]{\renewcommand{\case}{\ifequals{#1}}}{}
-
 % Palavras-chave do resumo
 \newcommand{\palavraschave}{}
 
+
 %================================================================================
-% Pacote para criação da lista de siglas e abreviaturas
+% Pacote para criacao da lista de siglas e abreviaturas
 %================================================================================
 
-% Configuração do pacote nomencl
+% Configuracao do pacote nomencl
 % Tamanho da Label da sigla
 \setlength{\nomlabelwidth}{0.15\hsize} 
-% Separa as abreviaturas de suas definições com pontos (....)
+% Separa as abreviaturas de suas definicoes com pontos (....)
 \renewcommand{\nomlabel}[1]{#1 \hfill}
 \setlength{\nomitemsep}{-.05in} 
-% Comando necessário para a criação da lista de abreviaturas
+% Comando necessario para a criacao da lista de abreviaturas
 \makenomenclature
-% Traduz o título da lista de abreviaturas
+% Traduz o titulo da lista de abreviaturas
 \renewcommand{\nomname}{\listadesiglasname}
 
-% Comando para criação de abreviaturas e siglas
+% Comando para criacao de abreviaturas e siglas
 \def\sigla{\@ifstar\@sigla\@@sigla}
 % Apenas faz o registro na tabela de siglas
 \def\@sigla#1#2{\nomenclature{#1}{#2}}          % \sigla*{}{} 
@@ -348,29 +265,28 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \def\@@sigla#1#2{#2 (#1)\nomenclature{#1}{#2}}  % \sigla{}{}
 
 
-
 %================================================================================
-% Pacote para criação do GLOSSÁRIO
+% Pacote para criacao do GLOSSARIO
 %================================================================================
-% Gera o indíce do Glossário
+% Gera o indice do Glossario
 \makeglossaries
-% Traduz o nome do glossário
+% Traduz o nome do glossario
 \addto\captionsbrazil{% portugues-brasil
     \renewcommand{\glossaryname}{Gloss\'ario}
 }
 
-% Contador de definições do Glossário
+% Contador de definicoes do Glossario
 \newcounter{count_glossario}
-% Comando para simplificar a definição de palavras no glossário
+% Comando para simplificar a definicao de palavras no glossario
 \newcommand{\newword}[2]{%
-    \stepcounter{count_glossario}% Incrementa o contador do glossário
+    \stepcounter{count_glossario}% Incrementa o contador do glossario
     \newglossaryentry{Def.\arabic{count_glossario}}{%
         name={#1:},%
         description={#2},%
     }%
 }
 
-% Alteração no formato do nome do glossário que aparece no sumário
+% Alteracao no formato do nome do glossario que aparece no sumario
 \ifthenelse{\boolean{ABNTEXupperchapter}}{
     \renewcommand{\glssettoctitle}[1]{%
         \renewcommand{\glossarytoctitle}{%
@@ -380,17 +296,16 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 }{}
 
 
-
 %================================================================================
-% Pacotes de citações
+% Pacotes de citacoes
 %================================================================================
 
-% Configurações do pacote backref
-% Texto padrão antes do número das páginas
+% Configuracoes do pacote backref
+% Texto padrao antes do numero das paginas
 \renewcommand{\backref}{}
-% Define os textos da citação
+% Define os textos da citacao
 \addto\captionsbrazil{% portugues-brasil
-    % Usado sem a opção hyperpageref de backref
+    % Usado sem a opcao hyperpageref de backref
     \renewcommand{\backrefpagesname}{Citado na(s) p{\'a}gina(s):~}
     \renewcommand*{\backrefalt}[4]{
     	\ifcase #1 %
@@ -402,7 +317,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     	\fi}%
 }
 \addto\captionsenglish{% ingles
-    % Usado sem a opção hyperpageref de backref
+    % Usado sem a opcao hyperpageref de backref
     \renewcommand{\backrefpagesname}{Cited on page(s):~}
     \renewcommand*{\backrefalt}[4]{
     	\ifcase #1 %
@@ -413,10 +328,10 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     		Citations on pages #2.%
     	\fi}%
 }
-% ---
+
 
 %================================================================================
-% Definição/Alteração de comandos uitlizados
+% Definicao/Alteracao de comandos uitlizados
 %================================================================================
 
 % Permite comandos com @ no nome
@@ -436,16 +351,16 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
         }
     }
 }
-% Checagem dos dialetos da língua portuguesa (portuges, portuguese, brazilian, brazil)
+% Checagem dos dialetos da lingua portuguesa
 \newcommand*{\IfLangPortuguese}{%
   \iflanguage{brazil}\@firstoftwo\@secondoftwo%
 }
 
-% Comando para definir o título em português
+% Comando para definir o titulo em portugues
 \providecommand{\imprimirtituloPT}{}
 \newcommand{\tituloPT}[1]{\renewcommand{\imprimirtituloPT}{#1}}%
 
-% Comando para definir o título em inglês
+% Comando para definir o titulo em ingles
 \providecommand{\imprimirtituloEN}{}
 \newcommand{\tituloEN}[1]{\renewcommand{\imprimirtituloEN}{#1}}%
 
@@ -459,7 +374,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     \titulo{\imprimirtituloPT}
 }
 
-% Comando para definir o gênero do autor (M = Masculino / F = Feminino)
+% Comando para definir o genero do autor (M = Masculino / F = Feminino)
 \providecommand{\imprimirgenero}{M}
 \newcommand{\genero}[1]{
     \renewcommand{\imprimirgenero}{#1}
@@ -474,8 +389,8 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     }
 }
 
-% Comando para definição do nome e sobrenome do author
-\renewcommand\autor[2][Nome para Referência]{
+% Comando para definicao do nome e sobrenome do autor
+\renewcommand\autor[2][Nome para Referencia]{
     
     \StrCount{#2}{\space}[\nbmatch]%
     \StrCut[\nbmatch]{#2}{\space}\strfirstautor\strsecondautor
@@ -489,18 +404,17 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     \global\def\@author{\@authname~\@authsurn}
 }
 
-% Retira os dois pontos (:) que vem por padrão da classe Abntex2
+% Retira os dois pontos (:) que vem por padrao da classe Abntex2
 \addto\captionsbrazil{% portugues-brasil
     \renewcommand{\orientadorname}{Orientador}
     \renewcommand{\coorientadorname}{Coorientador}
 }
 \addto\captionsenglish{% ingles
-    %% adjusts names from abnTeX2
     \renewcommand{\orientadorname}{Advisor}
     \renewcommand{\coorientadorname}{Co-advisor}
 }
 
-% Redefinição do comando de orientador
+% Redefinicao do comando de orientador
 \renewcommand{\orientador}[3][\orientadorname]{
 
     \StrCount{#3}{\space}[\nbmatch]%
@@ -517,7 +431,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     \renewcommand{\imprimirorientador}{\strfirstorientador~\strsecondorientador}
 }
 
-% Redefinição do comando de co-orientador
+% Redefinicao do comando de co-orientador
 \renewcommand{\coorientador}[3][\coorientadorname]{
 
     \StrCount{#3}{\space}[\nbmatch]%
@@ -534,93 +448,91 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     \renewcommand{\imprimircoorientador}{\strfirstcoorientador~\strsecondcoorientador}
 }
 
-% Comando para definição da área de concentração
+% Comando para definicao da area de concentracao
 \providecommand{\imprimirarea}{}
 \newcommand{\area}[1]{\renewcommand{\imprimirarea}{#1}}
 
-% Comando para definição da especialidade do Título
+% Comando para definicao da especialidade do Titulo
 \providecommand{\imprimirespecialidade}{}
 \newcommand{\especialidade}[1]{\renewcommand{\imprimirespecialidade}{#1}}
 
-% Comando para definição do nome do Programa
+% Comando para definicao do nome do Programa
 \providecommand{\imprimirprograma}{}
-\newcommand{\programa}[1]{\renewcommand{\imprimirprograma}{#1}}
+\providecommand{\imprimirsiglaprograma}{}
+\newcommand{\programa}[2]{
+    \renewcommand{\imprimirsiglaprograma}{#1}
+    \renewcommand{\imprimirprograma}{#2}
+}
 
-% Comando para definição da Universidade
+% Comando para definicao da Universidade
 \providecommand{\imprimiruniversidade}{}
 \newcommand{\universidade}[1]{\renewcommand{\imprimiruniversidade}{#1}}
 
-% Camando para definição do programa de Pós-Graduação, Especialidade do Título e Instituição
+% Camando para definicao do programa de Pos-Graduacao, Especialidade do Titulo e Instituicao
 \newcommand{\curso}[1]{
 
 \universidade{USP}
-\instituicao{Instituto de Ciências Matemáticas e de Computação -- ICMC-USP}
+\instituicao{Instituto de Ci{\^e}ncias Matem{\'a}ticas e de Computa{\c c}{\~a}o -- ICMC-USP}
 
 % CCMC ==========================================================================
     \ifthenelse{\equal{#1}{CCMC}}{
         \addto\captionsbrazil{
-            \area{Ciências de Computação e Matemática Computacional}
-            \programa{Programa de Pós-Graduação em Ciências de Computação e Matemática Computacional}
-            \especialidade{em Ciências -- Ciências de Computação e Matemática Computacional}
+            \area{Ci{\^e}ncias de Computa{\c c}{\~a}o e Matem{\'a}tica Computacional}
+            \programa{PPG-CCMC}{Programa P{\'o}s-Gradua{\c c}{\~a}o em Ci{\^e}ncias de Computa{\c c}{\~a}o e Matem{\'a}tica Computacional}
+            \especialidade{em Ci{\^e}ncias -- Ci{\^e}ncias de Computa{\c c}{\~a}o e Matem{\'a}tica Computacional}
         }
         \addto\captionsenglish{% ingles
             \area{Computer Science and Computational Mathematics}
-            %\programa{Programa de Pós-Graduação em Ciências de Computação e Matemática Computacional}
             \especialidade{Program in Computer Science and Computational Mathematics}
         }
     }{
 % MAT ===========================================================================
         \ifthenelse{\equal{#1}{MAT}}{
             \addto\captionsbrazil{
-                \area{Matemática}
-                \programa{Programa de Pós-Graduação em Matemática}
-                \especialidade{em Ciências -- Matemática}
+                \area{Matem{\'a}tica}
+                \programa{PPG-Mat}{Programa de P{\'o}s-Gradua{\c c}{\~a}o em Matem{\'a}tica}
+                \especialidade{em Ci{\^e}ncias -- Matem{\'a}tica}
             }
             \addto\captionsenglish{% ingles
                 \area{Mathematics}
-                %\programa{Programa de Pós-Graduação em Matemática}
                 \especialidade{Program in Mathematics}
             }
         }{
-% PIPGES ========================================================================     
+% PIPGES ========================================================================
             \ifthenelse{\equal{#1}{PIPGES}}{
                 \addto\captionsbrazil{
-                    \instituicao{Instituto de Ciências Matemáticas e de Computação -- ICMC-USP e ao Departamento de Estatística -- DEs-UFSCar}
-                    \area{Estatística}
-                    \programa{Programa Interinstitucional de Pós-Graduação em Estatística}
-                    \especialidade{em Estatística -- Interinstitucional de Pós-Graduação em Estatística}
+                    \instituicao{Instituto de Ci{\^e}ncias Matem{\'a}ticas e de Computa{\c c}{\~a}o -- ICMC-USP e ao Departamento de Estat{\'i}stica -- DEs-UFSCar}
+                    \area{Estat{\'i}stica}
+                    \programa{PIPGEs}{Programa Interinstitucional de P{\'o}s-Gradua{\c c}{\~a}o em Estat{\'i}stica}
+                    \especialidade{em Estat{\'i}stica -- Interinstitucional de P{\'o}s-Gradua{\c c}{\~a}o em Estat{\'i}stica}
                 }
                 \addto\captionsenglish{% ingles
-                    \instituicao{Instituto de Ciências Matemáticas e de Computação -- ICMC-USP and to the Departamento de Estatística -- DEs-UFSCar}
+                    \instituicao{Instituto de Ci{\^e}ncias Matem{\'a}ticas e de Computa{\c c}{\~a}o -- ICMC-USP and to the Departamento de Estat{\'i}stica -- DEs-UFSCar}
                     \area{Statistics}
-                    %\programa{Programa Interinstitucional de Pós-Graduação em Estatística}
                     \especialidade{joint Graduate Program in Statistics DEs-UFSCar/ICMC-USP}
                 }
             }{
 % PROFMAT =======================================================================
                 \ifthenelse{\equal{#1}{PROFMAT}}{
                     \addto\captionsbrazil{
-                        \area{Matemática}
-                        \programa{Programa de Pós-graduação em Mestrado Profissional em Matemática em Rede Nacional}
-                        \especialidade{em Ciências -- Programa de Mestrado Profissional em Matemática}
+                        \area{Matem{\'a}tica}
+                        \programa{PROFMAT}{Programa de Mestrado Profissional em Matem{\'a}tica em Rede Nacional}
+                        \especialidade{em Ci{\^e}ncias -- Programa de Mestrado Profissional em Matem{\'a}tica}
                     }
                     \addto\captionsenglish{% ingles
                         \area{Mathematics}
-                        %\programa{Programa de Pós-graduação em Mestrado Profissional em Matemática em Rede Nacional}
-                        \especialidade{of Mathematics Professional Master’s Program}
-                        \renewcommand{\imprimirpreambulo}{\nohyphens{\imprimirtipotrabalho~submitted to the \imprimirinstituicao,\exam~\imprimirespecialidade. \textit{\tipoexemplar}}}
+                        \especialidade{of Mathematics Professional Master’s Program} \renewcommand{\imprimirpreambulo}{\nohyphens{\imprimirtipotrabalho~submitted to the \imprimirinstituicao,\exam~\imprimirespecialidade. \textit{\tipoexemplar}}}
                     }
                 }{
 % MECAI =========================================================================
                     \ifthenelse{\equal{#1}{MECAI}}{
                         \addto\captionsbrazil{
-                            \area{Matemática, Estatística e Computação Aplicadas à Indústria}
-                            \programa{Programa de Pós-graduação em Mestrado Profissional em Matemática, Estatística e Computação Aplicadas à Indústria}
-                            \especialidade{-- Programa de Mestrado Profissional em Matemática, Estatística e Computação Aplicadas à Indústria}
+                            \area{Matem{\'a}tica, Estat{\'i}stica e Computa{\c c}{\~a}o Aplicadas {\`a} Ind{\'u}stria}
+                            \programa{MECAI}{Programa de Mestrado Profissional em Matem{\'a}tica, Estat{\'i}stica e Computa{\c c}{\~a}o Aplicadas {\`a} Ind{\'u}stria}
+                            \especialidade{-- Programa de Mestrado Profissional em Matem{\'a}tica, Estat{\'i}stica e Computa{\c c}{\~a}o Aplicadas {\`a} Ind{\'u}stria}
                         }
                         \addto\captionsenglish{% ingles
                             \area{Mathematics, Statistics and Computing Applied to Industry}
-                            %\programa{Programa de Pós-graduação em Mestrado Profissional em Matemática, Estatística e Computação Aplicadas à Indústria}
                             \especialidade{-- Program in Mathematics, Statistics and Computing Applied to Industry}
                         }
                     }{
@@ -638,7 +550,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 
 }
 
-% Redefinição do comando \date do Latex
+% Redefinicao do comando \date do Latex
 \renewcommand{\date}[3]{%
   \gdef\@day{#1}%
   \gdef\@month{#2}%
@@ -648,29 +560,28 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 % Define a data
 \date{\number\day}{\number\month}{\number\year}
 
-% Redefinição do comando de data do ABNTex
+% Redefinicao do comando de data do ABNTex
 \renewcommand{\data}[3]{%
     \date{#1}{#2}{#3}%
 }
 
-% Nome do Mês
-% Nome do Mês
+% Nome do Mes
 \providecommand*{\Monthname}{}
 \addto\captionsbrazil{
     \renewcommand\Monthname[1][EMPTY]{%
-        \ifnum1=#1Janeiro\else
-        \ifnum2=#1Fevereiro\else
-        \ifnum3=#1Março\else
-        \ifnum4=#1Abril\else
-        \ifnum5=#1Maio\else
-        \ifnum6=#1Junho\else
-        \ifnum7=#1Julho\else
-        \ifnum8=#1Agosto\else
-        \ifnum9=#1Setembro\else
-        \ifnum10=#1Outubro\else
-        \ifnum11=#1Novembro\else
-        \ifnum12=#1Dezembro\else
-        \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+      \ifnum1=#1Janeiro\else
+      \ifnum2=#1Fevereiro\else
+      \ifnum3=#1Mar{\c c}o\else
+      \ifnum4=#1Abril\else
+      \ifnum5=#1Maio\else
+      \ifnum6=#1Junho\else
+      \ifnum7=#1Julho\else
+      \ifnum8=#1Agosto\else
+      \ifnum9=#1Setembro\else
+      \ifnum10=#1Outubro\else
+      \ifnum11=#1Novembro\else
+      \ifnum12=#1Dezembro\else
+      \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
     }
 }
 \addto\captionsenglish{% ingles
@@ -691,64 +602,53 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     }
 }
 
-
-% Comando para definição dos resumos e palavras-chave
-\newcounter{numresumo}
-\newcommand{\textoresumo}[3][\languagename]{
-  \stepcounter{numresumo}%
-  \csdef{res-language-\thenumresumo}{#1}
-  \csdef{res-text-\thenumresumo}{#2}
-  \csdef{res-keywords-\thenumresumo}{#3}
-  \IfStrEq{#1}{\languagename}{\renewcommand{\palavraschave}{#3}}{}
-}
-
-% Opção para exibir a lista de figuras
+% Opcao para exibir a lista de figuras
 \newcommand{\incluilistadefiguras}{
   \gdef\@incluilistadefiguras{true}
 }
 
-% Opção para exibir a lista de tabelas
+% Opcao para exibir a lista de tabelas
 \newcommand{\incluilistadetabelas}{
   \gdef\@incluilistadetabelas{true}
 }
 
-% Opção para exibir a lista de siglas
+% Opcao para exibir a lista de siglas
 \newcommand{\incluilistadesiglas}{
   \gdef\@incluilistadesiglas{true}
 }
 
-% Opção para exibir a lista de símbolos
+% Opcao para exibir a lista de simbolos
 \newcommand{\incluilistadesimbolos}{
   \gdef\@incluilistadesimbolos{true}
 }
 
-% Opção para exibir a lista de quadros
+% Opcao para exibir a lista de quadros
 \newcommand{\incluilistadequadros}{
   \gdef\@incluilistadequadros{true}
 }
 
-% Opção para exibir a lista de algoritmos
+% Opcao para exibir a lista de algoritmos
 \newcommand{\incluilistadealgoritmos}{
   \gdef\@incluilistadealgoritmos{true}
 }
 
-% Opção para exibir a lista de códigos
+% Opcao para exibir a lista de codigos
 \newcommand{\incluilistadecodigos}{
   \gdef\@incluilistadecodigos{true}
 }
 
-% Comando para inclusão da ficha catalográfica
+% Comando para inclusao da ficha catalografica
 \newboolean{opt-fichacatalografica}
 \setboolean{opt-fichacatalografica}{false}
 \newcommand{\incluifichacatalografica}[1]{
-    % Incluir um arquivo externo como ficha catalográfica
+    % Incluir um arquivo externo como ficha catalografica
     \setboolean{opt-fichacatalografica}{true}%
     \gdef\@arquivofichacatalografica{#1}%
 }
 
 
 %================================================================================
-% Definição dos ambientes matemáticos
+% Definicao dos ambientes matematicos
 %================================================================================
 
 \providecommand*{\theoremaname}{Theorem}
@@ -760,9 +660,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \providecommand*{\definicaoname}{Definition}
 \providecommand*{\demonstracaoname}{Demonstration}
 
-\providecommand*{\sourcecodeautorefname}{Source code}
 \addto\captionsbrazil{% portugues-brasil
-    %% ajusta nomes padroes do babel
     \renewcommand{\theoremaname}{Teorema}
     \renewcommand{\proposicaoname}{Proposi{\c c}{\~a}o}
     \renewcommand{\lemaname}{Lema}
@@ -783,39 +681,23 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \newtheorem{definicao}{\definicaoname}
 \newenvironment{demonstracao}{\begin{proof}[\demonstracaoname]}{\end{proof}}
 
+
 %================================================================================
-% Criação dos Ambientes Flutuantes para Quadros, Algoritmos e Cógidos
+% Criacao dos Ambientes Flutuantes para Quadros
 %================================================================================
 
 \newcommand{\listquadroname}{Lista de quadros}
 \newcommand{\quadroname}{Quadro}
 \newcommand{\quadrorefname}{Quadro}
-
-\newcommand{\listalgoritmoname}{Lista de algoritmos}
-\newcommand{\algoritmoname}{Algoritmo}
-\newcommand{\algoritmorefname}{Algoritmo}
-
-\newcommand{\listcodigoname}{Lista de c{\'o}digos-fonte}
-\newcommand{\codigoname}{C{\'o}digo-fonte}
-\newcommand{\codigorefname}{C{\'o}digo-fonte}
+\newcommand{\chartautorefname}{Quadro}
 
 \addto\captionsenglish{% ingles
-    %% adjusts names from abnTeX2
     \renewcommand{\listquadroname}{List of charts}
     \renewcommand{\quadroname}{Chart}
     \renewcommand{\quadrorefname}{Chart}
-    \renewcommand{\listalgoritmoname}{List of algorithms}
-    \renewcommand{\algoritmoname}{Algorithm}
-    \renewcommand{\algoritmorefname}{Algorithm}
-    \renewcommand{\listcodigoname}{List of source codes}
-    \renewcommand{\codigoname}{Source code}
-    \renewcommand{\codigorefname}{Source code}
+    \renewcommand{\chartautorefname}{Chart}
 }
 
-
-% ---
-% Formatação de ambiente Quadro
-% ---
 \newfloat{quadro}{htbp}{loq}[chapter]
 \floatname{quadro}{\quadroname}
 \floatstyle{plaintop}
@@ -829,52 +711,74 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \renewcommand*{\cftquadroaftersnum}{\hfill\textendash\hfill}
 
 
+%================================================================================
+% Criacao dos Ambientes Flutuantes para Algoritmos
+%================================================================================
 
-% ---
-% Formatação de ambiente Algoritmo
-% ---
+\newcommand{\listalgoritmoname}{Lista de algoritmos}
+\newcommand{\algoritmoname}{Algoritmo}
+\newcommand{\algoritmorefname}{Algoritmo}
+\newcommand{\algorithmautorefname}{Algoritmo}
 
-% Altera o rótulo a ser usando no elemento pré-textual "Lista de algoritmos"
+\addto\captionsenglish{% ingles
+    \renewcommand{\listalgoritmoname}{List of algorithms}
+    \renewcommand{\algoritmoname}{Algorithm}
+    \renewcommand{\algoritmorefname}{Algorithm}
+    \renewcommand{\algorithmautorefname}{Algorithm}
+}
+
+% Altera o rotulo a ser usando no elemento pre-textual "Lista de algoritmos"
 \renewcommand{\listalgorithmname}{\listalgoritmoname}%
-% Altera o nome padrão do rótulo
-%\renewcommand{\algorithmname}{\algoritmoname}%
+% Altera o nome padrao do rotulo
 \floatname{algorithm}{\algoritmoname}
 
 % Configura a ``Lista de algoritmos'' conforme as regras da ABNT (para abnTeX2)
 \begingroup
-\let\newcounter\@gobble\let\setcounter\@gobbletwo
+  \let\newcounter\@gobble\let\setcounter\@gobbletwo
   \globaldefs\@ne \let\c@loldepth\@ne
   \newlistof{algorithmt}{loa}{\listalgorithmname}
   \newlistentry{algorithmt}{loa}{0}
 \endgroup
 
-   \let\oldlistofalgorithms\listofalgorithms
+\let\oldlistofalgorithms\listofalgorithms
 \newcommand{\NEWnumberline}[1]{\hspace*{-12pt}Algoritmo #1~~\textendash~~}%
 \renewcommand{\listofalgorithms}{%
-\let\OLDnumberline\numberline%
-\let\numberline\NEWnumberline%
-\oldlistofalgorithms%
-\let\numberline\OLDnumberline%
+  \let\OLDnumberline\numberline%
+  \let\numberline\NEWnumberline%
+  \oldlistofalgorithms%
+  \let\numberline\OLDnumberline%
 }%
 
 % Cria um novo ambiente "algoritmo" que inclui o ambiente "algorithm"
 \newenvironment{algoritmo}[1][htb]{
-    \begin{algorithm}[#1]%
-    }{\end{algorithm}}
+  \begin{algorithm}[#1]%
+}{\end{algorithm}}
 
 
-% ---
-% Formatação de código-fonte
-% ---
+%================================================================================
+% Criacao dos Ambientes Flutuantes para Cogidos
+%================================================================================
 
-% Altera o nome padrão do rótulo 
+\newcommand{\listcodigoname}{Lista de c{\'o}digos-fonte}
+\newcommand{\codigoname}{C{\'o}digo-fonte}
+\newcommand{\codigorefname}{C{\'o}digo-fonte}
+\newcommand{\sourcecodeautorefname}{C{\'o}digo-fonte}
+
+\addto\captionsenglish{% ingles
+    \renewcommand{\listcodigoname}{List of source codes}
+    \renewcommand{\codigoname}{Source code}
+    \renewcommand{\codigorefname}{Source code}
+    \renewcommand{\sourcecodeautorefname}{Source code}
+}
+
+% Altera o nome padrao do rotulo 
 \renewcommand{\lstlistingname}{\codigoname}
-% Altera o rótulo a ser usando no elemento pré-textual "Lista de códigos"
+% Altera o rotulo a ser usando no elemento pre-textual "Lista de codigos"
 \renewcommand{\lstlistlistingname}{\listcodigoname}
 
-% Configura a ``Lista de códigos'' conforme as regras da ABNT (para abnTeX2)
+% Configura a ``Lista de codigos'' conforme as regras da ABNT (para abnTeX2)
 \begingroup
-\let\newcounter\@gobble\let\setcounter\@gobbletwo
+  \let\newcounter\@gobble\let\setcounter\@gobbletwo
   \globaldefs\@ne \let\c@loldepth\@ne
   \newlistof{listings}{lol}{\lstlistlistingname}
   \newlistentry{lstlisting}{lol}{0}
@@ -888,19 +792,26 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
    \let\oldnumberline\numberline%
    \renewcommand{\numberline}{\lstlistingname\space\oldnumberline}%
    \oldlstlistoflistings%
-   \endgroup}
+   \endgroup%
+}
    
 \def\lst@numbersymbol{}
 \lst@Key{numbersymbol}{}{\def\lst@numbersymbol{#1}}
 \lst@Key{numbers}{none}{%
     \let\lst@PlaceNumber\@empty
     \lstKV@SwitchCases{#1}%
-    {none&\\%
-     left&\def\lst@PlaceNumber{\llap{\normalfont
-                \lst@numberstyle{\thelstnumber\lst@numbersymbol}\kern\lst@numbersep}}\\%
-     right&\def\lst@PlaceNumber{\rlap{\normalfont
-                \kern\linewidth \kern\lst@numbersep
-                \lst@numberstyle{\lst@numbersymbol\thelstnumber}}}%
+    {%
+      none&\\%
+      left&\def\lst@PlaceNumber{%
+        \llap{%
+          \normalfont\lst@numberstyle{\thelstnumber\lst@numbersymbol}\kern\lst@numbersep%
+        }%
+      }\\%
+        right&\def\lst@PlaceNumber{%
+          \rlap{%
+            \normalfont\kern\linewidth\kern\lst@numbersep\lst@numberstyle{\lst@numbersymbol\thelstnumber}%
+          }%
+        }%
     }{\PackageError{Listings}{Numbers #1 unknown}\@ehc}
 }
 
@@ -926,30 +837,31 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 {\setcounter{countcodigo}{\value{lstnumber}}}
 
 \addto\captionsbrazil{% portugues-brasil
-% Declaracoes em Português
-\algrenewcommand\algorithmicend{\textbf{fim}}
-\algrenewcommand\algorithmicdo{\textbf{fa{\c c}a}}
-\algrenewcommand\algorithmicwhile{\textbf{enquanto}}
-\algrenewcommand\algorithmicfor{\textbf{para}}
-\algrenewcommand\algorithmicif{\textbf{se}}
-\algrenewcommand\algorithmicthen{\textbf{ent{\~a}o}}
-\algrenewcommand\algorithmicelse{\textbf{sen{\~a}o}}
-\algrenewcommand\algorithmicreturn{\textbf{retorna}}
-\algrenewcommand\algorithmicfunction{\textbf{fun{\c c}{\~a}o}}
-\algrenewcommand\algorithmicforall{\textbf{para todo}}
-\algrenewcommand\algorithmicloop{\textbf{la{\c c}o}}
-\algrenewcommand\algorithmicrepeat{\textbf{repita}}
-\algrenewcommand\algorithmicuntil{\textbf{at{\'e}}}
-\algrenewcommand\algorithmicprocedure{\textbf{procedimento}}
-\algrenewcommand\algorithmicrequire{\textbf{Requer:}}
-\algrenewcommand\algorithmicensure{\textbf{Assegure:}}
+    \algrenewcommand\algorithmicend{\textbf{fim}}
+    \algrenewcommand\algorithmicdo{\textbf{fa{\c c}a}}
+    \algrenewcommand\algorithmicwhile{\textbf{enquanto}}
+    \algrenewcommand\algorithmicfor{\textbf{para}}
+    \algrenewcommand\algorithmicif{\textbf{se}}
+    \algrenewcommand\algorithmicthen{\textbf{ent{\~a}o}}
+    \algrenewcommand\algorithmicelse{\textbf{sen{\~a}o}}
+    \algrenewcommand\algorithmicreturn{\textbf{retorna}}
+    \algrenewcommand\algorithmicfunction{\textbf{fun{\c c}{\~a}o}}
+    \algrenewcommand\algorithmicforall{\textbf{para todo}}
+    \algrenewcommand\algorithmicloop{\textbf{la{\c c}o}}
+    \algrenewcommand\algorithmicrepeat{\textbf{repita}}
+    \algrenewcommand\algorithmicuntil{\textbf{at{\'e}}}
+    \algrenewcommand\algorithmicprocedure{\textbf{procedimento}}
+    \algrenewcommand\algorithmicrequire{\textbf{Requer:}}
+    \algrenewcommand\algorithmicensure{\textbf{Assegure:}}
 }
+
 % Rearranja os finais de cada estrutura
 \algrenewtext{EndWhile}{\algorithmicend\ \algorithmicwhile}
 \algrenewtext{EndFor}{\algorithmicend\ \algorithmicfor}
 \algrenewtext{EndIf}{\algorithmicend\ \algorithmicif}
 \algrenewtext{EndFunction}{\algorithmicend\ \algorithmicfunction}
-% O comando For, a seguir, retorna 'para #1 -- #2 até #3 faça'
+
+% O comando For, a seguir, retorna 'para #1 -- #2 ate #3 faca'
 \algnewcommand\algorithmicto{\textbf{at{\'e}}}
 \algrenewtext{For}[3]%
 {\algorithmicfor\ #1 $\gets$ #2 \algorithmicto\ #3 \algorithmicdo}
@@ -958,7 +870,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 %================================================================================
 % Comando para configurar os captions no documento
 %================================================================================
-\renewcommand{\ABNTEXfontereduzida}{\small} % Fonte reduzida para 11pt, conforme recomendação da USP
+\renewcommand{\ABNTEXfontereduzida}{\small} % Fonte reduzida para 11pt, conforme recomendacao da USP
 \DeclareCaptionFont{ABNTEXfontereduzida}{\ABNTEXfontereduzida}
 \captionsetup{position=above, labelfont=ABNTEXfontereduzida, font=ABNTEXfontereduzida}
 
@@ -966,43 +878,44 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \captionsetup[lstlisting]{format=listing,singlelinecheck=false, margin=0pt,labelsep=endash,labelfont=bf, font=normalsize}
 \captionsetup[algorithm]{singlelinecheck=false, margin=0pt,labelsep=endash,labelfont=bf, font=normalsize}
 
+
 %================================================================================
-% Dedicatória
+% Dedicatoria
 %================================================================================
 
-% Comando para definição da dedicatória
+% Comando para definicao da dedicatoria
 \def\textodedicatoria{\@ifstar\@textodedicatoria\@@textodedicatoria}
-% Inclui texto de um arquivo como dedicatória
+% Inclui texto de um arquivo como dedicatoria
 \def\@textodedicatoria#1{\gdef\@dedicatoria{\input{#1}}} % \textodedicatoria*{}{} 
-% Inclui o texto como dedicatória
+% Inclui o texto como dedicatoria
 \def\@@textodedicatoria#1{\gdef\@dedicatoria{#1}}       % \textodedicatoria{}{}
 
-% Criação da dedicatória
-\newcommand{\inserededicatoria}
-{
-  \@ifundefined{@dedicatoria}{}{
-    \begin{dedicatoria}
-   \vspace*{\fill}
-   \centering
-   \noindent
-      \textit{\@dedicatoria}
-     \vspace*{\fill}
-\end{dedicatoria}
-  }
+% Criacao da dedicatoria
+\newcommand{\inserededicatoria}{
+    \@ifundefined{@dedicatoria}{}{
+      \begin{dedicatoria}
+        \vspace*{\fill}
+        \centering
+        \noindent
+        \textit{\@dedicatoria}
+        \vspace*{\fill}
+      \end{dedicatoria}
+    }
 }
+
 
 %================================================================================
 % Agradecimentos
 %================================================================================
 
-% Comando para definição dos agradecimentos
+% Comando para definicao dos agradecimentos
 \def\textoagradecimentos{\@ifstar\@textoagradecimentos\@@textoagradecimentos}
 % Inclui texto de um arquivo como agradecimentos
 \def\@textoagradecimentos#1{\gdef\@agradecimentos{\input{#1}}} % \textoagradecimentos*{}{}
 % Inclui o texto como agradecimentos
 \def\@@textoagradecimentos#1{\gdef\@agradecimentos{#1}} % \textoagradecimentos{}{}
 
-% Criação dos agradecimentos
+% Criacao dos agradecimentos
 \newcommand{\insereagradecimentos}
 {
   \@ifundefined{@agradecimentos}{}{
@@ -1012,18 +925,18 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
   }
 }
 
+
 %================================================================================
-% Epígrafe
+% Epigrafe
 %================================================================================
 
-% Comando para definição da epígafe
+% Comando para definicao da epigafe
 \def\textoepigrafe{\@ifstar\@textoepigrafe\@@textoepigrafe}
-% Inclui texto de um arquivo como epígafe
+% Inclui texto de um arquivo como epigafe
 \def\@textoepigrafe#1{\gdef\@epigrafe{\input{#1}}}      % \textoepigrafe*{}{} 
-% Inclui o texto como epígafe
+% Inclui o texto como epigafe
 \def\@@textoepigrafe#1{\gdef\@epigrafe{#1}}             % \textoepigrafe{}{}
-
-% Criação da epígafe
+% Criacao da epigafe
 \newcommand{\insereepigrafe}
 {
   \@ifundefined{@epigrafe}{}{
@@ -1031,25 +944,26 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
       \vspace*{\fill}
 	  \begin{flushright}
 		\textit{\@epigrafe}
-	 \end{flushright}
+	  \end{flushright}
     \end{epigrafe}	 
     
   }
 }
 
+
 %================================================================================
-% Lista de Símbolos
+% Lista de Simbolos
 %================================================================================
 
-% Comando para inserir simbolos na lista de símbolos
+% Comando para inserir simbolos na lista de simbolos
 \newcommand{\simbolo}[2]{
   \addcontentsline{los}{simbolo}{\ensuremath{#1} --- #2}%
 }
 
-% Apresentação dos símbolos na lista de símbolos
+% Apresentacao dos simbolos na lista de simbolos
 \newcommand\l@simbolo[2]{\par #1}
 
-% Criação da lista de símbolos
+% Criacao da lista de simbolos
 \newcommand{\inserelistadesimbolos}
 {
   \@ifundefined{@incluilistadesimbolos}{}{
@@ -1061,6 +975,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
   }
 }
 
+
 %================================================================================
 % Ficha Catalografica
 %================================================================================
@@ -1069,7 +984,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 {
     \@ifundefined{@arquivofichacatalografica}{
         \PackageError{ICMC}{Some file is missing}{
-            A ficha catalográfica não foi inserida!
+            A ficha catalografica nao foi inserida!
         }
     }{
         \begin{fichacatalografica}
@@ -1083,6 +998,16 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 % Resumo
 %================================================================================
 
+% Comando para definicao dos resumos e palavras-chave
+\newcounter{numresumo}
+\newcommand{\textoresumo}[3][\languagename]{
+  \stepcounter{numresumo}%
+  \csdef{res-language-\thenumresumo}{#1}
+  \csdef{res-text-\thenumresumo}{#2}
+  \csdef{res-keywords-\thenumresumo}{#3}
+  \IfStrEq{#1}{\languagename}{\renewcommand{\palavraschave}{#3}}{}
+}
+
 \newcommand{\xselectlanguage}[1]{\begingroup\edef\x{\endgroup\noexpand\selectlanguage{#1}}\x}
 \newenvironment{xotherlanguage}[1]{%
   \begingroup%
@@ -1093,19 +1018,19 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 
 \providecommand{\imprimirlanguage}{brazil}
 
-% Criação do resumo e palavras chaves no documento
+% Criacao do resumo e palavras chaves no documento
 \newcommand{\insereresumo}
 {
 
-% Títulos do Resumo
+% Titulos do Resumo
 \csdef{res-title-english}{Abstract}
 \csdef{res-title-brazil}{Resumo}
-\csdef{res-title-french}{Résumé}
+\csdef{res-title-french}{R{\'e}sum{\'e}}
 \csdef{res-title-spanish}{Resumen}
 % Labels: Palavras-chave
 \csdef{res-label-keywords-english}{Keywords}
 \csdef{res-label-keywords-brazil}{Palavras-chave}
-\csdef{res-label-keywords-french}{Mots-clés}
+\csdef{res-label-keywords-french}{Mots-cl{\'e}s}
 \csdef{res-label-keywords-spanish}{Palabras clave}
 
 % Contador das palavras-chave
@@ -1123,11 +1048,11 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
         \phantomsection
         \begin{resumo}[\csuse{res-title-\csuse{res-language-\thecount}}]
                 \begin{SingleSpace}
-                    \IfEndWith{\ABNTautorreferencia}{.}{\MakeUppercase{\ABNTautorreferencia}}{\MakeUppercase{\ABNTautorreferencia}.}
-                    \foreignlanguage{\imprimirlanguage}{%
-                        \textbf{\IfLangPortuguese{\imprimirtituloPT}{\imprimirtituloEN}}. %
-                    }%
-                    \@year. \pageref{LastPage} p. \imprimirtipotrabalho~(\tipodocurso~\imprimirespecialidade) -- Instituto de Ciências Matemáticas e de Computação, Universidade de S\~ao Paulo, \imprimirlocal, \@year.
+                    \begin{otherlanguage}{brazil}
+                    \IfEndWith{\ABNTautorreferencia}{.}{\MakeUppercase{\ABNTautorreferencia}}{\MakeUppercase{\ABNTautorreferencia}.}~%
+                    \textbf{\IfEq{\imprimiridioma}{PT}{\imprimirtituloPT}{\imprimirtituloEN}}. %
+                    \@year. \pageref{LastPage} p. \imprimirtipotrabalho~(\tipodocurso~\imprimirespecialidade) -- Instituto de Ci{\^e}ncias Matem{\'a}ticas e de Computa{\c c}{\~a}o, Universidade de S\~ao Paulo, \imprimirlocal, \@year.
+                    \end{otherlanguage}
                 \end{SingleSpace}
                 
                 \vskip 20pt
@@ -1146,8 +1071,9 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     }
 }
 
+
 %================================================================================
-% Definição de comandos a serem inseridos diretamente no início do documento
+% Definicao de comandos a serem inseridos diretamente no inicio do documento
 %================================================================================
 
 \newcommand{\inserelistadefiguras}
@@ -1206,35 +1132,139 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
   }
 }
 
-%================================================================================
-% INDICE REMISSIVO
-%================================================================================
-
-\makeindex
 
 %================================================================================
-% Configuração do modelo de capa exigido pelo programa do ICMC
-%=============================================================================
+% Configuracao da fonte utilizada na capa exigida pelo ICMC
+%================================================================================
+
+\newcommand{\@icmcFont}[2][]{\fontsize{#2}{#2}\ifthenelse{\isempty{#1}}{}{\fontspec[Mapping = tex-text, Path = packages/fonts/]{#1}}}
+
+\ifthenelse{\boolean{luatex} \or \boolean{xetex}}{
+  % Configuracao da fonte para a compilacao por XeLaTeX ou LuaLaTeX
+  \RequirePackage{fontspec}
+  \ifxetex
+    \RequirePackage{xltxtra}
+  \fi
+    \newfontfamily{\arial}[
+        Ligatures=TeX, % recommended
+        Mapping         = tex-text,
+        Path            = packages/fonts/,
+        BoldFont        = *bd,
+        ItalicFont      = *i,
+        BoldItalicFont  = *bi]{arial}
+    
+    \newcommand\@icmcTitulo{\arial\bfseries\itshape}
+    \newcommand\@icmcAutorCapa{\@icmcFont{26}\arial\bfseries}
+    \newcommand\@icmcPrograma{\@icmcFont{9}\arial}
+    \newcommand\@icmcTipoTrabalho{\@icmcFont{16}\arial\bfseries}
+    \newcommand\@icmcAutorFolhaRosto{\@icmcFont{13}\arial\bfseries}
+    \newcommand\@icmcTituloFolhaRosto{\@icmcFont{17}\arial}
+    \newcommand\@icmcOrientador{\@icmcFont{10}\arial}
+    \newcommand\@icmcPreambulo{\@icmcFont{10}\arial}
+    \newcommand\@icmcLocalData{\@icmcFont{11}\arial\bfseries}
+    \newcommand\@icmcCarimbo{\@icmcFont{11}\arial}
+    \newcommand\@icmcSVPG{\@icmcFont{8}\arial}
+}{
+    % Configuracao da fonte para a compilacao por pdfLaTeX
+    \RequirePackage[T1]{fontenc}	    	% Selecao de codigos de fonte.
+    \RequirePackage[utf8]{inputenc}		% Codificacao do documento (conversao automatica dos acentos)
+      
+    \newcommand\@icmcTitulo{\selectfont\usefont{T1}{phv}{b}{it}}
+    \newcommand\@icmcAutorCapa{\fontsize{25pt}{1em}\selectfont\usefont{T1}{phv}{b}{n}}
+    \newcommand\@icmcPrograma{\fontsize{9pt}{1em}\selectfont\usefont{T1}{phv}{m}{n}}
+    \newcommand\@icmcTipoTrabalho{\fontsize{16pt}{1em}\selectfont\usefont{T1}{phv}{b}{n}}
+    \newcommand\@icmcAutorFolhaRosto{\fontsize{13pt}{1em}\selectfont\usefont{T1}{phv}{b}{n}}
+    \newcommand\@icmcTituloFolhaRosto{\fontsize{17pt}{1em}\selectfont\usefont{T1}{phv}{m}{n}}
+    \newcommand\@icmcOrientador{\fontsize{10pt}{1em}\selectfont\usefont{T1}{phv}{m}{n}}
+    \newcommand\@icmcPreambulo{\fontsize{10pt}{1em}\selectfont\usefont{T1}{phv}{m}{n}}
+    \newcommand\@icmcLocalData{\fontsize{11pt}{1em}\selectfont\usefont{T1}{phv}{b}{n}}
+    \newcommand\@icmcCarimbo{\fontsize{11pt}{1em}\selectfont\usefont{T1}{phv}{m}{n}}
+    \newcommand\@icmcSVPG{\fontsize{8pt}{1em}\selectfont\usefont{T1}{phv}{m}{n}}
+}
+
+
+%================================================================================
+% Configuracao do modelo de capa exigido pelo programa do ICMC
+%================================================================================
+
+% Configuracao para reduzir tamanho do Titulo da capa automaticamente
+\NewEnviron{fittext}{\def\trysize{24pt}\retry}
+
+\def\retry{%
+  \expandafter\@firstofone
+  {
+    \edef\trysize{\the\dimexpr\trysize-0.1pt\relax}%
+    \sbox0{%
+      \begin{minipage}{134mm}%
+        \linespread{1.0}
+        \begingroup\edef\x{
+          \endgroup\noexpand\fontsize{\trysize}{\trysize}\noexpand\@icmcTitulo%
+        }%
+        \x\BODY
+      \end{minipage}%
+    }%
+  }%
+  \dimen0=\dimexpr\ht0+\dp0\relax
+  \ifdim\dimen0>.4\textwidth
+    \expandafter\retry
+  \else
+    \expandafter\parindent0pt\begin{minipage}[c][65.5mm][c]{134mm}\usebox{0}\end{minipage}
+  \fi
+}
 
 % alterando a capa
 \renewcommand{\imprimircapa}{%
   \begin{capa}%
-    \center
-    ~\\
-    \vspace{7.1cm}
-    \begin{minipage}{14.8cm}
-    \center
-    \rule{\textwidth}{1pt} \\
-    \vspace{8mm}
-    \begin{Spacing}{1.5}
-        {\@icmcTitulo\nohyphens{\imprimirtitulo}} \\
-    \end{Spacing}
-    \vspace{8mm}
-    {\@icmcAutorCapa\nohyphens{\imprimirautor}} \\
-    \vspace{5mm}
-    \rule{\textwidth}{1pt} \\
-    \end{minipage}%
-    ~\\
+    
+    \begin{textblock*}{149mm}(56mm,56mm)%
+      \noindent%
+      \begin{minipage}[t][10mm][b]{149mm}
+        \begin{SingleSpace}
+        \linespread{0.9}%
+        \begin{flushleft}
+          \nohyphens{%
+            \textcolor{white}{%
+              \@icmcPrograma\imprimirprograma~(\imprimirsiglaprograma)%
+            }%
+          }%
+        \end{flushleft}
+        \end{SingleSpace}
+      \end{minipage}
+    \end{textblock*}%
+
+    \begin{textblock*}{144mm}(66mm,68.5mm)%
+      \begin{fittext}
+        \centering%
+        \textcolor{blue-capa}{%
+          \nohyphens{\imprimirtitulo}
+        }
+      \end{fittext}
+    \end{textblock*}%
+
+    \begin{textblock*}{148mm}(62mm,138mm)%
+      \noindent
+      \begin{minipage}[t][65mm][t]{138mm}
+        \begin{otherlanguage}{brazil}
+          \begin{SingleSpace}
+            \linespread{1.0}%
+            \begin{flushright}
+              \nohyphens{%
+                \color{white}%
+                \@icmcAutorCapa\imprimirautor%
+                
+                \vspace{2mm}%
+                
+                {\@icmcTipoTrabalho\imprimirtipotrabalho~de \ifthenelse{\boolean{opt-qualificacao}}{Qualifica{\c c}{\~a}o de }{}\tipodocurso}%
+              }
+            \end{flushright}
+          \end{SingleSpace}
+        \end{otherlanguage}
+      \end{minipage}
+    \end{textblock*}%
+
+    \AddToShipoutPictureBG*{\includegraphics[height=\paperheight]{packages/capa}}
+    ~
+    
   \end{capa}
 }
 
@@ -1243,107 +1273,92 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 \setboolean{carimbo-folha-rosto}{true}
 \renewcommand{\folhaderostocontent}{
 
-\vspace*{-6.2mm}
-\ifthenelse{\boolean{carimbo-folha-rosto}}
-    {
-        \makebox[14.9cm][r]{\fbox{\parbox{7.2cm}{
-        \vspace{0.3cm}
-        \makebox[\linewidth][c]{\@icmcSVPG{SERVIÇO DE PÓS-GRADUAÇÃO DO ICMC-USP}}
+  \vspace*{-6.2mm}
+  \ifthenelse{\boolean{carimbo-folha-rosto}}{
+    \makebox[14.9cm][r]{%
+      \fbox{
+        \parbox{7.2cm}{
+          \vspace{0.3cm}
+          \makebox[\linewidth][c]{\@icmcSVPG{SERVI{\c C}O DE P{\'O}S-GRADUA{\c C}{\~A}O DO ICMC-USP}}
           
           {
-              \@icmcCarimbo
-              \vspace{12pt}
-              \hspace{2pt} Data de Depósito:
+            \@icmcCarimbo
+            \vspace{12pt}
+            \hspace{2pt} Data de Dep{\'o}sito:
               
-              \vspace{9pt}
-              \hspace{2pt} Assinatura: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-              \vspace{9pt}
+            \vspace{9pt}
+            \hspace{2pt} Assinatura: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+            \vspace{9pt}
           }
-        }}}
+        }
+      }
     }
-    {\vspace{2.95cm}}
-\begin{center}
+  }{\vspace{2.95cm}}
+  \begin{center}
 
-\vspace{0.5cm}
+    \vspace{0.5cm}
 
-{\@icmcAutorFolhaRosto\nohyphens{\imprimirautor}}
+    {\@icmcAutorFolhaRosto\nohyphens{\imprimirautor}}
 
-\vfill
+    \vfill
 
-\begin{Spacing}{1.5}
-{\@icmcTituloFolhaRosto\nohyphens{\imprimirtitulo}}
-\end{Spacing}
-
-\vfill
-
-\abntex@ifnotempty{\imprimirpreambulo}{%
-  \hspace{.43\textwidth}
-  \begin{minipage}{8.4cm}
-    \begin{Spacing}{0.9}
-        {\@icmcPreambulo\imprimirpreambulo}%
-        
-        \vspace{5pt}
-        {\@icmcPreambulo\arealabel: \nohyphens{\imprimirarea}}%
-        
-        \vspace{5pt}
-        {\@icmcOrientador\imprimirorientadorRotulo: \titulacaoorientador{} \nohyphens{\imprimirorientador}}%
-        \abntex@ifnotempty{\imprimircoorientador}{%
-            \\{\@icmcOrientador\imprimircoorientadorRotulo: \titulacaocoorientador{} \nohyphens{\imprimircoorientador}}
-        }%
+    \begin{Spacing}{1.5}
+      {\@icmcTituloFolhaRosto\nohyphens{\imprimirtitulo}}
     \end{Spacing}
-  \end{minipage}%
-}%
 
+    \vfill
 
-\vspace{1cm}
-%\vspace{\fill}
-%\vspace{\fill}
+    \abntex@ifnotempty{\imprimirpreambulo}{%
+      \hspace{.43\textwidth}
+      \begin{minipage}{8.4cm}
+        \begin{Spacing}{0.9}
+          {\@icmcPreambulo\imprimirpreambulo}%
+        
+          \vspace{5pt}
+          {\@icmcPreambulo\arealabel: \nohyphens{\imprimirarea}}%
+        
+          \vspace{5pt}
+          {\@icmcOrientador\imprimirorientadorRotulo: \titulacaoorientador{} \nohyphens{\imprimirorientador}}%
+          \abntex@ifnotempty{\imprimircoorientador}{%
+              \\{\@icmcOrientador\imprimircoorientadorRotulo: \titulacaocoorientador{} \nohyphens{\imprimircoorientador}}
+          }%
+        \end{Spacing}
+      \end{minipage}%
+    }%
 
-{\@icmcLocalData
-\imprimiruniversidade~-- São Carlos\\ 
-\IfLangPortuguese
-    {\Monthname[\@month] de \@year\\}
-    {\Monthname[\@month]~\@year\\}
-}
-\vspace*{1.2cm}
-\end{center}
+    \vspace{1cm}
 
+    {
+      \@icmcLocalData
+      \imprimiruniversidade~-- S{\~a}o Carlos\\ 
+      \IfLangPortuguese{\Monthname[\@month] de \@year\\}{\Monthname[\@month]~\@year\\}
+    }
+    \vspace*{1.2cm}
+  \end{center}
+  
 } %folha de rosto
 
-%================================================================================
-% Configuração dos Estilo dos Capítulo
-%================================================================================
 
+%================================================================================
+% Configuracao dos Estilo dos Capitulo
+%================================================================================
 
 \makechapterstyle{icmc}{%
   \renewcommand{\chapterheadstart}{} 
   
-    % Secao secundaria (Section) Caixa baixa, Negrito
-    \renewcommand*{\cftsectionfont}{\bfseries}
-    % Secao terciaria (Subsection) Caixa baixa, Negrito, italico
-    \renewcommand*{\cftsubsectionfont}{\itshape\bfseries}
-    % Secao quaternaria (Subsubsection) Caixa baixa, italico
-    \renewcommand*{\cftsubsubsectionfont}{\itshape}
-    % Secao quinquenária (Subsubsubsection) Caixa baixa
-    \renewcommand*{\cftparagraphfont}{\normalsize}
-
+  % Secao secundaria (Section) Caixa baixa, Negrito
+  \renewcommand*{\cftsectionfont}{\bfseries}
+  % Secao terciaria (Subsection) Caixa baixa, Negrito, italico
+  \renewcommand*{\cftsubsectionfont}{\itshape\bfseries}
+  % Secao quaternaria (Subsubsection) Caixa baixa, italico
+  \renewcommand*{\cftsubsubsectionfont}{\itshape}
+  % Secao quinquenaria (Subsubsubsection) Caixa baixa
+  \renewcommand*{\cftparagraphfont}{\normalsize}
 
   % tamanhos de fontes de chapter e part	
-   \ifthenelse{\equal{\ABNTEXisarticle}{true}}{%
-     \setlength\beforechapskip{\baselineskip}
-     \renewcommand{\chaptitlefont}{\ABNTEXsectionfont\ABNTEXsectionfontsize}
-   }{%else
-     \setlength{\beforechapskip}{0pt}
-     \renewcommand{\ABNTEXchapterfontsize}{\LARGE}
-    
-    %\renewcommand{\ABNTEXchapterfont}{\sffamily\bfseries}  %alteração da fonte dos capítulos, seções e subseções
-    \renewcommand{\chaptitlefont}{\ABNTEXchapterfont\bfseries\ABNTEXchapterfontsize}
-   }
-  
-  \renewcommand{\chapnumfont}{\chaptitlefont}
-  \renewcommand{\parttitlefont}{\ABNTEXpartfont\ABNTEXpartfontsize}
-  \renewcommand{\partnumfont}{\ABNTEXpartfont\ABNTEXpartfontsize}
-  \renewcommand{\partnamefont}{\ABNTEXpartfont\ABNTEXpartfontsize}
+  \setlength{\beforechapskip}{0pt}
+  \renewcommand{\ABNTEXchapterfontsize}{\LARGE}
+  \renewcommand{\chaptitlefont}{\ABNTEXchapterfont\bfseries\ABNTEXchapterfontsize}
   
   % tamanhos de fontes de section, subsection, subsubsection e subsubsubsection
   \setsecheadstyle{\ABNTEXsectionfont\ABNTEXsectionfontsize\bfseries\ABNTEXsectionupperifneeded}
@@ -1355,10 +1370,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
   \renewcommand{\chapternamenum}{}
   
   % impressao do nome do capitulo
-  \renewcommand{\printchaptername}{%
-   %\chaptitlefont
-   %\ifthenelse{\boolean{abntex@apendiceousecao}}{\appendixname}{\chaptername}%
-  }
+  \renewcommand{\printchaptername}{}
     
   % impressao do titulo do capitulo
   \def\printchaptertitle##1{%
@@ -1371,60 +1383,51 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
         \vskip -2.8ex\hfill\rule{.8\textwidth}{2pt}
         \vskip 1.5ex
     
-    }{%
-    % else
+    }{% else
         {\hrulefill
         {\renewcommand{\arraystretch}{1.5} %  1 is the default, change whatever you need
         \begin{tabular}{|c|}
             \rowcolor{black}\color{white}\normalsize\ABNTEXchapterfont
               \ifthenelse{\boolean{abntex@apendiceousecao}}{\MakeTextUppercase{\appendixname}}{\MakeTextUppercase{\chaptername}}  \\ 
-            \vspace{-1.5ex}\\ %coloquei para aumentar o espaço entre o título e o número
+            \vspace{-1.5ex}\\ %coloquei para aumentar o espaco entre o titulo e o numero
             \resizebox{!}{1.1cm}{\ABNTEXchapterfont\thechapter}
             \\[2.5ex]
             \hline
         \end{tabular}}} \\
         \vskip 4.3ex \flushright\chaptitlefont\bfseries\ABNTEXchapterupperifneeded{##1} \\
         \vskip -0.6ex\hfill\rule{.8\textwidth}{0.5pt} \\
-        \vskip -2.8ex\hfill\rule{.8\textwidth}{2pt}\\
+        \vskip -2.8ex\hfill\rule{.8\textwidth}{2pt} \\
         \vskip 1.5ex
 	}    
-        
   }
-       
+
   % impressao do numero do capitulo     	
   \renewcommand{\printchapternum}{%
-    \setboolean{abntex@innonumchapter}{false}
+    \setboolean{abntex@innonumchapter}{false}%
   }
   \renewcommand{\afterchapternum}{}
   
   % impressao do capitulo nao numerado
   \renewcommand\printchapternonum{%
-     \setboolean{abntex@innonumchapter}{true}%
-    }
+    \setboolean{abntex@innonumchapter}{true}%
+  }
 }
 \chapterstyle{icmc}
 
 
-
 %================================================================================
-% Configurações diversas
+% Configuracoes diversas
 %================================================================================
 
-% ---
-% Configurações de aparência do PDF final
-% ---
-% alterando o aspecto da cor azul
-\definecolor{blue}{RGB}{41,5,195}
-
-% informações do PDF
+% informacoes do PDF
 \hypersetup{
-        unicode=true, % Codificação dos caracteres especiais no Bookmark
+        unicode=true, % Codificacao dos caracteres especiais no Bookmark
 		pdftitle={\@title}, 
 		pdfauthor={\@author},
     	pdfsubject={\imprimirpreambulo},
-	    pdfcreator={LaTeX with abnTeX2/ICMC-USP},
+	    pdfcreator={LaTeX with abnTeX2/ICMC-USP (v1.3.4)},
 		pdfkeywords={\palavraschave}, 
-		colorlinks=true,       		% false: boxed links; true: colored links
+		colorlinks={\colorlinks},   % colored links
     	linkcolor=blue,          	% color of internal links
     	citecolor=blue,        		% color of links to bibliography
     	filecolor=magenta,      	% color of file links
@@ -1432,30 +1435,11 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
 		bookmarksdepth=4
 }
 
-% alterando o aspecto da cor azul
+% Define as cores basicas utilizadas no documento
 \definecolor{blue}{RGB}{41,5,195}
 \definecolor{white}{RGB}{255,255,255}
 \definecolor{black}{RGB}{0,0,0}
-
-
-\providecommand*{\chartautorefname}{Chart}
-\providecommand*{\algorithmautorefname}{Algorithm}
-\providecommand*{\sourcecodeautorefname}{Source code}
-\addto\captionsbrazil{% portugues-brasil
-    %% ajusta nomes padroes do babel
-    \renewcommand{\sectionrefname}{se{\c c}\~ao~}   % \Sref{ }
-    \renewcommand{\chapterrefname}{Cap{\'i}tulo~}   % \Cref{ }
-    \renewcommand{\appendixrefname}{Ap{\^e}ndice~}  % \Aref{ }
-    \renewcommand{\bookrefname}{Livro~}             % \Bref{ }
-    \renewcommand{\partrefname}{Parte~}             % \Pref{ }
-    \renewcommand{\figurerefname}{Figura}           % \fref{ }
-    \renewcommand{\tablerefname}{Tabela}            % \tref{ }
-    \renewcommand{\pagerefname}{p{\'a}gina}         % \pref{ }
-    %% ajusta nomes usados com a macro \autoref
-    \renewcommand{\chartautorefname}{Quadro}
-    \renewcommand{\algorithmautorefname}{Algoritmo}
-    \renewcommand{\sourcecodeautorefname}{Código-fonte}
-}
+\definecolor{blue-capa}{RGB}{16,62,93}
 
 % Corrige warning gerado pelo uso do comando \uppercase
 \ifthenelse{\boolean{ABNTEXsumario-abnt-6027-2012}}{%v
@@ -1470,58 +1454,107 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     }
 }{}
 
-% Níveis de subseções
+% Niveis de subsecoes
 \setcounter{tocdepth}{4}
 \setcounter{secnumdepth}{4}
 
-% Ajusta o espaçamento dos parágrafos do resumo
+% Ajusta o espacamento dos paragrafos do resumo
 \setlength{\absparsep}{18pt}
 
-% O tamanho do parágrafo é dado por:
+% O tamanho do paragrafo e dado por:
 \setlength{\parindent}{1.3cm}
 
-% Controle do espaçamento entre um parágrafo e outro:
-\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+% Controle do espacamento entre um paragrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente tambem \onelineskip
 
-% Pasta padrão para as imagens
+% Pasta padrao para as imagens
 \graphicspath{{images/}}
 
 % Nome do local do instituto
-\local{São Carlos -- SP}
+\local{S{\~a}o Carlos -- SP}
 
-% Define o programa de Pós-Graduação padrão para o template
+% Define o programa de Pos-Graduacao padrao para o template
 \curso{CCMC}
+
+% Indice remissivo
+\makeindex
 
 
 %================================================================================
-% Configurações ao iniciar documento
+% Configuracoes para definir idioma principal do documento
+%================================================================================
+
+\def\HyLang@DeclareLang#1#2#3{%
+    \expandafter\HyLang@addto
+        \csname extras#1\expandafter\endcsname
+        \csname HyLang@#2\endcsname
+    \begingroup
+      \edef\x{\endgroup
+        #3%
+      }%
+    \x
+    \@namedef{HyLang@#1@done}{}%
+  \begingroup
+    \edef\x##1##2{%
+      \noexpand\ifx##2\relax
+        \errmessage{No definitions for language #2' found!}%
+      \noexpand\fi
+      \endgroup
+      \noexpand\define@key{Hyp}{#1}[]{%
+        \noexpand\@ifundefined{HyLang@#1@done}{%
+          \noexpand\HyLang@addto{\noexpand##1}{\noexpand##2}%
+          #3%
+          \noexpand\@namedef{HyLang@#1@done}{}%
+        }{}%
+      }%
+    }%
+  \expandafter\x\csname extras#1\expandafter\endcsname
+                \csname HyLang@#2\endcsname
+}
+% repeat the known language declarations
+\HyLang@DeclareLang{english}{english}{}
+\HyLang@DeclareLang{brazil}{portuges}{}
+\HyLang@DeclareLang{spanish}{spanish}{}
+
+\addto\extrasenglish{%
+  \def\chapterautorefname{Chapter}%
+}
+
+
+%================================================================================
+% Configuracoes ao iniciar documento
 %================================================================================
 \AtBeginDocument{
 
-% Altera o idioma principal caso o documento seja redigido em inglês
-\IfStrEq{\imprimiridioma}{EN}{\selectlanguage{english}}{}
-
-% Centraliza o caption das tabelas do IBGE, conforme recomendação da USP
-\renewcommand{\configurecaptions}{\captionstyle[singlelinecheck=on]{}}
-
-% suporte a alguns sequências comuns do LaTeX, como -- para travessão
-\ifxetex
-    \defaultfontfeatures{Mapping=tex-text}
-\else
-    \ifluatex
+    % Altera o idioma principal caso o documento seja redigido em ingles
+    \IfStrEq{\imprimiridioma}{EN}{
+        \selectlanguage{english}
+        \bibliographystyle{packages/abntexalfenglish}
+    }{}
+    
+    % Centraliza o caption das tabelas do IBGE, conforme recomendacao da USP
+    \renewcommand{\configurecaptions}{\captionstyle[singlelinecheck=on]{}}
+    
+    % suporte a alguns sequencias comuns do LaTeX, como -- para travessao
+    \ifxetex
         \defaultfontfeatures{Mapping=tex-text}
-        \setmainfont[Ligatures=TeX, SmallCapsFont={* Caps}]{Latin Modern Roman} 
+    \else
+        \ifluatex
+            \defaultfontfeatures{Mapping=tex-text}
+            \setmainfont[Ligatures=TeX, SmallCapsFont={* Caps}]{Latin Modern Roman} 
+        \fi
     \fi
-\fi
-
-\pretextual
+    
+    \pretextual
     
     % Capa
-    \imprimircapa
+    \ifthenelse{\boolean{opt-impressao}}{}{
+        \imprimircapa
+    }
 
-    % Folha de rosto e Ficha catalográfica (se houver)
+    % Folha de rosto e Ficha catalografica (se houver)
     \ifthenelse{\boolean{opt-fichacatalografica}}{
-        % (o * indica que haverá a ficha bibliográfica)
+        % (o * indica que havera a ficha bibliografica)
         \imprimirfolhaderosto*{}
 		\inserefichacatalografica
 		\newpage
@@ -1539,10 +1572,8 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
             \imprimirfolhaderosto{}
         \end{otherlanguage}
     }
-    
-    %\renewcommand{\rmdefault}{cmr}
 
-    % DEDICATÓRIA / AGRADECIMENTO / EPÍGRAFE
+    % DEDICATORIA / AGRADECIMENTO / EPIGRAFE
     \inserededicatoria
     \insereagradecimentos
     \insereepigrafe
@@ -1563,7 +1594,7 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
     \tableofcontents*
     \cleardoublepage
     
-    % Configuração dos caracteres especiais utilizados no pacote <listings>
+    % Configuracao dos caracteres especiais utilizados no pacote <listings>
     \lstset{%
         frame=top,
         frame=bottom,
@@ -1612,19 +1643,23 @@ Programas de Pós-graduação do Instituto de Ciências Matemáticas e de Comput
         {ü}{{\"u}}1
     }
     
-    % Numeração contínua do elementos do presentes no documento
+    % Numeracao continua do elementos do presentes no documento
     \counterwithout{quadro}{chapter}
     \counterwithout{lstlisting}{chapter}
     
     \mainmatter
 
-    % Retira espaço extra obsoleto entre as frases.
+    % Retira espaco extra obsoleto entre as frases.
     \frenchspacing
-    
-    \IfLangPortuguese{}{
-        \bibliographystyle{packages/abntexalfenglish}
+}
+
+
+\AtEndDocument{
+    \ifthenelse{\boolean{opt-impressao}}{}{
+        \includepdf[pages={1}]{packages/contra-capa.pdf}
     }
 }
 
+% ---
 % Finaliza comandos com @ no nome
 \makeatother

@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2017/06/14 v1.3.4 Classe ICMC baseado em abnTeX2 - Teses e Dissertacoes dos Programas de Pos-graduacao do Instituto de Ciencias Matematicas e de Computacao]
+\ProvidesClass{packages/icmc}[2017/06/20 v1.3.5 Classe ICMC baseado em abnTeX2 - Teses e Dissertacoes dos Programas de Pos-graduacao do Instituto de Ciencias Matematicas e de Computacao]
 \RequirePackage{xifthen}
 \RequirePackage{ifxetex}        % Verifica se a compilacao ocorre por xetex
 \RequirePackage{ifluatex}       % Verifica se a compilacao ocorre por luatex
@@ -478,7 +478,7 @@
     \ifthenelse{\equal{#1}{CCMC}}{
         \addto\captionsbrazil{
             \area{Ci{\^e}ncias de Computa{\c c}{\~a}o e Matem{\'a}tica Computacional}
-            \programa{PPG-CCMC}{Programa P{\'o}s-Gradua{\c c}{\~a}o em Ci{\^e}ncias de Computa{\c c}{\~a}o e Matem{\'a}tica Computacional}
+            \programa{PPG-CCMC}{Programa de P{\'o}s-Gradua{\c c}{\~a}o em Ci{\^e}ncias de Computa{\c c}{\~a}o e Matem{\'a}tica Computacional}
             \especialidade{em Ci{\^e}ncias -- Ci{\^e}ncias de Computa{\c c}{\~a}o e Matem{\'a}tica Computacional}
         }
         \addto\captionsenglish{% ingles
@@ -1050,7 +1050,7 @@
                 \begin{SingleSpace}
                     \begin{otherlanguage}{brazil}
                     \IfEndWith{\ABNTautorreferencia}{.}{\MakeUppercase{\ABNTautorreferencia}}{\MakeUppercase{\ABNTautorreferencia}.}~%
-                    \textbf{\IfEq{\imprimiridioma}{PT}{\imprimirtituloPT}{\imprimirtituloEN}}. %
+                    \textbf{\IfEq{\imprimirlanguage}{english}{\imprimirtituloEN}{\imprimirtituloPT}}. %
                     \@year. \pageref{LastPage} p. \imprimirtipotrabalho~(\tipodocurso~\imprimirespecialidade) -- Instituto de Ci{\^e}ncias Matem{\'a}ticas e de Computa{\c c}{\~a}o, Universidade de S\~ao Paulo, \imprimirlocal, \@year.
                     \end{otherlanguage}
                 \end{SingleSpace}
@@ -1425,7 +1425,7 @@
 		pdftitle={\@title}, 
 		pdfauthor={\@author},
     	pdfsubject={\imprimirpreambulo},
-	    pdfcreator={LaTeX with abnTeX2/ICMC-USP (v1.3.4)},
+	    pdfcreator={LaTeX with abnTeX2/ICMC-USP (v1.3.5)},
 		pdfkeywords={\palavraschave}, 
 		colorlinks={\colorlinks},   % colored links
     	linkcolor=blue,          	% color of internal links

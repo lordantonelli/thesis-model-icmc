@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2017/06/20 v1.3.5 Classe ICMC baseado em abnTeX2 - Teses e Dissertacoes dos Programas de Pos-graduacao do Instituto de Ciencias Matematicas e de Computacao]
+\ProvidesClass{packages/icmc}[2017/07/25 v1.3.6 Classe ICMC baseado em abnTeX2 - Teses e Dissertacoes dos Programas de Pos-graduacao do Instituto de Ciencias Matematicas e de Computacao]
 \RequirePackage{xifthen}
 \RequirePackage{ifxetex}        % Verifica se a compilacao ocorre por xetex
 \RequirePackage{ifluatex}       % Verifica se a compilacao ocorre por luatex
@@ -127,6 +127,7 @@
 \RequirePackage{environ}        % Pacote para definicao de ambientes
 \RequirePackage[absolute]{textpos} % Pacote para posicionamento do texto
 \RequirePackage{eso-pic}        % Pacote para incluir imagem de fundo
+\RequirePackage{adjustbox}      % Pacote para ajuste do tamanho do nome do autor na capa
 
 
 %================================================================================
@@ -471,8 +472,14 @@
 % Camando para definicao do programa de Pos-Graduacao, Especialidade do Titulo e Instituicao
 \newcommand{\curso}[1]{
 
-\universidade{USP}
-\instituicao{Instituto de Ci{\^e}ncias Matem{\'a}ticas e de Computa{\c c}{\~a}o -- ICMC-USP}
+\addto\captionsbrazil{
+    \universidade{USP}
+    \instituicao{Instituto de Ci{\^e}ncias Matem{\'a}ticas e de Computa{\c c}{\~a}o -- ICMC-USP}
+}
+\addto\captionsenglish{% ingles
+    \universidade{USP}
+    \instituicao{Institute of Mathematics and Computer Sciences -- ICMC-USP}
+}
 
 % CCMC ==========================================================================
     \ifthenelse{\equal{#1}{CCMC}}{
@@ -504,36 +511,36 @@
                     \instituicao{Instituto de Ci{\^e}ncias Matem{\'a}ticas e de Computa{\c c}{\~a}o -- ICMC-USP e ao Departamento de Estat{\'i}stica -- DEs-UFSCar}
                     \area{Estat{\'i}stica}
                     \programa{PIPGEs}{Programa Interinstitucional de P{\'o}s-Gradua{\c c}{\~a}o em Estat{\'i}stica}
-                    \especialidade{em Estat{\'i}stica -- Interinstitucional de P{\'o}s-Gradua{\c c}{\~a}o em Estat{\'i}stica}
+                    \especialidade{em Estat{\'i}stica -- Programa Interinstitucional de P{\'o}s-Gradua{\c c}{\~a}o em Estat{\'i}stica}
                 }
                 \addto\captionsenglish{% ingles
-                    \instituicao{Instituto de Ci{\^e}ncias Matem{\'a}ticas e de Computa{\c c}{\~a}o -- ICMC-USP and to the Departamento de Estat{\'i}stica -- DEs-UFSCar}
+                    \instituicao{Institute of Mathematics and Computer Sciences -- ICMC-USP and to the Department of Statistics -- DEs-UFSCar}
                     \area{Statistics}
-                    \especialidade{joint Graduate Program in Statistics DEs-UFSCar/ICMC-USP}
+                    \especialidade{Interagency Program Graduate in Statistics}
                 }
             }{
 % PROFMAT =======================================================================
                 \ifthenelse{\equal{#1}{PROFMAT}}{
                     \addto\captionsbrazil{
-                        \area{Matem{\'a}tica}
+                        \area{Mestrado Profissional em Matem{\'a}tica em Rede Nacional}
                         \programa{PROFMAT}{Programa de Mestrado Profissional em Matem{\'a}tica em Rede Nacional}
-                        \especialidade{em Ci{\^e}ncias -- Programa de Mestrado Profissional em Matem{\'a}tica}
+                        \especialidade{em Ci{\^e}ncias -- Mestrado Profissional em Matem{\'a}tica em Rede Nacional}
                     }
                     \addto\captionsenglish{% ingles
-                        \area{Mathematics}
-                        \especialidade{of Mathematics Professional Master’s Program} \renewcommand{\imprimirpreambulo}{\nohyphens{\imprimirtipotrabalho~submitted to the \imprimirinstituicao,\exam~\imprimirespecialidade. \textit{\tipoexemplar}}}
+                        \area{Professional Master Degree Program in Mathematics in National Network}
+                        \especialidade{of Mathematics Professional Master's Program} \renewcommand{\imprimirpreambulo}{\nohyphens{\imprimirtipotrabalho~submitted to the \imprimirinstituicao,\exam~\imprimirespecialidade. \textit{\tipoexemplar}}}
                     }
                 }{
 % MECAI =========================================================================
                     \ifthenelse{\equal{#1}{MECAI}}{
                         \addto\captionsbrazil{
-                            \area{Matem{\'a}tica, Estat{\'i}stica e Computa{\c c}{\~a}o Aplicadas {\`a} Ind{\'u}stria}
+                            \area{Matem{\'a}tica, Estat{\'i}stica e Computa{\c c}{\~a}o}
                             \programa{MECAI}{Programa de Mestrado Profissional em Matem{\'a}tica, Estat{\'i}stica e Computa{\c c}{\~a}o Aplicadas {\`a} Ind{\'u}stria}
-                            \especialidade{-- Programa de Mestrado Profissional em Matem{\'a}tica, Estat{\'i}stica e Computa{\c c}{\~a}o Aplicadas {\`a} Ind{\'u}stria}
+                            \especialidade{-- Mestrado Profissional em Matem{\'a}tica, Estat{\'i}stica e Computa{\c c}{\~a}o Aplicadas {\`a} Ind{\'u}stria}
                         }
                         \addto\captionsenglish{% ingles
-                            \area{Mathematics, Statistics and Computing Applied to Industry}
-                            \especialidade{-- Program in Mathematics, Statistics and Computing Applied to Industry}
+                            \area{Mathematics, Statistics and Computing}
+                            \especialidade{-- Professional Masters in Mathematics, Statistics and Computing Applied to Industry}
                         }
                     }{
 % Outros ========================================================================
@@ -1153,10 +1160,10 @@
         ItalicFont      = *i,
         BoldItalicFont  = *bi]{arial}
     
-    \newcommand\@icmcTitulo{\arial\bfseries\itshape}
-    \newcommand\@icmcAutorCapa{\@icmcFont{26}\arial\bfseries}
-    \newcommand\@icmcPrograma{\@icmcFont{9}\arial}
-    \newcommand\@icmcTipoTrabalho{\@icmcFont{16}\arial\bfseries}
+    \newcommand\@icmcTitulo{\arial\bfseries}
+    \newcommand\@icmcAutorCapa{\@icmcFont{14}\arial\bfseries}
+    \newcommand\@icmcPrograma{\@icmcFont{11}\arial}
+    \newcommand\@icmcTipoTrabalho{\@icmcFont{10}\arial}
     \newcommand\@icmcAutorFolhaRosto{\@icmcFont{13}\arial\bfseries}
     \newcommand\@icmcTituloFolhaRosto{\@icmcFont{17}\arial}
     \newcommand\@icmcOrientador{\@icmcFont{10}\arial}
@@ -1169,10 +1176,10 @@
     \RequirePackage[T1]{fontenc}	    	% Selecao de codigos de fonte.
     \RequirePackage[utf8]{inputenc}		% Codificacao do documento (conversao automatica dos acentos)
       
-    \newcommand\@icmcTitulo{\selectfont\usefont{T1}{phv}{b}{it}}
-    \newcommand\@icmcAutorCapa{\fontsize{25pt}{1em}\selectfont\usefont{T1}{phv}{b}{n}}
-    \newcommand\@icmcPrograma{\fontsize{9pt}{1em}\selectfont\usefont{T1}{phv}{m}{n}}
-    \newcommand\@icmcTipoTrabalho{\fontsize{16pt}{1em}\selectfont\usefont{T1}{phv}{b}{n}}
+    \newcommand\@icmcTitulo{\selectfont\usefont{T1}{phv}{b}{n}}
+    \newcommand\@icmcAutorCapa{\fontsize{14pt}{1em}\selectfont\usefont{T1}{phv}{b}{n}}
+    \newcommand\@icmcPrograma{\fontsize{11pt}{1em}\selectfont\usefont{T1}{phv}{m}{n}}
+    \newcommand\@icmcTipoTrabalho{\fontsize{10pt}{1em}\selectfont\usefont{T1}{phv}{m}{n}}
     \newcommand\@icmcAutorFolhaRosto{\fontsize{13pt}{1em}\selectfont\usefont{T1}{phv}{b}{n}}
     \newcommand\@icmcTituloFolhaRosto{\fontsize{17pt}{1em}\selectfont\usefont{T1}{phv}{m}{n}}
     \newcommand\@icmcOrientador{\fontsize{10pt}{1em}\selectfont\usefont{T1}{phv}{m}{n}}
@@ -1188,14 +1195,14 @@
 %================================================================================
 
 % Configuracao para reduzir tamanho do Titulo da capa automaticamente
-\NewEnviron{fittext}{\def\trysize{24pt}\retry}
+\NewEnviron{fittext}{\def\trysize{14pt}\retry}
 
 \def\retry{%
   \expandafter\@firstofone
   {
     \edef\trysize{\the\dimexpr\trysize-0.1pt\relax}%
     \sbox0{%
-      \begin{minipage}{134mm}%
+      \begin{minipage}{144mm}%
         \linespread{1.0}
         \begingroup\edef\x{
           \endgroup\noexpand\fontsize{\trysize}{\trysize}\noexpand\@icmcTitulo%
@@ -1208,55 +1215,44 @@
   \ifdim\dimen0>.4\textwidth
     \expandafter\retry
   \else
-    \expandafter\parindent0pt\begin{minipage}[c][65.5mm][c]{134mm}\usebox{0}\end{minipage}
+    \expandafter\parindent0pt\begin{minipage}[c][47mm][c]{144mm}\usebox{0}\end{minipage}
   \fi
 }
-
+  
 % alterando a capa
 \renewcommand{\imprimircapa}{%
   \begin{capa}%
-    
-    \begin{textblock*}{149mm}(56mm,56mm)%
-      \noindent%
-      \begin{minipage}[t][10mm][b]{149mm}
-        \begin{SingleSpace}
-        \linespread{0.9}%
-        \begin{flushleft}
-          \nohyphens{%
-            \textcolor{white}{%
-              \@icmcPrograma\imprimirprograma~(\imprimirsiglaprograma)%
-            }%
-          }%
-        \end{flushleft}
-        \end{SingleSpace}
-      \end{minipage}
-    \end{textblock*}%
 
-    \begin{textblock*}{144mm}(66mm,68.5mm)%
+    \begin{textblock*}{144mm}(61mm,65mm)%
       \begin{fittext}
         \centering%
-        \textcolor{blue-capa}{%
+        \textcolor{blue-capa}{
           \nohyphens{\imprimirtitulo}
         }
       \end{fittext}
     \end{textblock*}%
 
-    \begin{textblock*}{148mm}(62mm,138mm)%
+    \begin{textblock*}{130mm}(81mm,123mm)%
       \noindent
-      \begin{minipage}[t][65mm][t]{138mm}
+      \begin{minipage}[t][65mm][t]{125mm}
         \begin{otherlanguage}{brazil}
           \begin{SingleSpace}
             \linespread{1.0}%
-            \begin{flushright}
+            \begin{flushleft}
               \nohyphens{%
-                \color{white}%
-                \@icmcAutorCapa\imprimirautor%
+                \color{blue-capa}%
+                \maxsizebox{125mm}{5mm}{\@icmcAutorCapa\imprimirautor}%
                 
-                \vspace{2mm}%
+                \vspace{3mm}%
                 
-                {\@icmcTipoTrabalho\imprimirtipotrabalho~de \ifthenelse{\boolean{opt-qualificacao}}{Qualifica{\c c}{\~a}o de }{}\tipodocurso}%
+                \ifthenelse{\boolean{opt-qualificacao}}{%
+                    \@icmcPrograma Qualifica{\c c}{\~a}o de \tipodocurso~do \imprimirprograma~(\imprimirsiglaprograma)%
+                }{%
+                    \@icmcPrograma\imprimirtipotrabalho~de \tipodocurso~do \imprimirprograma~(\imprimirsiglaprograma)%
+                }%
+                
               }
-            \end{flushright}
+            \end{flushleft}
           \end{SingleSpace}
         \end{otherlanguage}
       \end{minipage}
@@ -1425,7 +1421,7 @@
 		pdftitle={\@title}, 
 		pdfauthor={\@author},
     	pdfsubject={\imprimirpreambulo},
-	    pdfcreator={LaTeX with abnTeX2/ICMC-USP (v1.3.5)},
+	    pdfcreator={LaTeX with abnTeX2/ICMC-USP (v1.3.6)},
 		pdfkeywords={\palavraschave}, 
 		colorlinks={\colorlinks},   % colored links
     	linkcolor=blue,          	% color of internal links

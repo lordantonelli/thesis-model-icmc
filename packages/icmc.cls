@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2017/07/25 v1.3.6 Classe ICMC baseado em abnTeX2 - Teses e Dissertacoes dos Programas de Pos-graduacao do Instituto de Ciencias Matematicas e de Computacao]
+\ProvidesClass{packages/icmc}[2017/10/17 v1.3.7 Classe ICMC baseado em abnTeX2 - Teses e Dissertacoes dos Programas de Pos-graduacao do Instituto de Ciencias Matematicas e de Computacao]
 \RequirePackage{xifthen}
 \RequirePackage{ifxetex}        % Verifica se a compilacao ocorre por xetex
 \RequirePackage{ifluatex}       % Verifica se a compilacao ocorre por luatex
@@ -306,6 +306,8 @@
 \renewcommand{\backref}{}
 % Define os textos da citacao
 \addto\captionsbrazil{% portugues-brasil
+    \renewcommand*{\backreftwosep}{ e~} % inserido entre as entradas de uma lista com duas itens.
+    \renewcommand*{\backreflastsep}{ e~} % inserido entre as ultimas duas entradas de uma lista com varios itens.
     % Usado sem a opcao hyperpageref de backref
     \renewcommand{\backrefpagesname}{Citado na(s) p{\'a}gina(s):~}
     \renewcommand*{\backrefalt}[4]{
@@ -319,6 +321,8 @@
 }
 \addto\captionsenglish{% ingles
     % Usado sem a opcao hyperpageref de backref
+    \renewcommand*{\backreftwosep}{ and~} % inserido entre as entradas de uma lista com duas itens.
+    \renewcommand*{\backreflastsep}{, and~} % inserido entre as ultimas duas entradas de uma lista com varios itens.
     \renewcommand{\backrefpagesname}{Cited on page(s):~}
     \renewcommand*{\backrefalt}[4]{
     	\ifcase #1 %
@@ -748,7 +752,7 @@
 \endgroup
 
 \let\oldlistofalgorithms\listofalgorithms
-\newcommand{\NEWnumberline}[1]{\hspace*{-12pt}Algoritmo #1~~\textendash~~}%
+\newcommand{\NEWnumberline}[1]{\hspace*{-12pt}\algoritmoname~#1~~\textendash~~}%
 \renewcommand{\listofalgorithms}{%
   \let\OLDnumberline\numberline%
   \let\numberline\NEWnumberline%
@@ -861,17 +865,30 @@
     \algrenewcommand\algorithmicrequire{\textbf{Requer:}}
     \algrenewcommand\algorithmicensure{\textbf{Assegure:}}
 }
+\addto\captionsenglish{% english
+    \algrenewcommand\algorithmicend{\textbf{end}}
+    \algrenewcommand\algorithmicdo{\textbf{do}}
+    \algrenewcommand\algorithmicwhile{\textbf{while}}
+    \algrenewcommand\algorithmicfor{\textbf{for}}
+    \algrenewcommand\algorithmicif{\textbf{if}}
+    \algrenewcommand\algorithmicthen{\textbf{then}}
+    \algrenewcommand\algorithmicelse{\textbf{else}}
+    \algrenewcommand\algorithmicreturn{\textbf{return}}
+    \algrenewcommand\algorithmicfunction{\textbf{function}}
+    \algrenewcommand\algorithmicforall{\textbf{for all}}
+    \algrenewcommand\algorithmicloop{\textbf{loop}}
+    \algrenewcommand\algorithmicrepeat{\textbf{repeat}}
+    \algrenewcommand\algorithmicuntil{\textbf{until}}
+    \algrenewcommand\algorithmicprocedure{\textbf{procedure}}
+    \algrenewcommand\algorithmicrequire{\textbf{Require:}}
+    \algrenewcommand\algorithmicensure{\textbf{Ensure:}}
+}
 
 % Rearranja os finais de cada estrutura
 \algrenewtext{EndWhile}{\algorithmicend\ \algorithmicwhile}
 \algrenewtext{EndFor}{\algorithmicend\ \algorithmicfor}
 \algrenewtext{EndIf}{\algorithmicend\ \algorithmicif}
 \algrenewtext{EndFunction}{\algorithmicend\ \algorithmicfunction}
-
-% O comando For, a seguir, retorna 'para #1 -- #2 ate #3 faca'
-\algnewcommand\algorithmicto{\textbf{at{\'e}}}
-\algrenewtext{For}[3]%
-{\algorithmicfor\ #1 $\gets$ #2 \algorithmicto\ #3 \algorithmicdo}
 
 
 %================================================================================

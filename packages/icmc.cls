@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2017/10/17 v1.3.7 Classe ICMC baseado em abnTeX2 - Teses e Dissertacoes dos Programas de Pos-graduacao do Instituto de Ciencias Matematicas e de Computacao]
+\ProvidesClass{packages/icmc}[2018/08/16 v1.3.8 Classe ICMC baseado em abnTeX2 - Teses e Dissertacoes dos Programas de Pos-graduacao do Instituto de Ciencias Matematicas e de Computacao]
 \RequirePackage{xifthen}
 \RequirePackage{ifxetex}        % Verifica se a compilacao ocorre por xetex
 \RequirePackage{ifluatex}       % Verifica se a compilacao ocorre por luatex
@@ -142,7 +142,7 @@
 
 % Configuracao do texto do preambulo
 \addto\captionsenglish{% ingles
-    \renewcommand{\exam}{ in partial fulfillment of the requirements for the degree}
+    \renewcommand{\exam}{ in accordance with the requirements of the \imprimirprograma, for the}
 }
 \addto\captionsbrazil{% portugues-brasil
     \renewcommand{\exam}{ como parte dos requisitos para obten{\c c}{\~a}o do t{\'i}tulo de}
@@ -168,9 +168,9 @@
 % Configuracao do tipo de trabalho para DOUTORADO ou MESTRADO
 \ifthenelse{\boolean{opt-doutorado}}{
     \addto\captionsenglish{% ingles
-        \renewcommand{\degree}{of the Doctorate}
+        \renewcommand{\degree}{degree of Doctor}
         \renewcommand{\tipodocurso}{Doctorate Candidate}
-        \tipotrabalho{Doctoral dissertation}
+        \tipotrabalho{Thesis}
     }
     \addto\captionsbrazil{% portugues-brasil
         \ifthenelse{\equal{\imprimirgenero}{M}}{\renewcommand{\degree}{Doutor}}{\renewcommand{\degree}{Doutora}}
@@ -179,9 +179,9 @@
     }
 }{
     \addto\captionsenglish{% ingles
-        \renewcommand{\degree}{of the Master}
+        \renewcommand{\degree}{degree of Master}
         \renewcommand{\tipodocurso}{Master student}
-        \tipotrabalho{Master dissertation}
+        \tipotrabalho{Dissertation}
     }
     \addto\captionsbrazil{% portugues-brasil
         \ifthenelse{\equal{\imprimirgenero}{M}}{\renewcommand{\degree}{Mestre}}{\renewcommand{\degree}{Mestra}}
@@ -193,7 +193,7 @@
 % Configuracao do tipo de trabalho como QUALIFICACAO de DOUTORADO ou MESTRADO
 \ifthenelse{\boolean{opt-qualificacao}}{
     \addto\captionsenglish{% ingles
-        \renewcommand{\exam}{ as part of the qualifying exam requisites of the}
+        \renewcommand{\exam}{ as part of the qualifying exam requisites of the \imprimirprograma, for the}
         \tipotrabalho{Monograph}
         \renewcommand{\tipoexemplar}{}
     }
@@ -206,7 +206,7 @@
 
 % Configuracao do texto impresso no Preambulo
 \addto\captionsenglish{% ingles
-    \renewcommand{\imprimirpreambulo}{\nohyphens{\imprimirtipotrabalho~submitted to the \imprimirinstituicao,\exam~\degree~\imprimirespecialidade. \textit{\tipoexemplar}}}
+    \renewcommand{\imprimirpreambulo}{\nohyphens{\imprimirtipotrabalho~submitted to the \imprimirinstituicao~-- \exam~\degree~\imprimirespecialidade. \textit{\tipoexemplar}}}
     \renewcommand{\arealabel}{Concentration Area}
 }
 \addto\captionsbrazil{% portugues-brasil
@@ -494,7 +494,8 @@
         }
         \addto\captionsenglish{% ingles
             \area{Computer Science and Computational Mathematics}
-            \especialidade{Program in Computer Science and Computational Mathematics}
+            \especialidade{in Science}
+            \programa{PPG-CCMC}{Computer and Mathematical Sciences Graduate Program}
         }
     }{
 % MAT ===========================================================================
@@ -506,7 +507,8 @@
             }
             \addto\captionsenglish{% ingles
                 \area{Mathematics}
-                \especialidade{Program in Mathematics}
+                \especialidade{in Science}
+                \programa{PPG-Mat}{Mathematics Graduate Program}
             }
         }{
 % PIPGES ========================================================================
@@ -520,7 +522,8 @@
                 \addto\captionsenglish{% ingles
                     \instituicao{Institute of Mathematics and Computer Sciences -- ICMC-USP and to the Department of Statistics -- DEs-UFSCar}
                     \area{Statistics}
-                    \especialidade{Interagency Program Graduate in Statistics}
+                    \especialidade{in Statistics}
+                    \programa{PIPGEs}{Statistics Interagency Graduate Program}
                 }
             }{
 % PROFMAT =======================================================================
@@ -532,7 +535,8 @@
                     }
                     \addto\captionsenglish{% ingles
                         \area{Professional Master Degree Program in Mathematics in National Network}
-                        \especialidade{of Mathematics Professional Master's Program} \renewcommand{\imprimirpreambulo}{\nohyphens{\imprimirtipotrabalho~submitted to the \imprimirinstituicao,\exam~\imprimirespecialidade. \textit{\tipoexemplar}}}
+                        \especialidade{in Science} 
+                        \programa{PROFMAT}{Professional Master's Program in Mathematics in National Network}
                     }
                 }{
 % MECAI =========================================================================
@@ -544,7 +548,8 @@
                         }
                         \addto\captionsenglish{% ingles
                             \area{Mathematics, Statistics and Computing}
-                            \especialidade{-- Professional Masters in Mathematics, Statistics and Computing Applied to Industry}
+                            \especialidade{in Science}
+                            \programa{MECAI}{Professional Master's Program in Mathematics Statistics and Computing Applied to Industry}
                         }
                     }{
 % Outros ========================================================================

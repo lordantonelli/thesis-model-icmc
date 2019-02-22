@@ -817,13 +817,13 @@
     \let\lst@PlaceNumber\@empty
     \lstKV@SwitchCases{#1}%
     {%
-      none&\\%
-      left&\def\lst@PlaceNumber{%
+      none:\\%
+      left:\def\lst@PlaceNumber{%
         \llap{%
           \normalfont\lst@numberstyle{\thelstnumber\lst@numbersymbol}\kern\lst@numbersep%
         }%
       }\\%
-        right&\def\lst@PlaceNumber{%
+        right:\def\lst@PlaceNumber{%
           \rlap{%
             \normalfont\kern\linewidth\kern\lst@numbersep\lst@numberstyle{\lst@numbersymbol\thelstnumber}%
           }%

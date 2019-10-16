@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2018/08/16 v1.3.8 Classe ICMC baseado em abnTeX2 - Teses e Dissertacoes dos Programas de Pos-graduacao do Instituto de Ciencias Matematicas e de Computacao]
+\ProvidesClass{packages/icmc}[2019/10/16 v1.3.9 Classe ICMC baseado em abnTeX2 - Teses e Dissertacoes dos Programas de Pos-graduacao do Instituto de Ciencias Matematicas e de Computacao]
 \RequirePackage{xifthen}
 \RequirePackage{ifxetex}        % Verifica se a compilacao ocorre por xetex
 \RequirePackage{ifluatex}       % Verifica se a compilacao ocorre por luatex
@@ -811,25 +811,7 @@
    \endgroup%
 }
    
-\def\lst@numbersymbol{}
-\lst@Key{numbersymbol}{}{\def\lst@numbersymbol{#1}}
-\lst@Key{numbers}{none}{%
-    \let\lst@PlaceNumber\@empty
-    \lstKV@SwitchCases{#1}%
-    {%
-      none&\\%
-      left&\def\lst@PlaceNumber{%
-        \llap{%
-          \normalfont\lst@numberstyle{\thelstnumber\lst@numbersymbol}\kern\lst@numbersep%
-        }%
-      }\\%
-        right&\def\lst@PlaceNumber{%
-          \rlap{%
-            \normalfont\kern\linewidth\kern\lst@numbersep\lst@numberstyle{\lst@numbersymbol\thelstnumber}%
-          }%
-        }%
-    }{\PackageError{Listings}{Numbers #1 unknown}\@ehc}
-}
+\renewcommand*\thelstnumber{\arabic{lstnumber}:}
 
 % Cria um ambiente "codigo" estilizando o ambiente "lstlisting" 
 \newcounter{countcodigo}
@@ -846,7 +828,6 @@
             framexbottommargin=5pt,
             framextopmargin=5pt,
             abovecaptionskip=10pt,
-            numbersymbol=$:$,
             #1
           }
 }

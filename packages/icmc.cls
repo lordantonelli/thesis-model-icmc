@@ -687,6 +687,17 @@
     \renewcommand{\demonstracaoname}{Demonstra{\c c}{\~a}o}
 }
 
+\addto\captionsenglish{% ingles
+	\renewcommand{\theoremaname}{Theorem}
+	\renewcommand{\proposicaoname}{Proposition}
+	\renewcommand{\lemaname}{Lemma}
+	\renewcommand{\corolarioname}{Corollary}
+	\renewcommand{\exemploname}{Example}
+	\renewcommand{\observacaoname}{Note}
+	\renewcommand{\definicaoname}{Definition}
+	\renewcommand{\demonstracaoname}{Demonstration}
+}
+
 \theoremstyle{definition}
 \newtheorem{teorema}{\theoremaname}
 \newtheorem{proposicao}{\proposicaoname}

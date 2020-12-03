@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2019/10/16 v1.3.9 Classe ICMC baseado em abnTeX2 - Teses e Dissertacoes dos Programas de Pos-graduacao do Instituto de Ciencias Matematicas e de Computacao]
+\ProvidesClass{packages/icmc}[2020/12/01 v1.4.0 Classe ICMC baseado em abnTeX2 - Teses e Dissertacoes dos Programas de Pos-graduacao do Instituto de Ciencias Matematicas e de Computacao]
 \RequirePackage{xifthen}
 \RequirePackage{ifxetex}        % Verifica se a compilacao ocorre por xetex
 \RequirePackage{ifluatex}       % Verifica se a compilacao ocorre por luatex
@@ -482,7 +482,7 @@
 }
 \addto\captionsenglish{% ingles
     \universidade{USP}
-    \instituicao{Institute of Mathematics and Computer Sciences -- ICMC-USP}
+    \instituicao{Instituto de Ci{\^e}ncias Matem{\'a}ticas e de Computa{\c c}{\~a}o -- ICMC-USP}
 }
 
 % CCMC ==========================================================================
@@ -520,7 +520,7 @@
                     \especialidade{em Estat{\'i}stica -- Programa Interinstitucional de P{\'o}s-Gradua{\c c}{\~a}o em Estat{\'i}stica}
                 }
                 \addto\captionsenglish{% ingles
-                    \instituicao{Institute of Mathematics and Computer Sciences -- ICMC-USP and to the Department of Statistics -- DEs-UFSCar}
+                    \instituicao{Institute of Mathematics and Computer Science -- ICMC-USP and to the Department of Statistics -- DEs-UFSCar}
                     \area{Statistics}
                     \especialidade{in Statistics}
                     \programa{PIPGEs}{Statistics Interagency Graduate Program}

@@ -21,7 +21,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{packages/icmc}[2020/12/01 v1.4.0 Classe ICMC baseado em abnTeX2 - Teses e Dissertacoes dos Programas de Pos-graduacao do Instituto de Ciencias Matematicas e de Computacao]
+\ProvidesClass{packages/icmc}[2021/08/11 v1.4.1 Classe ICMC baseado em abnTeX2 - Teses e Dissertacoes dos Programas de Pos-graduacao do Instituto de Ciencias Matematicas e de Computacao]
 \RequirePackage{xifthen}
 \RequirePackage{ifxetex}        % Verifica se a compilacao ocorre por xetex
 \RequirePackage{ifluatex}       % Verifica se a compilacao ocorre por luatex
@@ -686,6 +686,17 @@
     \renewcommand{\observacaoname}{Observa{\c c}{\~a}o}
     \renewcommand{\definicaoname}{Defini{\c c}{\~a}o}
     \renewcommand{\demonstracaoname}{Demonstra{\c c}{\~a}o}
+}
+
+\addto\captionsenglish{% ingles
+	\renewcommand{\theoremaname}{Theorem}
+	\renewcommand{\proposicaoname}{Proposition}
+	\renewcommand{\lemaname}{Lemma}
+	\renewcommand{\corolarioname}{Corollary}
+	\renewcommand{\exemploname}{Example}
+	\renewcommand{\observacaoname}{Note}
+	\renewcommand{\definicaoname}{Definition}
+	\renewcommand{\demonstracaoname}{Demonstration}
 }
 
 \theoremstyle{definition}

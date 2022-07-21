@@ -93,7 +93,8 @@
 	openright,			% capitulos comecam em pagina impar (insere pagina vazia caso preciso)
 	twoside,			% para impressao em verso e anverso. Oposto a oneside
 	a4paper,			% tamanho do papel. 
-	chapter=TITLE		% titulos de capitulos convertidos em letras maiusculas
+	%chapter=TITLE		% títulos de capítulos convertidos em letras maiúsculas
+	sumario=tradicional
 	]{abntex2}
 	
 
@@ -717,12 +718,21 @@
 \newcommand{\quadroname}{Quadro}
 \newcommand{\quadrorefname}{Quadro}
 \newcommand{\chartautorefname}{Quadro}
+\renewcommand{\anexoname}{Anexo}
+\renewcommand{\anexosname}{Anexos}
+\renewcommand{\apendicename}{Ap\^endice}
+\renewcommand{\apendicesname}{Ap\^endices}
+
 
 \addto\captionsenglish{% ingles
     \renewcommand{\listquadroname}{List of charts}
     \renewcommand{\quadroname}{Chart}
     \renewcommand{\quadrorefname}{Chart}
     \renewcommand{\chartautorefname}{Chart}
+    \renewcommand{\anexoname}{Annex}
+    \renewcommand{\anexosname}{Annex}
+    \renewcommand{\apendicename}{Appendix}
+    \renewcommand{\apendicesname}{Appendix}
 }
 
 \newfloat{quadro}{htbp}{loq}[chapter]
@@ -1356,14 +1366,14 @@
 \makechapterstyle{icmc}{%
   \renewcommand{\chapterheadstart}{} 
   
-  % Secao secundaria (Section) Caixa baixa, Negrito
-  \renewcommand*{\cftsectionfont}{\bfseries}
-  % Secao terciaria (Subsection) Caixa baixa, Negrito, italico
-  \renewcommand*{\cftsubsectionfont}{\itshape\bfseries}
-  % Secao quaternaria (Subsubsection) Caixa baixa, italico
-  \renewcommand*{\cftsubsubsectionfont}{\itshape}
-  % Secao quinquenaria (Subsubsubsection) Caixa baixa
-  \renewcommand*{\cftparagraphfont}{\normalsize}
+   % Secao secundaria (Section) Caixa baixa
+    \renewcommand*{\cftsectionfont}{}
+    % Secao terciaria (Subsection) Caixa baixa
+    \renewcommand*{\cftsubsectionfont}{}
+    % Secao quaternaria (Subsubsection) Caixa baixa
+    \renewcommand*{\cftsubsubsectionfont}{}
+    % Secao quinquenária (Subsubsubsection) Caixa baixa
+    \renewcommand*{\cftparagraphfont}{\normalsize}
 
   % tamanhos de fontes de chapter e part	
   \setlength{\beforechapskip}{0pt}
@@ -1372,8 +1382,8 @@
   
   % tamanhos de fontes de section, subsection, subsubsection e subsubsubsection
   \setsecheadstyle{\ABNTEXsectionfont\ABNTEXsectionfontsize\bfseries\ABNTEXsectionupperifneeded}
-  \setsubsecheadstyle{\ABNTEXsubsectionfont\ABNTEXsubsectionfontsize\bfseries\itshape\ABNTEXsubsectionupperifneeded}
-  \setsubsubsecheadstyle{\ABNTEXsubsubsectionfont\ABNTEXsubsubsectionfontsize\itshape\ABNTEXsubsubsectionupperifneeded}
+  \setsubsecheadstyle{\ABNTEXsubsectionfont\ABNTEXsubsectionfontsize\bfseries\ABNTEXsubsectionupperifneeded}
+  \setsubsubsecheadstyle{\ABNTEXsubsubsectionfont\ABNTEXsubsubsectionfontsize\ABNTEXsubsubsectionupperifneeded}
   \setsubsubsubsecheadstyle{\ABNTEXsubsubsubsectionfont\ABNTEXsubsubsubsectionfontsize\ABNTEXsubsubsubsectionupperifneeded}
  
   % impressao do numero do capitulo
@@ -1385,7 +1395,7 @@
   % impressao do titulo do capitulo
   \def\printchaptertitle##1{%
     
-    \setboolean{ABNTEXupperchapter}{true}
+    \setboolean{ABNTEXupperchapter}{false}
     
     \ifthenelse{\boolean{abntex@innonumchapter}}{
         \vskip 0ex \hrulefill\chaptitlefont\bfseries\ABNTEXchapterupperifneeded{##1}
